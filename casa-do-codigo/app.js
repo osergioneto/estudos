@@ -1,7 +1,8 @@
 var express = require('express')();
+express.set('view engine', 'ejs');
 
 express.get('/produtos', function (req, res) {
-    res.send('<html><body><h1>Listagem de produtos</h1></body></html>');
+    res.render('produtos/lista');
 });
 
 express.listen(3000, function () {
