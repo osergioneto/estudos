@@ -1,16 +1,38 @@
 
 module.exports = function rotasProdutos(app) {
-    app.get('/produtos', function(req, res) {
+
+    var listarProdutos = function (req, res) {
 
         var connection = app.infra.connectionFactory();
-        var produtosBanco = new app.infra.ProdutosDAO(connection);
+        var produtosDAO = new app.infra.ProdutosDAO(connection);
 
-        produtosBanco.listar(function(err, results) {
-            res.render('produtos/lista', {lista: results});
+        produtosDAO.listar(function (err, results) {
+            res.render('produtos/lista', { lista: results });
         });
 
-        connection.end();  
+        connection.end();
+    };
+
+    var cadastrarProduto = function(req, res) {
+
+        var produto = req.body;
+
+        var connection = app.infra.connectionFactory();
+        var produtosDAO = new app.infra.ProdutosDAO(connection);
+
+        produtosDAO.salvar(produto, function (err, results) {
+            res.redirect('/produtos');
+        }); 
+    };
+
+    app.get('/produtos', listarProdutos);
+
+    app.get('/produtos/formularios', function(req,res) {
+        res.render('produtos/forms.ejs');
     });
+
+    app.post('/produtos', cadastrarProduto);
+    
 }
 
  

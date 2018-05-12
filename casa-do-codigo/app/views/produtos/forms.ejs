@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/produtos" method="POST">
+        <div>
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Escreva o título">
+        </div>
+        <div>
+            <label for="preco">Preço</label>
+            <input type="text" id="preco" name="preco" placeholder="Digite um valor. Ex.: 125.30">
+        </div>
+        <div>
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+        </div>
+        <input type="submit" value="GRAVAR">
+    </form>
+</body>
+</html>
