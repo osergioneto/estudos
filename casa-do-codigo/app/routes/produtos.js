@@ -7,7 +7,14 @@ module.exports = function rotasProdutos(app) {
         var produtosDAO = new app.infra.ProdutosDAO(connection);
 
         produtosDAO.listar(function (err, results) {
-            res.render('produtos/lista', { lista: results });
+            res.format({
+                html: function() {
+                    res.render('produtos/lista', { lista: results });
+                },
+                json: function(params) {
+                    res.json(results);
+                }
+            });
         });
 
         connection.end();
@@ -16,11 +23,13 @@ module.exports = function rotasProdutos(app) {
     var cadastrarProduto = function(req, res) {
 
         var produto = req.body;
-
+        console.log(produto);
+        
         var connection = app.infra.connectionFactory();
         var produtosDAO = new app.infra.ProdutosDAO(connection);
 
         produtosDAO.salvar(produto, function (err, results) {
+            console.log(err);
             res.redirect('/produtos');
         }); 
     };
