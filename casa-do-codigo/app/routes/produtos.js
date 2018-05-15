@@ -7,6 +7,9 @@ module.exports = function rotasProdutos(app) {
         var produtosDAO = new app.infra.ProdutosDAO(connection);
 
         produtosDAO.listar(function (err, results) {
+            if(err){
+                return next(err);
+            }
             res.format({
                 html: function() {
                     res.render('produtos/lista', { lista: results });
@@ -44,7 +47,6 @@ module.exports = function rotasProdutos(app) {
         }
 
         produtosDAO.salvar(produto, function (err, results) {
-            console.log(err);
             res.redirect('/produtos');
         }); 
     };
