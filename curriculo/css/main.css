@@ -78,7 +78,7 @@ body {
 }
 
 .band-a {
-  background: url(../img/bio.gif) no-repeat center center fixed; 
+  background: url(../img/bio.gif) no-repeat center center /*fixed*/; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -86,7 +86,7 @@ body {
 }
 
 .band-b {
-  background: url(../img/bio.gif) no-repeat center center fixed; 
+  background: url(../img/Habilidades.png) no-repeat center center /*fixed*/; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -94,7 +94,7 @@ body {
 }
 
 .band-c {
-  background: url(../img/bio.gif) no-repeat center center fixed; 
+  background: url(../img/Experiencia.png) no-repeat center center /*fixed*/; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -102,7 +102,23 @@ body {
 }
 
 .band-d {
-  background: url(../img/bio.gif) no-repeat center center fixed; 
+  background: url(../img/Educacao.png) no-repeat center center /*fixed*/; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.band-e {
+  background: url(../img/Interesses.png) no-repeat center center /*fixed*/; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.band-f {
+  background: url(../img/Contato.png) no-repeat center center /*fixed*/; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
