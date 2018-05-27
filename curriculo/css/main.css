@@ -49,9 +49,9 @@ body {
 
 .band h1 {
   margin: 0;
-  padding: 0 0 10px;
+  padding: 0 0 4vh;
   color: #fff;
-  font-size: 32px;
+  font-size: 45px;
 }
 .band p {
   margin: 0;
@@ -64,7 +64,7 @@ body {
   left: 0;
   right: 0;
   margin: 0 auto;
-  min-height: 85vh;
+  min-height: 100vh;
   max-width: 960px;
   display: table;
   position: relative;
@@ -78,11 +78,23 @@ body {
 }
 
 .band-a {
-  background: url(../img/bio.gif) no-repeat center center /*fixed*/; 
+  /*background: url(../img/beach-daylight-foam-386148.jpg) no-repeat center center fixed;*/ 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+#meuVideo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translate(-50%, -50%);
 }
 
 .band-b {
@@ -231,6 +243,42 @@ body {
   top: 8px;
   width: 16px;
   left: 0;
+}
+
+.container-curso{
+  display: block;
+}
+.container-curso h2{
+  color: #FFF;
+  margin: 0;
+}
+.container-curso h4{
+  color: #999999;
+  margin-top: 0;
+  font-weight: 400;
+}
+
+.container-experiencia{
+  display: block;
+}
+.container-experiencia h2{
+  color: #FFF;
+  margin: 0;
+}
+.container-experiencia h4{
+  color: #999999;
+  margin: 0;
+  font-weight: 400;
+}
+.container-experiencia p{
+  color: #FFF;
+  font-weight: 400;
+  margin: .5vh 0 3vh 0;
+  padding-left: 1vw;
+}
+
+.invi{
+  visibility: hidden;
 }
 
 @media screen and (max-width: 980px) {
