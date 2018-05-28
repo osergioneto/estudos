@@ -5,6 +5,8 @@ body {
   padding: 0;
   background: #5d676c;
   font-family: 'Open Sans', sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .l-site {
@@ -245,19 +247,9 @@ body {
   left: 0;
 }
 
-.container-curso{
-  display: block;
-}
-.container-curso h2{
-  color: #FFF;
-  margin: 0;
-}
-.container-curso h4{
-  color: #999999;
-  margin-top: 0;
-  font-weight: 400;
-}
 
+
+/*Experiencia*/
 .container-experiencia{
   display: block;
 }
@@ -275,6 +267,58 @@ body {
   font-weight: 400;
   margin: .5vh 0 3vh 0;
   padding-left: 1vw;
+}
+
+/*Educação*/
+.container-curso{
+  display: block;
+}
+.container-curso h2{
+  color: #FFF;
+  margin: 0;
+}
+.container-curso h4{
+  color: #999999;
+  margin-top: 0;
+  font-weight: 400;
+}
+
+/*Contato*/
+.container-contato{
+  color: #FFF;
+  overflow-wrap: break-word;
+  width: 100vw;
+  margin: 4vh 0;
+}
+.container-contato a img, p{
+  display: inline-block;
+}
+.container-contato a{
+  text-decoration: none;
+}
+.container-contato a:link{
+  color: #FFF;
+}
+.container-contato a:visited{
+  color: #FFF;
+}
+.container-contato a:hover {
+  color: #FFF;
+  border-bottom: 1px solid #FFF;
+}
+.container-contato p{
+  font-size: 1.8em;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+  padding: 0 0 0 2vw;
+}
+.container-contato img{
+  height: 3em;
+  widows: auto;
+}
+
+#no-padding{
+  padding-left: 0px;
 }
 
 .invi{
