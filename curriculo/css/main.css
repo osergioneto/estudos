@@ -91,8 +91,8 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  min-width: 100%;
-  min-height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
   width: auto;
   height: auto;
   z-index: -100;
@@ -205,11 +205,13 @@ body {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+  z-index: 100;
 }
 .menu.is-active .menu-hamburger:after {
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
+  z-index: 100;
 }
 .menu.is-active .menu-hamburger:hover {
   -webkit-transform: scale(1.2);
@@ -245,6 +247,7 @@ body {
   top: 8px;
   width: 16px;
   left: 0;
+  z-index: 100;
 }
 
 

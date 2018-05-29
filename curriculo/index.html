@@ -8,8 +8,7 @@
     <link rel="icon" href="img/code.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
     <link rel="stylesheet" type="text/css" href="css/skills.css">
-    <script href="js/jquery-2.1.3.min.js"></script>
-    <script src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/interests.css">
 </head>
 <body>
     <div class="l-site">
@@ -42,9 +41,11 @@
                 <div class="menu-hamburger"></div>
             </div>
             <section id="bio" class="band band-a">
+                
                 <video autoplay muted loop id="meuVideo" poster="img/poster.png">
                     <source src="img/bio.mp4" type="video/mp4">
                 </video>
+                 
                 <div class="band-container">
                     <div class="band-inner">
                         <h1>Sérgio Deusdedith</h1>
@@ -64,8 +65,27 @@
                 <div class="band-container">
                     <div class="band-inner">
                         <h1>Habilidades</h1>
-                        <div class="content"></div> 
-                        <p>Possuo conhecimento intermediário em HTML, CSS e Javascript. Conhecimento básico em UX, NodeJS, MySQL, 
+                        <dl class="skills-diagram">
+                            <dt class="skill-5">NodeJS</dt>
+                            <dd>5</dd>
+                            <dt class="skill-10">Inglês</dt>
+                            <dd>10</dd>
+                            <dt class="skill-3">Java</dt>
+                            <dd>3</dd>
+                            <dt class="skill-8">Javascript</dt>
+                            <dd>8</dd>
+                            <dt class="skill-4">Linux</dt>
+                            <dd>4</dd>
+                            <dt class="skill-6">UX</dt>
+                            <dd>6</dd>
+                            <dt class="skill-7">CSS</dt>
+                            <dd>7</dd>
+                            <dt class="skill-9">HTML</dt>
+                            <dd>9</dd>
+                            <dt class="skill-3">POO</dt>
+                            <dd>3</dd>
+                        </dl>
+                        <p class="invi">Possuo conhecimento intermediário em HTML, CSS e Javascript. Conhecimento básico em UX, NodeJS, MySQL, 
                         MongoDB, Java, Programação Orientado a Objetos, Estrutura de Dados e Engenharia de Software..</p>
                     </div>
                 </div>
@@ -128,12 +148,21 @@
                 <div class="band-container">
                     <div class="band-inner">
                         <h1>Interesses</h1>
-                        <p>Nulla tempor laoreet sagittis. Donec molestie odio sit amet tincidunt egestas. Ut ut nisi nec felis vehicula
-                            pharetra. Nunc ullamcorper vitae lectus vitae consectetur. Quisque pharetra lorem metus, at lacinia magna
-                            malesuada non. Maecenas tristique risus quis massa convallis tempus in non turpis. Mauris pretium purus sed
-                            lacus euismod, eu cursus massa commodo. Nulla in erat ut ex imperdiet iaculis. Aliquam erat volutpat. Sed
-                            pellentesque et neque vitae accumsan. Etiam nec dolor quis est dignissim viverra. Nunc et pulvinar felis.
-                            Nulla in varius turpis. Curabitur non diam libero. Nam porttitor orci in metus sagittis</p>
+                        <dl class="interest-diagram">
+                            <dt class="interest-9">UX</dt>
+                            <dd>9</dd>
+                            <dt class="interest-10">Data Science</dt>
+                            <dd>10</dd>
+                            <dt class="interest-7">Mangás</dt>
+                            <dd>8</dd>
+                            <dt class="interest-9">Game Developing</dt>
+                            <dd>9</dd>
+                            <dt class="interest-9">Confeitaria</dt>
+                            <dd>9</dd>
+                            
+                        </dl>
+
+                        <p class="invi">Meus interesses são: Data Science, UX, Desenvolvimento de Jogos, Confeitaria e Mangás/Animes. Lorem ipsum dolor sit amet. </p>
                     </div>
                 </div>
             </section>
@@ -144,7 +173,7 @@
                         <div class="container-contato">
                             <a href="#" target="">
                                 <img src="img/mail.svg" alt="Ícone de um smartphone">
-                                <p>sergio.deusdedith</p><p id="no-padding">@gmail.com</p>
+                                <p>sergio</p><p id="no-padding">.deusdedith</p><p id="no-padding">@gmail.com</p>
                             </a>
                         </div>
                         <div class="container-contato">
@@ -172,6 +201,8 @@
         </div>
     </div>
 
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/smooth-scroll.js"></script>
     <script>
         var scroll = new SmoothScroll('a[href*="#"]');
