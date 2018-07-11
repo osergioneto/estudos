@@ -17,6 +17,14 @@ body {
   margin: 0;
 }
 
+p{
+  margin: 0;
+}
+
+button{
+  padding: 0;
+}
+
 h1,
 h2,
 h3,
@@ -28,3 +36,120 @@ h6 {
   font-size: 1.5em;
 }
 
+/*Pagina inteira*/
+.codepen{
+  display: grid;
+  grid-template-rows: auto 1fr 1fr auto;
+  height: 100vh;
+}
+
+/*Pen Header*/
+.pen{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 10px;
+  align-items: center;
+  background: #000;
+  padding: 10px;
+}
+
+.pen__buttons{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 10px;
+}
+
+.pen__buttons .button{
+  padding: 5px;
+}
+
+.button{
+  background: #272727;
+  border-radius: 2px;
+  border: 1px solid #272727;
+  color: #FFF;
+}
+
+.pen__details{
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  align-items: end;
+  color: #FFF;
+}
+
+p.pen__author{
+  color: #272727;
+}
+
+/*Code section*/
+.code{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.editor{
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 5px solid #464646;
+}
+
+.editor__header{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  background: #252525;
+  color: #FFF;
+  align-items: center;
+  justify-content: space-evenly;
+  grid-gap: 5px;
+  padding: 0 5px 0 5px;
+  vertical-align: baseline;
+  border-bottom: 1px solid #414141;
+}
+
+.editor__code{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: minmax(40vh, 1fr);
+  color: #FFF;
+  font-weight: bold;
+}
+
+.editor__input{
+  color: rgb(127, 127, 128);
+  background: #333333;
+  border: 1px solid #333333;
+}
+
+.editor__number{
+  display: block;
+  padding: 0 7px 0 7px;
+}
+
+.editor__gutter{
+  background: #333333;
+  padding: 5px 0 0 0;
+}
+
+/*Preview*/
+iframe{
+  width: 100%;
+  height: 100%;
+}
+
+/*Settings*/
+.settings{
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  grid-template-rows: auto;
+  padding: 7px;
+  background: #333333;
+  justify-items: start;
+  grid-gap: 10px;
+  align-content: end;
+}
+
+.button--black{
+  background: rgb(12, 12, 12);
+  padding: 3px;
+  border-radius: 3px;
+}
