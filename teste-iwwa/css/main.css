@@ -1,0 +1,4 @@
+#big-wrapper{
+    display: grid;
+    grid-template-columns: 1fr minmax(200px, 1336px) 1fr;
+}
