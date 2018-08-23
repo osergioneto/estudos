@@ -1,7 +1,7 @@
 body {
-    background: #252529;
+    background: #FFF;
     font-family: 'Lato', sans-serif;
-    color: #fff;
+    color: #000;
   }
   a {
     color: #5dc;
@@ -14,7 +14,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100vh;
+    height: auto;
     position: relative;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -35,7 +35,7 @@ body {
   }
   .container #nav {
     height: 50px;
-    text-align: center;
+    text-align: left;
     margin: 0;
     padding: 25px 0 0;
   }
@@ -82,7 +82,7 @@ body {
   }
   .container #nav li a {
     display: block;
-    color: #fff;
+    color: #000;
     font-size: 18px;
     padding: 10px 25px;
     border: 2px solid transparent;
