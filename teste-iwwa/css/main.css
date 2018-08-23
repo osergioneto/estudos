@@ -2,3 +2,73 @@
     display: grid;
     grid-template-columns: 1fr minmax(200px, 1336px) 1fr;
 }
+
+/*Começo Header*/
+#header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#divLogo{
+    align-self: center;
+}
+#infos{
+    display: grid;
+    justify-items: end;
+}
+#infos > p{
+    margin: 2px;
+}
+#infos strong{
+    font-size: .8em;
+}
+#redes-sociais{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: end;
+    grid-gap: 3px;
+    grid-template-areas: ". . . . . . instagram facebook twitter youtube";
+    margin: 20px 0;
+}
+#instagram{
+    grid-area: instagram;
+}
+#facebook{
+    grid-area: facebook;
+}
+#twitter{
+    grid-area: twitter;
+}
+#youtube{
+    grid-area: youtube;
+}
+
+/*Fim Header*/
+
+
+
+/*Media Queries*/
+@media (max-width: 788px) {
+    #header-menu{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    #header{
+        grid-template-columns: 1fr;
+        max-height: 200px;
+    }
+    #infos{
+        display: grid;
+        justify-items: start;
+    }
+    #infos > p{
+        margin: 0px;
+    }
+    #redes-sociais{
+        justify-items: start;
+        grid-template-areas: "instagram facebook twitter youtube . . . . . .";
+        margin-top: 0px;
+    }
+
+    
+}
+

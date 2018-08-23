@@ -51,8 +51,11 @@ a:hover {
   height: 50px;
   text-align: left;
   margin: 0;
-  padding: 25px 0 0;
+  padding: 10px 0 0;
+  border-top: 2px solid lightgrey;
+  border-bottom: 2px solid lightgrey;
 }
+
 .container #nav.open .bars .bar1 {
   -webkit-transform: rotate(45deg) translate(8px, 7px);
   -moz-transform: rotate(45deg) translate(8px, 7px);
@@ -112,7 +115,7 @@ ul#nav.open{
   transition: all 0.3s;
 }
 .container #nav li a:hover {
-  border: 2px solid #fff;
+  color: var(--corPropeg);
 }
 .box {
   width: 50%;
@@ -139,7 +142,7 @@ ul#nav.open{
   font-size: 1.5em;
   margin: 10px 0 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 788px) {
   body {
     min-width: 320px;
   }
