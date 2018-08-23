@@ -1,3 +1,8 @@
+body{
+    overflow-x: hidden;
+}
+
+
 #big-wrapper{
     display: grid;
     grid-template-columns: 1fr minmax(200px, 1336px) 1fr;
@@ -43,6 +48,17 @@
 }
 
 /*Fim Header*/
+
+/*Inicio Galeria*/
+#galeria{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card img{
+    width: 100%;
+}
+/*Fim Galeria*/
 
 
 

@@ -28,7 +28,7 @@ a:hover {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  height: 10vh;
   position: relative;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -38,6 +38,7 @@ a:hover {
 }
 .container.menu-open {
   position: relative;
+  height: 50vh;
   /*right:230px;*/
   -webkit-transform: translate(-230px, 0);
   -moz-transform: translate(-230px, 0);
