@@ -53,10 +53,70 @@ body{
 #galeria{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 250px;
 }
 
-.card img{
+.card > img{
+    height: 100%;
     width: 100%;
+    object-fit: cover;
+}
+
+#card-1{
+    background: url(../img/1.jpg);
+    background-size: cover;
+}
+
+#card-2{
+    background: url(../img/2.jpg);
+    background-size: cover;
+}
+#card-3{
+    background: url(../img/3.jpg);
+    background-size: cover;
+}
+#card-4{
+    background: url(../img/4.jpg);
+    background-size: cover;
+}
+#card-5{
+    background: url(../img/1.jpg);
+    background-size: cover;
+}
+#card-6{
+    background: url(../img/2.jpg);
+    background-size: cover;
+}
+#card-7{
+    background: url(../img/3.jpg);
+    background-size: cover;
+}
+#card-8{
+    background: url(../img/4.jpg);
+    background-size: cover;
+}
+#card-9{
+    background: url(../img/1.jpg);
+    background-size: cover;
+}
+#card-10{
+    background: url(../img/2.jpg);
+    background-size: cover;
+}
+#card-11{
+    background: url(../img/3.jpg);
+    background-size: cover;
+}
+#card-12{
+    background: url(../img/4.jpg);
+    background-size: cover;
+}
+#card-13{
+    background: url(../img/4.jpg);
+    background-size: cover;
+}
+.trabalho{
+    grid-column-end: span 2;
 }
 /*Fim Galeria*/
 
