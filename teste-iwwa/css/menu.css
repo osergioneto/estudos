@@ -1,10 +1,10 @@
 :root{
-  --corPropeg: #4ea398;
+  --corPropeg: rgb(0,160,173);
 }
 
 body {
   background: #FFF;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Gotham', sans-serif;
   color: #fff;
 }
 .centered {
@@ -22,7 +22,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: #6ae1d2;
+  color: rgb(0,160,173);
 }
 .container {
   margin: 0;
@@ -75,7 +75,7 @@ a:hover {
   transform: rotate(-45deg) translate(7px, -6px);
 }
 ul#nav.open{
-  background: #6ae1d2;
+  background: rgb(0,160,173);
 }
 
 .container #nav li {

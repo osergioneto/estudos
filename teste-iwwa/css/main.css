@@ -1,5 +1,13 @@
+@font-face{
+    font-family: Gotham;
+    src: url('fonts/Gotham-Xlight.otf');
+}
+
 body{
     overflow-x: hidden;
+    font-family: 'Raleway', sans-serif;
+    font-weight:normal;
+    font-style:normal;
 }
 
 #big-wrapper{
@@ -217,7 +225,6 @@ footer p{
     margin: 20px 0;
 }
 /*Fim Footer*/
-
 
 
 /*Media Queries*/
