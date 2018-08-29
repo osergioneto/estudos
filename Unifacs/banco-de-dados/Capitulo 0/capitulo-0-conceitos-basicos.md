@@ -46,6 +46,8 @@ Um __Sistema de Gerenciamento de Banco de Dados (SGBD)__ é o conjunto de softwa
 
 Um SGDB implica a criação e manutenção das bases de dados, elimina a necessidade de especificação de definição de dados, age como interface entre os programas de aplicação e os ficheiros de dados físicos, e separa as visões lógica e de concepção dos dados. Assim sendo, são basicamente três os componentes de um SGBD:
 
+![](database-organograma.jpg);
+
 * __Linguagem de definição de dados__ (especifica conteúdos, estrutura a base de dados e define os elementos de dados);
 * __Linguagem de manipulação de dados__ (para poder alterar os dados na base);
 * __Dicionário de dados__ (guarda definições de elementos de dados e respetivas caraterísticas — descreve os dados, quem os acede, etc.);
@@ -75,6 +77,8 @@ __Vantagens do SGBD__:
 * __Maior segurança:__ Como afirmado anteriormente, SGBDs permitem que múltiplos usuários acessem os recursos dos mesmos dados. Esta capacidade é geralmente vista como um benefício, mas há riscos potenciais para a organização. Algumas fontes de informação devem ser protegidas ou garantida e vista apenas por indivíduos selecionados. Através do uso de senhas, sistemas de gerenciamento de banco de dados podem ser usado para restringir o acesso aos dados a apenas aqueles que devem vê-lo.
 
 * __Outros:__ Tempo de desenvolvimento de aplicações é reduzido, Maior flexibilidade para realizar alterações (independência de dados) e Maior economia, informações atualizadas, menor volume de papel.
+
+![](sgbd_pg2.jpg)
 
 __Desvantagens do SGBD__:
 
@@ -109,6 +113,40 @@ Funções do DBA:
 
 ### SQL <a id="sql"></a>
 
+__Structured Query Language (SQL)__, é a linguagem de pesquisa declarativa padrão para banco de dados relacional. A linguagem é um grande padrão de banco de dados. Isto decorre da sua simplicidade e facilidade de uso. Ela se diferencia de outras linguagens de consulta a banco de dados no sentido em que uma consulta SQL especifica a forma do resultado e não o caminho para chegar a ele. Ela é uma linguagem declarativa em oposição a outras linguagens procedurais. 
+
+A linguagem SQL é dividida em subconjuntos de acordo com as operações que queremos efetuar sobre um banco de dados, tais como:
+
+  * DML - Linguagem de Manipulação de Dados: O primeiro grupo é a DML (Data Manipulation Language - Linguagem de manipulação de dados). DML é um subconjunto da linguagem SQL que é utilizado para realizar inclusões, consultas, alterações e exclusões de dados presentes em registros. Estas tarefas podem ser executadas em vários registros de diversas tabelas ao mesmo tempo. Os comandos que realizam respectivamente as funções acima referidas são Insert, Select, Update e Delete. 
+
+  ![](1.png)
+
+  * DDL - Linguagem de Definição de Dados: O segundo grupo é a DDL (Data Definition Language - Linguagem de Definição de Dados). Uma DDL permite ao utilizador definir tabelas novas e elementos associados. A maioria dos bancos de dados de SQL comerciais tem extensões proprietárias no DDL. <br>Os comandos básicos da DDL são poucos: 
+    * CREATE: cria um objeto (uma Tabela, por exemplo) dentro da base de dados.
+    * DROP: apaga um objeto do banco de dados   Alguns sistemas de banco de dados usam o comando ALTER, que permite ao usuário alterar um objeto, por exemplo, adicionando uma coluna a uma tabela existente.
+
+    Alguns sistemas de banco de dados usam o comando ALTER, que permite ao usuário alterar um objeto, por exemplo, adicionando uma coluna a uma tabela existente.
+
+   * DCL - Linguagem de Controle de Dados: O terceiro grupo é o DCL (Data Control Language - Linguagem de Controle de Dados). DCL controla os aspectos de autorização de dados e licenças de usuários para controlar quem tem acesso para ver ou manipular dados dentro do banco de dados. Duas palavras-chaves da DCL: 
+     * GRANT - autoriza ao usuário executar ou setar operações.
+     * REVOKE - remove ou restringe a capacidade de um usuário de executar operações.
+
+    * DTL - Linguagem de Transação de Dados: 
+
+      * BEGIN WORK (ou START TRANSACTION, dependendo do dialeto SQL) pode ser usado para marcar o começo de uma transação de banco de dados que pode ser completada ou não.
+      * COMMIT finaliza uma transação dentro de um sistema de gerenciamento de banco de dados.
+      * ROLLBACK faz com que as mudanças nos dados existentes desde o último COMMIT ou ROLLBACK sejam descartadas.
+
+    * DQL - Linguagem de Consulta de Dados: Embora tenha apenas um comando, a DQL é a parte da SQL mais utilizada. O comando SELECT permite ao usuário especificar uma consulta ("query") como uma descrição do resultado desejado. Esse comando é composto de várias cláusulas e opções, possibilitando elaborar consultas das mais simples às mais elaboradas.
+
+![](2.png)
+
 ### Conceitos Importantes <a id="conceitos-importantes"></a>
+
+* __Redundância:__ Ocorre quando um mesmo dado é armazenado em mais de uma área do banco de dados. 
+
+* __Consistência:__ A consistência indica a utilização de dados que não conflitam com outros.
+
+* __Integridade/Falta de Integridade:__ A integridade diz respeito ao nível de confiança das informações do banco de dados. Diz respeito a credibilidade das informações e à lógica das informações. Regras de restrição de integridade configuraram um banco de dados para ser alimentado por informações com características lógicas específicas, diminuindo a probabilidade de falta de integridade no banco de dados.
 
 
