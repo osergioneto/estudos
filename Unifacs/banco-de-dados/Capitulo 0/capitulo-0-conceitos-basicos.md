@@ -131,13 +131,13 @@ A linguagem SQL é dividida em subconjuntos de acordo com as operações que que
      * GRANT - autoriza ao usuário executar ou setar operações.
      * REVOKE - remove ou restringe a capacidade de um usuário de executar operações.
 
-    * DTL - Linguagem de Transação de Dados: 
+   * DTL - Linguagem de Transação de Dados: 
 
       * BEGIN WORK (ou START TRANSACTION, dependendo do dialeto SQL) pode ser usado para marcar o começo de uma transação de banco de dados que pode ser completada ou não.
       * COMMIT finaliza uma transação dentro de um sistema de gerenciamento de banco de dados.
       * ROLLBACK faz com que as mudanças nos dados existentes desde o último COMMIT ou ROLLBACK sejam descartadas.
 
-    * DQL - Linguagem de Consulta de Dados: Embora tenha apenas um comando, a DQL é a parte da SQL mais utilizada. O comando SELECT permite ao usuário especificar uma consulta ("query") como uma descrição do resultado desejado. Esse comando é composto de várias cláusulas e opções, possibilitando elaborar consultas das mais simples às mais elaboradas.
+   * DQL - Linguagem de Consulta de Dados: Embora tenha apenas um comando, a DQL é a parte da SQL mais utilizada. O comando SELECT permite ao usuário especificar uma consulta ("query") como uma descrição do resultado desejado. Esse comando é composto de várias cláusulas e opções, possibilitando elaborar consultas das mais simples às mais elaboradas.
 
 ![](2.png)
 
