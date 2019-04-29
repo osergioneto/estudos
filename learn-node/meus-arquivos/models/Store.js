@@ -25,4 +25,4 @@ storeSchema.pre('save', function(next){
     next()
 });
 
-module.exports =  mongoose.model('Store', storeSchema)
+module.exports = mongoose.model('Store', storeSchema)
