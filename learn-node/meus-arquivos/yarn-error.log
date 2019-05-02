@@ -2,7 +2,7 @@ Arguments:
   /usr/bin/node /usr/share/yarn/bin/yarn.js install
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  /home/osergioneto/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Yarn version: 
   1.15.2
@@ -27,7 +27,7 @@ npm manifest:
     "scripts": {
       "prod": "node ./start.js",
       "watch": "nodemon ./start.js --ignore public/",
-      "start": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
+      "start": "concurrently \"yarn run watch\" \"yarn run assets\" --names \"💻,📦\" --prefix name",
       "assets": "webpack -w --display-max-modules 0",
       "sample": "node ./data/load-sample-data.js",
       "blowitallaway": "node ./data/load-sample-data.js --delete",
