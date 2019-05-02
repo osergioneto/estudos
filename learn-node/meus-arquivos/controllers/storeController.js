@@ -50,7 +50,7 @@ exports.createStore = async (req, res) => {
     try {
         const store = await (new Store(req.body)).save();
         req.flash('success', `Succefully Created ${store.name}. Care to leave a review? `);
-        res.redirect(`/stores/${store.slugs}`);
+        res.redirect(`/store/${store.slugs}`);
     } 
     catch(err) {
         console.error(err);
