@@ -20,6 +20,9 @@ router.post('/add/:id',
     storeController.updateStore
 );
 
+router.get('/tags', storeController.getStoresByTag);
+router.get('/tags/:tag', storeController.getStoresByTag);
+
 //Extras LearnNode
 router.get('/nome', extrasController.showName);
 router.get('/reverse/:word/:number', extrasController.reverse);

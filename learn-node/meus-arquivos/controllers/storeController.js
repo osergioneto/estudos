@@ -83,6 +83,20 @@ exports.getStoreBySlug = async (req, res) => {
         res.render('store', { title: `Store: ${store.name}`, store });
     } catch (error) {
         res.send('Store not found');
-    }
-    
+    }   
 }
+
+exports.getStoresByTag = async (req, res) => {
+    try {
+        const tag = req.params.tag;
+        const tagQuery = tag || { $exists: true };
+        const tagsPromise = Store.getTagsList();
+        const storesPromies = Store.find({ tags: tagQuery});
+        const [tags, store] = await Promise.all([tagsPromise, storesPromies]);
+
+        res.render('tag', { tags, title: `Tag` , tag, store });
+    } catch (error) {
+        console.log(error);
+    }
+}
+

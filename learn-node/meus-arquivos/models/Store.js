@@ -31,17 +31,31 @@ const storeSchema = new mongoose.Schema({
             type: String,
             required: 'You must supply an address!'
         }
-    },
+    }, 
     photo: String
 });
 
-storeSchema.pre('save', function(next){
+storeSchema.pre('save', async function(next){
     if(!this.isModified('name')){
         next();
         return;
     }
     this.slugs = slug(this.name);
+    // encontra stores que contem a url com um nome já criado. ex.: wes, wes-1, wes-2...
+    const slugRegEx = new RegExp(`^(${this.slugs})((-[0-9]*$)?)$`, 'i');
+    const storesWithSlug = await this.constructor.find({ slugs: slugRegEx });
+    if(storesWithSlug){
+        this.slugs = `${this.slugs}-${storesWithSlug.length + 1}`;
+    }
     next()
 });
+
+storeSchema.statics.getTagsList = function() {
+    return this.aggregate([
+        { $unwind: '$tags' },
+        { $group: { _id: '$tags', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+    ]);
+}
 
 module.exports = mongoose.model('Store', storeSchema)
