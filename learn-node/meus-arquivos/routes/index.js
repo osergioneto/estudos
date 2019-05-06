@@ -37,7 +37,12 @@ router.post('/register',
 
 router.get('/account', authController.isLoggedIn, userController.account);
 router.post('/account', userController.updateAccount);
-
+router.post('/account/forgot', authController.forgot);
+router.get('/account/reset/:token', authController.reset);
+router.post('/account/reset/:token', 
+    authController.confirmPassword,
+    authController.update
+);
 
 //Extras LearnNode
 router.get('/nome', extrasController.showName);
