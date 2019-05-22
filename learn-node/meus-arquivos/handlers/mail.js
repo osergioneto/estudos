@@ -19,7 +19,7 @@ const generateHTML = (filename, options = {}) => {
     return inlined;
 }
 
-exports.send = async (options) => {
+exports.send = (options) => {
     console.log(options);
     const html = generateHTML(options.filename, options);
     const text = htmlToText.fromString(html);
