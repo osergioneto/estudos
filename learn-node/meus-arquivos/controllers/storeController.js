@@ -107,3 +107,24 @@ const confirmOwner = (store, user) => {
         throw Error('You must own a store to edit');
     }
 }
+
+exports.searchStores = async (req, res) => {
+    try {
+        const stores = await Store
+            .find({
+                $text: {
+                    $search: req.query.q
+                }
+            }, {
+                score: { $meta: 'textScore' }
+            })
+            .sort({
+                score: { $meta: 'textScore' }
+            })
+            .limit(5);
+
+        res.json(stores);
+    } catch (error) {
+        console.log(error);
+    }
+}
