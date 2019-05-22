@@ -44,6 +44,9 @@ router.post('/account/reset/:token',
     authController.update
 );
 
+/* API */
+router.get('/api/v1/search', storeController.searchStores);
+
 //Extras LearnNode
 router.get('/nome', extrasController.showName);
 router.get('/reverse/:word/:number', extrasController.reverse);
