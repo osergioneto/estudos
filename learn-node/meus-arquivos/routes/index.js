@@ -46,6 +46,7 @@ router.post('/account/reset/:token',
 
 /* API */
 router.get('/api/v1/search', storeController.searchStores);
+router.get('/api/v1/stores/near', storeController.mapStores);
 
 //Extras LearnNode
 router.get('/nome', extrasController.showName);
