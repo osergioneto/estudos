@@ -43,6 +43,7 @@ router.post('/account/reset/:token',
     authController.confirmPassword,
     authController.update
 );
+router.get('/map', storeController.mapPage);
 
 /* API */
 router.get('/api/v1/search', storeController.searchStores);

@@ -150,3 +150,7 @@ exports.mapStores = async (req, res) => {
         console.log(error);
     }
 }
+
+exports.mapPage = (req, res) => {
+    res.render('map', { title: 'Map' });
+}
