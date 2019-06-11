@@ -43,6 +43,11 @@ router.post('/account/reset/:token',
     authController.confirmPassword,
     authController.update
 );
+router.get('/map', storeController.mapPage);
+
+/* API */
+router.get('/api/v1/search', storeController.searchStores);
+router.get('/api/v1/stores/near', storeController.mapStores);
 
 //Extras LearnNode
 router.get('/nome', extrasController.showName);

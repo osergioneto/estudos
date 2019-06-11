@@ -107,3 +107,50 @@ const confirmOwner = (store, user) => {
         throw Error('You must own a store to edit');
     }
 }
+
+exports.searchStores = async (req, res) => {
+    try {
+        const stores = await Store
+            .find({
+                $text: {
+                    $search: req.query.q
+                }
+            }, {
+                score: { $meta: 'textScore' }
+            })
+            .sort({
+                score: { $meta: 'textScore' }
+            })
+            .limit(5);
+
+        res.json(stores);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.mapStores = async (req, res) => {
+    try {
+        const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+        const q = {
+            location: {
+                $near:{
+                    $geometry: {
+                        type: 'Point',
+                        coordinates
+                    },
+                    $maxDistance: 10000
+                }
+            }
+        }
+
+        const stores = await Store.find(q).select('slug name description location');
+        res.json(stores);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.mapPage = (req, res) => {
+    res.render('map', { title: 'Map' });
+}
