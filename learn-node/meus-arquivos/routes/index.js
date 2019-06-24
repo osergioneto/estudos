@@ -3,7 +3,9 @@ const router = express.Router();
 const storeController = require('../controllers/storeController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const reviewController = require('../controllers/reviewController');
 const extrasController = require('../controllers/extrasController');
+ 
 
 // Do work here
 router.get('/', storeController.homePage);
@@ -45,6 +47,8 @@ router.post('/account/reset/:token',
 );
 router.get('/map', storeController.mapPage);
 router.get('/hearts', authController.isLoggedIn, storeController.getHearts);
+router.post('/reviews/:id', authController.isLoggedIn, reviewController.addReview);
+
 /* API */
 router.get('/api/v1/search', storeController.searchStores);
 router.get('/api/v1/stores/near', storeController.mapStores);
