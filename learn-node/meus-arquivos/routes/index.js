@@ -49,6 +49,8 @@ router.get('/map', storeController.mapPage);
 router.get('/hearts', authController.isLoggedIn, storeController.getHearts);
 router.post('/reviews/:id', authController.isLoggedIn, reviewController.addReview);
 
+router.get('/top', storeController.getTopStores);
+
 /* API */
 router.get('/api/v1/search', storeController.searchStores);
 router.get('/api/v1/stores/near', storeController.mapStores);
