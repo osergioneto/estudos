@@ -82,7 +82,7 @@ exports.updateStore = async (req, res) => {
 
 exports.getStoreBySlug = async (req, res) => {
     try {
-        const store = await Store.findOne( { slugs: req.params.slugs }).populate('author');
+        const store = await Store.findOne( { slugs: req.params.slugs }).populate('author reviews');
         res.render('store', { title: `Store: ${store.name}`, store });
     } catch (error) {
         res.send('Store not found');
