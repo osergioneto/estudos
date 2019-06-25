@@ -10,6 +10,7 @@ const extrasController = require('../controllers/extrasController');
 // Do work here
 router.get('/', storeController.homePage);
 router.get('/stores', storeController.getStores);
+router.get('/stores/page/:page', storeController.getStores);
 router.get('/store/:slugs', storeController.getStoreBySlug);
 router.get('/stores/:id/edit', storeController.editStore);
 router.get('/add', authController.isLoggedIn, storeController.addStore);
