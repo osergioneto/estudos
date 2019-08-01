@@ -1,3 +1,21 @@
-const sum = (a, b) => a + b;
+import React, { Component, Fragment } from "react";
+import { render } from "react-dom";
 
-alert(sum(12, 2));
+class Button extends Component {
+  render() {
+    return <a href="#">Salvar</a>;
+  }
+}
+
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        <h1>Hehehe kkkk</h1>
+        <Button />
+      </Fragment>
+    );
+  }
+}
+
+render(<App />, document.getElementById("app"));
