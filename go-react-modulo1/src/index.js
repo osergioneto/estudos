@@ -1,15 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { render } from "react-dom";
 
-class Button extends Component {
-  render() {
-    return (
-      <a href="#" onClick={this.props.onClick}>
-        {this.props.children}
-      </a>
-    );
-  }
-}
+import Button from "./Button";
 
 class App extends Component {
   constructor(props) {
@@ -17,15 +9,16 @@ class App extends Component {
     this.state = { clicks: 0 };
   }
 
-  handleClick(e) {
-    this.setState(() => this.state.clicks++);
-  }
+  handleClick = () => {
+    this.setState({ clicks: this.state.clicks + 1 });
+  };
 
   render() {
     return (
       <Fragment>
         <h1>Hello Rocketseat</h1>
         <h2>O botão foi clicado {this.state.clicks} vezes.</h2>
+        <Button onClick={() => alert("Dattebayo. Esse é meu jeito ninja!")} />
         <Button onClick={this.handleClick.bind(this)}>Salvaaaaaar</Button>
       </Fragment>
     );
