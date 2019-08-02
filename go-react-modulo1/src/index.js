@@ -3,6 +3,8 @@ import { render } from "react-dom";
 
 import Button from "./Button";
 
+import "./style.css";
+
 class App extends Component {
   constructor(props) {
     super(props);
