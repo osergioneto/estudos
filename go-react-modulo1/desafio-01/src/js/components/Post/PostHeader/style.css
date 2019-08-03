@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+.postHeader-container {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  margin: 20px 20px 0 20px;
+}
+
+.postHeader-profile {
+  display: flex;
+  height: 100px;
+  margin: 0 10px 0 0;
+  align-items: center;
+}
+
+.postHeader-profile img {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.postHeader-details {
+  font-family: "Roboto", sans-serif;
+}
+
+.postHeader-details .postHeader-name {
+  color: rgb(73, 73, 73);
+  font-size: 0.85em;
+}
+
+.postHeader-details .postHeader-timepost {
+  color: rgb(168, 168, 168);
+  font-size: 0.6em;
+}
+
+.postHeader-border {
+  width: calc(100% - 10px);
+  border-bottom: 1px solid grey;
+  display: inline-block;
+}
