@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Non_primitive_types.Math;
+
 
 namespace Non_primitive_types
 {
     partial class Program
     {
+
+        public enum ShippingMethod
+        {
+            RegularAirMail = 1,
+            RegistredAirMail = 2,
+            Express = 3
+        }
+
         static void Main(string[] args)
         {
             var gaia = new Dog("Gaia");
@@ -52,6 +61,19 @@ c:\folder3\folder4";
             System.Console.WriteLine(formatedNames);
             System.Console.WriteLine(text);
 
+            // Enums
+            var method = ShippingMethod.Express;
+            System.Console.WriteLine((int)method);
+
+            var methodId = 3;
+            System.Console.WriteLine((ShippingMethod)methodId);
+
+            System.Console.WriteLine(method.ToString());
+
+            var methodName = "Express";
+            var shippingMethod = (ShippingMethod)Enum.Parse(typeof (ShippingMethod), methodName);
+
+            Console.WriteLine(shippingMethod);
         }
     }
 }
