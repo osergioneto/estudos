@@ -29,6 +29,29 @@ namespace Non_primitive_types
             System.Console.WriteLine(names[0]);
             System.Console.WriteLine(names[1]);
             System.Console.WriteLine(names[2]);
+
+            // Strings
+
+            string firstName = "Sérgio";
+            string lastName = "Neto";
+
+            string fullName = firstName + " " + lastName;
+
+            string myFullName = string.Format("My name is {0} {1}", firstName, lastName);
+
+            var randomNames = new string[3] { "Jack", "John", "Mary" };
+            var formatedNames = string.Join(", ", randomNames);
+
+            var text = @"Hi John,
+Look into the following paths
+c:\folder1\folder2
+c:\folder3\folder4";
+
+            System.Console.WriteLine(fullName);
+            System.Console.WriteLine(myFullName);
+            System.Console.WriteLine(formatedNames);
+            System.Console.WriteLine(text);
+
         }
     }
 }
