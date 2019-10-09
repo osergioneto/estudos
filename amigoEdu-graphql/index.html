@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>reveal.js</title>
+    <title>GraphQL - Amigo Edu</title>
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/reveal.css" />
@@ -135,7 +135,7 @@
           </section>
 
           <section>
-            <img src="./img/3.png" style="height: 80vh;" alt="" />
+            <img src="./img/3.png" style="height: 90vh;" alt="" />
             <aside class="notes">
               Com uma API REST, você normalmente reunia os dados acessando
               vários endpoints. No exemplo, esses podem ser o endpoint
@@ -156,7 +156,594 @@
               atendidos.
             </aside>
           </section>
+
+          <section>
+            <h3>Sem mais Over- e Underfetching</h3>
+            <ul>
+              <li class="fragment">
+                Busca excessiva: Fazendo download de dados supérfluos
+              </li>
+              <li class="fragment">A busca insuficiente e o problema n + 1</li>
+            </ul>
+            <aside class="notes">
+              A busca excessiva significa que um cliente baixa mais informações
+              do que é realmente necessário no aplicativo. Imagine, por exemplo,
+              uma tela que precise exibir uma lista de usuários apenas com seus
+              nomes. Em uma API REST, esse aplicativo geralmente acessa o
+              terminal /users e recebe uma matriz JSON com dados do usuário. No
+              entanto, essa resposta pode conter mais informações sobre os
+              usuários retornados, por exemplo, seus aniversários ou endereços -
+              informações que são inúteis para o cliente porque ele precisa
+              apenas exibir os nomes dos usuários.
+              <br />
+              Outra questão é a busca insuficiente e o problema n +
+              1-solicitações. A busca insuficiente geralmente significa que um
+              endpoint específico não fornece o suficiente das informações
+              necessárias. O cliente terá que fazer solicitações adicionais para
+              buscar tudo o que precisa. Isso pode escalar para uma situação em
+              que um cliente precisa primeiro baixar uma lista de elementos, mas
+              precisa fazer uma solicitação adicional por elemento para buscar
+              os dados necessários. Como exemplo, considere que o mesmo
+              aplicativo também precisaria exibir os três últimos seguidores por
+              usuário. A API fornece o ponto de extremidade adicional /users
+              /&lt;user-id&gt;/ followers. Para poder exibir as informações
+              necessárias, o aplicativo precisará fazer uma solicitação ao
+              terminal /users e pressionar o terminal
+              /users/&lt;user-id&gt;/followers para cada usuário.
+            </aside>
+          </section>
+          <section>
+            <h3>Iterações rápidas de produtos no front-end</h3>
+            <aside class="notes">
+              Um padrão comum com as APIs REST é estruturar os endpoints de
+              acordo com as visualizações que você tem dentro do seu aplicativo.
+              Isso é útil, pois permite que o cliente obtenha todas as
+              informações necessárias para uma visualização específica,
+              simplesmente acessando o terminal correspondente.
+              <br />
+              A principal desvantagem dessa abordagem é que ela não permite
+              iterações rápidas no front-end. A cada alteração feita na
+              interface do usuário, há um alto risco de que agora haja mais (ou
+              menos) dados do que antes. Conseqüentemente, o back-end também
+              precisa ser ajustado para atender às novas necessidades de dados.
+              Isso reduz a produtividade e diminui notavelmente a capacidade de
+              incorporar o feedback do usuário em um produto.
+              <br />
+              Com o GraphQL, esse problema está resolvido. Graças à natureza
+              flexível do GraphQL, as alterações no lado do cliente podem ser
+              feitas sem nenhum trabalho extra no servidor. Como os clientes
+              podem especificar seus requisitos de dados exatos, nenhum
+              engenheiro de back-end precisa fazer ajustes quando o projeto e os
+              dados no front-end forem alterados.
+            </aside>
+          </section>
+          <section>
+            <h3>Análise perspicaz no back-end</h3>
+            <aside class="notes">
+              O GraphQL permite que você tenha informações detalhadas sobre os
+              dados solicitados no back-end. Como cada cliente especifica
+              exatamente em quais informações está interessada, é possível obter
+              um entendimento profundo de como os dados disponíveis estão sendo
+              usados. Por exemplo, isso pode ajudar na evolução de uma API e na
+              descontinuação de campos específicos que não são mais solicitados
+              por nenhum cliente.
+              <br />
+              Com o GraphQL, você também pode fazer um monitoramento de
+              desempenho de baixo nível das solicitações que são processadas
+              pelo seu servidor. O GraphQL usa o conceito de resolver functions
+              para coletar os dados solicitados por um cliente. A instrumentação
+              e a medição do desempenho desses resolvers fornecem informações
+              cruciais sobre gargalos em seu sistema.
+            </aside>
+          </section>
+          <section>
+            <h3>Benefícios de um sistema de Esquemas e Tipos</h3>
+            <aside class="notes">
+              O GraphQL usa um sistema de tipos fortes para definir os recursos
+              de uma API. Todos os tipos expostos em uma API são gravados em um
+              esquema usando a SDL (GraphQL Schema Definition Language). Esse
+              esquema serve como o contrato entre o cliente e o servidor para
+              definir como um cliente pode acessar os dados.
+              <br />
+              Depois que o esquema é definido, as equipes que trabalham com
+              front-end e back-end podem fazer seu trabalho sem comunicação
+              adicional, pois ambos conhecem a estrutura definida dos dados que
+              são enviados pela rede.
+              <br />
+              As equipes de front-end podem testar facilmente suas aplicações
+              mockando os dados necessários. Quando o servidor estiver pronto, é
+              possível alternar o switch para que os aplicativos clientes
+              carreguem os dados da API real.
+            </aside>
+          </section>
         </section>
+        <section>
+          <section>
+            <h2>Conceitos principais</h2>
+            <ul>
+              <li>Schema Definition Language (SDL)</li>
+              <li>Query</li>
+              <li>Mutation</li>
+              <li>Subscription</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Schema Definition Language (SDL)</h3>
+            <pre><code class="hljs" data-trim data-line-numbers="4,8-11">
+              type Person {
+                name: String!
+                age: Int!
+              }
+
+              type Post {
+                title: String!
+                author: Person!
+              }
+            </code></pre>
+            <aside class="notes">
+              O GraphQL possui seu próprio sistema de tipos que é usado para
+              definir o esquema de uma API. A sintaxe para escrever esquemas é
+              chamada de linguagem de definição de esquema (SDL).
+              <br />
+              Esse tipo tem dois campos, chamados name e age que são
+              respectivamente do tipo String e Int. A exclamação (!) a seguir o
+              tipo significa que este campo é obrigatório.
+              <br />
+              Também é possível expressar relacionamentos entre tipos. No
+              exemplo de um aplicativo de blog, uma Person pode estar associada
+              a um Post:
+            </aside>
+          </section>
+          <section>
+            <pre>
+              <code class="hljs" data-trim data-line-numbers="4,8-11">
+                  type Person {
+                    name: String!
+                    age: Int!
+                    posts: [Post!]!
+                  }
+              </code>
+            </pre>
+            <aside class="notes">
+              Observe que acabamos de criar um relacionamento um-para-muitos
+              entre Person e Post, pois o campo de posts em Person é na verdade
+              uma matriz de postagens.
+            </aside>
+          </section>
+          <section>
+            <h3>Buscando dados com consultas (queries)</h3>
+            <pre>
+              <code class="hljs" data-trim data-line-numbers="4,8-11">
+                query{
+                  allPersons {
+                    name
+                  }
+                }
+
+                "allPersons": [
+                    { "name": "Johnny" },
+                    { "name": "Sarah" },
+                    { "name": "Alice" }
+                  ]
+                }
+              </code>
+            </pre>
+            <aside class="notes">
+              Ao trabalhar com APIs REST, os dados são carregados a partir de
+              endpoints. Cada endpoint possui uma estrutura claramente definida
+              das informações que ele retorna. Isso significa que os requisitos
+              de dados de um cliente são efetivamente codificados na URL à qual
+              ele se conecta.
+              <br />
+              A abordagem adotada no GraphQL é radicalmente diferente. Em vez de
+              ter vários terminais que retornam estruturas de dados fixas, as
+              APIs do GraphQL normalmente expõem apenas um único endpoint. Isso
+              funciona porque a estrutura dos dados retornados não é fixa. Em
+              vez disso, é totalmente flexível e permite que o cliente decida
+              quais dados são realmente necessários.
+              <br />
+              Isso significa que o cliente precisa enviar mais informações ao
+              servidor para expressar suas necessidades de dados - essas
+              informações são chamadas de queries.
+            </aside>
+          </section>
+          <section>
+            <h3>Buscando dados com consultas (queries)</h3>
+            <pre>
+                <code class="hljs" data-trim data-line-numbers="4,8-11">
+                  {
+                    allPersons {
+                      name
+                      age
+                    }
+                  }
+  
+                  {
+                    allPersons {
+                      name
+                      age
+                      posts {
+                        title
+                      }
+                    }
+                  }
+                </code>
+              </pre>
+            <aside class="notes">
+              O campo `allPersons` nesta consulta é chamado de campo raiz da
+              consulta. Tudo o que segue o campo raiz é chamado de payload da
+              query. O único campo especificado no payload desta consulta é o
+              `name`.
+              <br />
+              Essa query retornaria uma lista de todas as pessoas atualmente
+              armazenadas no banco de dados.
+              <br />
+              Observe que cada pessoa tem apenas o `name` na resposta, mas a
+              idade não é retornada pelo servidor. Isso é exatamente porque
+              `name` foi o único campo especificado na consulta.
+              <br />
+              Se o usuário também precisar da idade das pessoas, basta ajustar a
+              query e incluir o novo campo no payload da consulta:
+              <br />
+              Uma das principais vantagens do GraphQL é que ele permite
+              consultar naturalmente informações aninhadas. Por exemplo, se você
+              deseja carregar todas as postagens que uma Person escreveu, basta
+              seguir a estrutura de seus tipos para solicitar essas informações:
+            </aside>
+          </section>
+          <section>
+            <h3>Queries com Argumentos</h3>
+            <pre>
+                <code class="hljs" data-trim data-line-numbers="4,8-11">
+                  {
+                    allPersons(last: 2) {
+                      name
+                    }
+                  }
+                </code>
+              </pre>
+            <aside class="notes">
+              No GraphQL, cada campo pode ter zero ou mais argumentos, se isso
+              for especificado no esquema. Por exemplo, o campo allPersons pode
+              ter um parâmetro para retornar apenas um número específico de
+              pessoas.
+            </aside>
+          </section>
+          <section>
+            <h3>Escrevendo dados com Mutations</h3>
+            <pre>
+                <code class="hljs" data-trim data-line-numbers="4,8-11">
+                  mutation {
+                    createPerson(name: "Bob", age: 36) {
+                      name
+                      age
+                    }
+                  }
+                </code>
+              </pre>
+            <aside class="notes">
+              Além de solicitar informações de um servidor, a maioria dos
+              aplicativos também precisa de alguma maneira de fazer alterações
+              nos dados armazenados no back-end. Com o GraphQL, essas alterações
+              são feitas usando as mutations. Geralmente existem três tipos de
+              mutations:
+              <br />
+              - para criar novos dados;
+              <br />
+              - atualizar dados existentes;
+              <br />
+              - deletar dados existentes;
+              <br />
+              As mutações seguem a mesma estrutura sintática das consultas, mas
+              sempre precisam começar com a palavra-chave `mutation`. Aqui está
+              um exemplo de como podemos criar uma nova `Person`:
+            </aside>
+          </section>
+          <section>
+            <h3>Escrevendo dados com Mutations</h3>
+            <pre>
+                  <code class="hljs" data-trim data-line-numbers="4,8-11">
+                    mutation {
+                      createPerson(name: "Bob", age: 36) {
+                        name
+                        age
+                      }
+                    }
+
+                    "createPerson": {
+                      "name": "Bob",
+                      "age": 36,
+                    }
+                  </code>
+                </pre>
+            <aside class="notes">
+              Observe que, semelhante à consulta que escrevemos antes, a
+              mutation também possui um campo raiz - nesse caso, é chamado
+              `createPerson`. Nesse caso, o campo `createPerson` usa dois
+              argumentos que especificam o `name` e a `age` da nova pessoa.
+              <br />
+              Assim como em uma consulta, também podemos especificar um payload
+              para uma mutation na qual podemos solicitar propriedades
+              diferentes do novo objeto `Person`. No nosso caso, estamos
+              solicitando o `name` e a `age` - embora, sem dúvida, isso não seja
+              muito útil em nosso exemplo, já que obviamente já os conhecemos
+              quando os passamos para a mutation. No entanto, poder também
+              consultar informações ao enviar mutações pode ser uma ferramenta
+              muito poderosa que permite recuperar novas informações do servidor
+              em uma única viagem de ida e volta!
+            </aside>
+          </section>
+          <section>
+            <h3>Escrevendo dados com Mutations</h3>
+            <pre>
+                <code class="hljs" data-trim data-line-numbers="4,8-11">
+                  type Person {
+                    id: ID!
+                    name: String!
+                    age: Int!
+                  }
+  
+                  mutation {
+                    createPerson(name: "Alice", age: 36) {
+                      id
+                    }
+                  }
+                </code>
+              </pre>
+            <aside class="notes">
+              Um padrão que você encontrará com frequência é que os tipos de
+              GraphQL têm IDs únicos que são gerados pelo servidor quando novos
+              objetos são criados. Estendendo nosso tipo de Person de antes,
+              poderíamos adicionar um id como este:
+              <br />
+              Agora, quando uma nova Person é criada, você pode solicitar
+              diretamente o id no payload da mutation, pois essas são
+              informações que não estavam disponíveis no cliente anteriormente:
+            </aside>
+          </section>
+          <section>
+            <h3>
+              Atualizações em tempo real com Assinaturas (Subscriptions)
+            </h3>
+            <pre>
+              <code class="hljs" data-trim data-line-numbers="4,8-11">
+                subscription {
+                  newPerson {
+                    name
+                    age
+                  }
+                }
+
+                {
+                  "newPerson": {
+                    "name": "Jane",
+                    "age": 23
+                  }
+                }
+              </code>
+            </pre>
+            <aside class="notes">
+              Outro requisito importante para muitos aplicativos é ter uma
+              conexão em tempo real com o servidor para ser informado
+              imediatamente sobre eventos importantes. Para este caso de uso, o
+              GraphQL oferece o conceito de subscriptions.
+              <br />
+              Quando um cliente se inscreve em um evento, ele inicia e mantém
+              uma conexão estável com o servidor. Sempre que esse evento
+              específico acontece, o servidor envia os dados correspondentes ao
+              cliente. Diferentemente de queries e mutations que seguem um
+              *"ciclo de solicitação-resposta"* típico, as subscriptions
+              representam um fluxo de dados enviado ao cliente.
+              <br />
+              As subscriptions são gravadas usando a mesma sintaxe que as
+              queries e mutations. Aqui está um exemplo em que assinamos eventos
+              que acontecem no tipo `Person`:
+              <br />
+              Depois que um cliente enviou essa subscription para um servidor,
+              uma conexão é aberta entre eles. Então, sempre que uma nova
+              mutation é executada que cria uma nova Person, o servidor envia as
+              informações sobre essa pessoa para o cliente:
+            </aside>
+          </section>
+          <section>
+            <h3>Definindo um Esquema (Schema)</h3>
+            <pre>
+              <code class="hljs" data-trim data-line-numbers="4,8-11">
+                  type Query { ... }
+                  type Mutation { ... }
+                  type Subscription { ... }
+
+                  type Query {
+                    allPersons: [Person!]!
+                  }
+
+                  type Query {
+                    allPersons(last: Int): [Person!]!
+                  }
+              </code>
+            </pre>
+            <aside class="notes">
+              O esquema é um dos conceitos mais importantes ao trabalhar com uma
+              API GraphQL. Ele especifica os recursos da API e define como os
+              clientes podem solicitar os dados. É frequentemente visto como um
+              *contrato* entre o servidor e o cliente.
+              <br />
+              Geralmente, um esquema é simplesmente uma coleção de tipos de
+              GraphQL. No entanto, ao escrever o esquema para uma API, existem
+              alguns tipos de raiz especiais:
+              <br />
+              Os tipos Query, Mutation e Subscription são os pontos de entrada
+              para as solicitações enviadas pelo cliente. Para ativar a query
+              allPersons que vimos antes, o tipo de query teria que ser escrito
+              da seguinte maneira:
+              <br />
+              allPersons é chamado de campo raiz da API. Considerando novamente
+              o exemplo em que adicionamos o argumento last ao campo allPersons,
+              teríamos que escrever a Query da seguinte maneira:
+            </aside>
+          </section>
+          <section>
+            <h3>Definindo um Esquema (Schema)</h3>
+            <pre>
+                <code class="hljs" data-trim data-line-numbers="4,8-11">
+                    type Mutation {
+                      createPerson(name: String!, age: Int!): Person!
+                    }
+
+                    type Subscription {
+                      newPerson: Person!
+                    }
+                </code>
+              </pre>
+            <aside class="notes">
+              Da mesma forma, para a mutation createPerson, teremos de adicionar
+              um campo raiz ao tipo de Mutation:
+              <br />
+              Note que esse campo raiz também possui dois argumentos, o `name` e
+              `age` da nova `Person`. Por fim, para as subscriptions, precisamos
+              adicionar o campo raiz `newPerson`:
+            </aside>
+          </section>
+          <section>
+            <h3>Definindo um Esquema (Schema)</h3>
+            <pre>
+              <code class="hljs" data-trim data-line-numbers="4,8-11">
+                      type Query {
+                        allPersons(last: Int): [Person!]!
+                      }
+                      
+                      type Mutation {
+                        createPerson(name: String!, age: Int!): Person!
+                      }
+                      
+                      type Subscription {
+                        newPerson: Person!
+                      }
+                      
+                      type Person {
+                        name: String!
+                        age: Int!
+                        posts: [Post!]!
+                      }
+                      
+                      type Post {
+                        title: String!
+                        author: Person!
+                      }
+              </code>
+            </pre>
+            <aside class="notes">
+              Da mesma forma, para a mutation createPerson, teremos de adicionar
+              um campo raiz ao tipo de Mutation:
+              <br />
+              Note que esse campo raiz também possui dois argumentos, o `name` e
+              `age` da nova `Person`. Por fim, para as subscriptions, precisamos
+              adicionar o campo raiz `newPerson`:
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>
+              Big Picture (Arquitetura)
+            </h2>
+            <ul>
+              <li class="fragment">
+                Servidor GraphQL com um banco de dados conectado
+              </li>
+              <li class="fragment">
+                Servidor GraphQL que é uma camada fina na frente de vários
+                sistemas legados ou de terceiros e os integra por meio de uma
+                única API GraphQL
+              </li>
+              <li class="fragment">
+                Uma abordagem híbrida de um banco de dados conectado e de
+                sistemas legados ou de terceiros que podem ser acessados através
+                da mesma API GraphQL
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Servidor GraphQL conectado a um banco de dados</h3>
+            <img src="./img/6.png" alt="" />
+            <aside class="notes">
+              Essa arquitetura será a mais comum para projetos novos. Na
+              configuração, você tem um único servidor (web) que implementa a
+              especificação GraphQL. Quando uma query chega ao servidor GraphQL,
+              o servidor lê o payload da query e busca as informações
+              necessárias no banco de dados. Isso é chamado de *resolução* da
+              query. Em seguida, ele constrói o objeto de resposta conforme
+              descrito na especificação oficial e o retorna ao cliente.
+              <br />
+              O GraphQL também não se importa com o banco de dados ou o formato
+              usado para armazenar os dados. Você pode usar um banco de dados
+              SQL como o AWS Aurora ou um banco de dados NoSQL como o MongoDB.
+            </aside>
+          </section>
+          <section>
+            <h3>Camada GraphQL que integra sistemas existentes</h3>
+            <img src="./img/7.png" alt="" />
+            <aside class="notes">
+              Outro caso de uso importante para o GraphQL é a integração de
+              vários sistemas existentes atrás de uma única API do GraphQL. Isso
+              é particularmente atraente para empresas com infra-estruturas
+              legadas e muitas APIs diferentes que cresceram ao longo dos anos e
+              agora impõem uma alta carga de manutenção. Um grande problema com
+              esses sistemas legados é que eles tornam praticamente impossível
+              criar produtos inovadores que precisam de acesso a vários
+              sistemas.
+              <br />
+              Nesse contexto, o GraphQL pode ser usado para unificar esses
+              sistemas existentes e ocultar sua complexidade por trás de uma boa
+              API do GraphQL. Dessa forma, novos aplicativos clientes podem ser
+              desenvolvidos que simplesmente conversam com o servidor GraphQL
+              para buscar os dados necessários. O servidor GraphQL é responsável
+              por buscar os dados dos sistemas existentes e empacotá-los no
+              formato de resposta GraphQL.
+            </aside>
+          </section>
+          <section>
+            <h3>
+              Abordagem híbrida com banco de dados conectado e integração do
+              sistema existente
+            </h3>
+            <img src="./img/8.png" alt="" />
+            <aside class="notes">
+              Por fim, é possível combinar as duas abordagens e criar um
+              servidor GraphQL que tenha um banco de dados conectado, mas ainda
+              fale com sistemas legados ou de terceiros.
+              <br />
+              Quando uma consulta é recebida pelo servidor, ela será resolvida e
+              recuperará os dados necessários do banco de dados conectado ou de
+              algumas das APIs integradas.
+            </aside>
+          </section>
+          <section>
+            <h3>Funções Resolver</h3>
+            <img src="./img/9.png" alt="" />
+            <aside class="notes">
+              Mas como ganhamos essa flexibilidade com o GraphQL? Como é que ele
+              se encaixa muito bem nesses tipos muito diferentes de casos de
+              buso?
+              <br />
+              Como você falamos antes, o payload uma query (ou mutation) do
+              GraphQL consiste em um conjunto de campos. Na implementação do
+              servidor GraphQL, cada um desses campos corresponde a exatamente
+              uma função que é chamada de resolver. O único objetivo de uma
+              função de resolver é buscar os dados para seu campo.
+              <br />
+              Quando o servidor recebe uma consulta, ele chama todas as funções
+              dos campos especificados no payload da query. Assim, resolve a
+              query e é capaz de recuperar os dados corretos para cada campo.
+              Depois que todos os resolvers retornarem, o servidor empacotará os
+              dados no formato descrito pela query e os enviará de volta ao
+              cliente.
+            </aside>
+          </section>
+        </section>
+        <section
+          data-background="https://media.giphy.com/media/3osxYvOJthLFhiiA5a/giphy.gif"
+        ></section>
       </div>
     </div>
 
