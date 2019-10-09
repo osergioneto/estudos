@@ -1,49 +1,189 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/white.css" />
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Overview GraphQL</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Overview GraphQL</h1>
+          <img
+            style="height: 20vh; width: auto; margin: 0; border: 0px; box-shadow: 0 0 0 0;"
+            src="./img/1.png"
+          />
+        </section>
+        <section>
+          <section>
+            <h2>O qué GraphQL?</h2>
+            <ul>
+              <li class="fragment">
+                Um novo padrão de <bold class="graphql">API</bold> que foi
+                criado pelo Facebook
+              </li>
+              <li class="fragment">
+                permite a
+                <div class="graphql">busca declarativa de dados</div>
+              </li>
+              <li class="fragment">
+                expõe um <bold class="graphql">único endpoint</bold> que
+                responde a
+                <div class="graphql">queries</div>
+              </li>
+            </ul>
+            <aside class="notes">
+              O GraphQL é um novo padrão de API que fornece uma alternativa mais
+              eficiente, poderosa e flexível ao REST. Foi desenvolvido pelo
+              Facebook e agora é mantido por uma grande comunidade de empresas e
+              indivíduos do mundo todo. <br />O GraphQL permite a busca
+              declarativa de dados, onde um cliente pode especificar exatamente
+              quais dados precisa de uma API. <br />Em vez de vários endpoints
+              que retornam dados fixos, um servidor GraphQL expõe apenas um
+              único endpoint e responde com precisão com os dados solicitados
+              pelo cliente.
+            </aside>
+          </section>
+          <section>
+            <h2>Uma Query Language para APIs</h2>
+            <img src="./img/2.png" alt="" />
+            <aside class="notes">
+              A maioria das aplicações precisa buscar dados de um servidor em
+              que esses dados são armazenados em um banco de dados. É de
+              responsabilidade da API fornecer uma interface para os dados
+              armazenados que atendam às necessidades de um aplicativo.
+              <br />
+              Muitas vezes, o GraphQL é confundido com uma tecnologia de banco
+              de dados. Isso é um equívoco, o GraphQL é uma linguagem de
+              consulta para APIs - não para bancos de dados. Nesse sentido, o
+              banco de dados é independente e efetivamente pode ser usado em
+              qualquer contexto em que uma API é usada.
+            </aside>
+          </section>
+          <section>
+            <h3>Uma alternativa mais eficiente que o REST</h3>
+            <ol>
+              <li class="fragment">
+                O aumento do mobile cria a necessidade de carregamento eficiente
+                de dado
+              </li>
+              <li class="fragment">
+                Variedade de diferentes frameworks e plataformas de front-end
+              </li>
+              <li class="fragment">
+                Desenvolvimento rápido e expectativa de desenvolvimento rápido
+                de features
+              </li>
+            </ol>
+            <aside class="notes">
+              O GraphQL minimiza a quantidade de dados que precisam ser
+              transferidos pela rede e, portanto, aprimora principalmente os
+              aplicativos que operam sob essas condições.
+              <br />
+              O cenário heterogêneo de estruturas e plataformas de front-end que
+              executam aplicativos clientes dificulta a criação e a manutenção
+              de uma API que atenda aos requisitos de todos. Com o GraphQL, cada
+              cliente pode acessar com precisão os dados necessário.
+              <br />
+              A entrega contínua se tornou um padrão para muitas empresas,
+              iterações rápidas e atualizações frequentes de produtos são
+              indispensáveis. Com as APIs REST, a maneira como os dados são
+              expostos pelo servidor geralmente precisa ser modificada para
+              atender a requisitos específicos e alterações de design no lado do
+              cliente. Isso dificulta práticas rápidas de desenvolvimento e
+              iterações de produtos.
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>
+              <div class="graphql">GraphQL</div>
+              é melhor que REST
+            </h2>
+            <aside class="notes">
+              Para mostrar as principais diferenças entre REST e GraphQL, vamos
+              considerar um cenário de exemplo simples: em uma aplicação de
+              blog, é necessario exibir os títulos das postagens de um usuário
+              específico. A mesma tela também exibe os nomes dos três últimos
+              seguidores desse usuário. Como essa situação seria resolvida com o
+              REST e o GraphQL?
+            </aside>
+          </section>
 
-		<script src="js/reveal.js"></script>
+          <section>
+            <img src="./img/3.png" style="height: 80vh;" alt="" />
+            <aside class="notes">
+              Com uma API REST, você normalmente reunia os dados acessando
+              vários endpoints. No exemplo, esses podem ser o endpoint
+              /users/&lt;id&gt; para buscar os dados iniciais do usuário. Em
+              segundo lugar, é provável que exista um endpoint
+              /users/&lt;id&gt;/posts que retorne todas as postagens de um
+              usuário. O terceiro endpoint será o /users/&lt;id&gt;/ followers
+              que retorna uma lista de seguidores por usuário.
+            </aside>
+          </section>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+          <section>
+            <img src="./img/4.png" alt="" />
+            <aside class="notes">
+              Por outro lado, no GraphQL, você envia uma única consulta ao
+              servidor GraphQL que inclui os requisitos dos dados. O servidor
+              então responde com um objeto JSON onde esses requisitos são
+              atendidos.
+            </aside>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true },
+          { src: "plugin/highlight/highlight.js", async: true }
+        ]
+      });
+    </script>
+  </body>
+  <style>
+    .graphql {
+      color: #e535ab;
+    }
+    img {
+      margin: 0 !important;
+      border: solid 0px black !important;
+      box-shadow: 0 0 0 0 !important;
+    }
+  </style>
 </html>
