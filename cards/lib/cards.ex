@@ -44,10 +44,9 @@ defmodule Cards do
       {:error, _reason } -> "Esse arquivo não existe"
     end
   end
-    case status do
-      :ok -> :erlang.binary_to_term(binary)
-      :error -> "Esse arquivo não existe"
-    end
+
+  def create_hand(hand_size) do
+    Cards.create_deck |> Cards.shuffle |> Cards.deal()
   end
 
   # def deal(deck, hand_size) do
