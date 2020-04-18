@@ -8,8 +8,8 @@ defmodule Cards do
 
   ## Examples
 
-      iex> Cards.create_deck()
-      ["Ace", "Two", "Three"]
+      iex> Cards.create_deck
+      iex> ["Ace", "Two", "Three"]
 
   """
   def create_deck do
@@ -26,20 +26,31 @@ defmodule Cards do
 
   ## Examples
 
+      iex> deck = Cards.create_deck
       iex> Cards.shuffle(deck)
-      ["Three", "Ace", "Two"]
+      iex> ["Three", "Ace", "Two"]
 
   """
   def shuffle(deck) do
     Enum.shuffle(deck)
   end
 
-  def contains(deck, card) do 
-    Enum.member?(deck, card) 
+  @doc """
+    Determines whether a deck contains a given card
+
+  ## Examples
+
+      iex> deck = Cards.create_deck()
+      iex> Cards.contains?(deck, "Ace of Spades")
+      true
+
+  """
+  def contains?(deck, card) do
+    Enum.member?(deck, card)
   end
 
   @doc """
-    Divides a deck into a hand and the remainder of the deck. The `hand_size` argument 
+    Divides a deck into a hand and the remainder of the deck. The `hand_size` argument
     indicates how many cards should be in the hand.
 
   ## Examples
@@ -50,7 +61,6 @@ defmodule Cards do
       ["Ace of Spades"]
 
   """
-
   def deal(deck, hand_size) do
     Enum.split(deck, hand_size)
   end
@@ -68,10 +78,10 @@ defmodule Cards do
   end
 
   def create_hand(hand_size) do
-    Cards.create_deck |> Cards.shuffle |> Cards.deal()
+    Cards.create_deck |> Cards.shuffle |> Cards.deal(hand_size)
   end
 
-  # def deal(deck, hand_size) do
-  #   "My hand is #{Enum.join(elem(Enum.split(deck, hand_size), 0), ", ")}"
-  # end
+  def hello do
+    :world
+  end
 end
