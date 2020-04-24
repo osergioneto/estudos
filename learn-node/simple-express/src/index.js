@@ -7,7 +7,12 @@ app.use(express.json());
 const projects = [];
 
 app.get("/projects", (req, res) => {
-  return res.status(200).json(projects);
+  const { title } = req.query;
+  const results = title 
+    ? projects.filter(project => project.title.includes(title)) 
+    : projects;
+
+  return res.status(200).json(results);
 });
 
 app.post("/projects", (req, res) => {
