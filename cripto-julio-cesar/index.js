@@ -3,27 +3,22 @@ const { createReadStream, readFileSync, writeFileSync } = require("fs");
 const axios = require("axios");
 const crypto = require("crypto");
 
-const ALPHABET = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; 
+const ALPHABET = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", ",", ".", " "]
 const LETTERS_ALPHABET = 26;
 
 function translate(phrase, houses) {
-  houses = houses < LETTERS_ALPHABET ? houses : houses % LETTERS_ALPHABET;
-  const sortedAlphabet = ALPHABET.map((letter, index) => getNewHouse(index, houses)).concat([",", ".", " "]);
   const splitedPhrase = phrase.split("");
-
-  const translatedPhrase = splitedPhrase.map((letter, index) => sortedAlphabet[getSortedLetterIndex(splitedPhrase, index)]);
+  const translatedPhrase = splitedPhrase.map((letterPhrase, index) => ALPHABET[getIndex(letterPhrase, houses)]);
 
   return translatedPhrase.join("");
 }
 
-function getNewHouse(letterIndex, houses) { // Tratar caso de casas grandes ou negativo
-  const newIndex = letterIndex + houses < LETTERS_ALPHABET ? letterIndex + houses : letterIndex - houses; 
-  return ALPHABET[newIndex];
-};
-
-function getSortedLetterIndex(splitedPhrase, index) {
-  const extendedAlphabet = ALPHABET.concat([",", ".", " "]); 
-  return extendedAlphabet.findIndex(letter => letter === splitedPhrase[index]);
+function getIndex(letterPhrase, houses) { 
+  if([",", ".", " "].includes(letterPhrase)) {
+    return ALPHABET.findIndex(letter => letter === letterPhrase);
+  }
+  const index = ((ALPHABET.findIndex(letterAlphabet => letterPhrase === letterAlphabet) - houses) % LETTERS_ALPHABET);
+  return index >= 0 ? index : LETTERS_ALPHABET - Math.abs(index);
 }
 
 async function fetchEncriptedMessage() {
@@ -61,7 +56,7 @@ async function main() {
   const encryptedMessage = crypto.createHash("sha1").update(translatedMessage).digest("hex");
   writeAnswer({ translatedMessage, encryptedMessage })
   console.log("before send 🚀🚀🚀");
-  // await sendAnswer();
+  await sendAnswer();
 }
 
 main(); 
