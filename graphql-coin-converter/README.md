@@ -23,13 +23,13 @@ npm run dev:start
 ## Exemplo de query
 
 ```graphql
-{
- 	exchange(url: "https://www.smartmei.com.br") {
-      real
-      dolar
-      euro
-      tariffDescription
-      date
-    }
+{                                                  
+  exchange(url: "https://www.smartmei.com.br") {
+    real
+    dolar
+    euro
+    tariffDescription
+    date
+  }
 }
 ```
