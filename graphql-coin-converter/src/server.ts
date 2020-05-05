@@ -1,6 +1,5 @@
 import { ApolloServer } from "apollo-server";
 import { context, resolvers } from "./resolvers";
-import "./sequelize";
 import { typeDefs } from "./typeDefs";
 
 const PORT = process.env.PORT || "8000";

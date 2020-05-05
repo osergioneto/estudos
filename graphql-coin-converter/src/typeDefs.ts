@@ -5,10 +5,19 @@ export const typeDefs = gql`
         message: String!
     }
 
+    type Exchange {
+        date: String!
+        tariffDescription: String!
+        real: String!
+        dolar: String!
+        euro: String!
+    }
+
     type Query {
-        hello: Hello!
+        exchange(url: String): Exchange
     }
 
     type Mutation {
+        hello: Hello!
     }
 `;
