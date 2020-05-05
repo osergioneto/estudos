@@ -12,7 +12,7 @@ const server = new ApolloServer({
     cors: {
         origin: "*",
     },
-    mocks: true,
+    mocks: false,
 });
 
 server.listen(PORT).then(({ url }: { url: string }) => {
