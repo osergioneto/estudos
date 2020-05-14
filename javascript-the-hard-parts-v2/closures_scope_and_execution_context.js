@@ -86,23 +86,34 @@ function once(func) {
   function callOnce(num) {
     if(count > 0) return value;
     count++;
-    value = func(num);
-    return value;
+    return value = func(num);
   }
   
   return callOnce;
 }
 
 // /*** Uncomment these to check your work! ***/
-const onceFunc = once(addByTwo);
-console.log(onceFunc(4));  // => should log 6
-console.log(onceFunc(10));  // => should log 6
-console.log(onceFunc(9001));  // => should log 6
+// const onceFunc = once(addByTwo);
+// console.log(onceFunc(4));  // => should log 6
+// console.log(onceFunc(10));  // => should log 6
+// console.log(onceFunc(9001));  // => should log 6
+
+
+//--------------------------------------------------
+// Extension
+//--------------------------------------------------
 
 
 // CHALLENGE 5
 function after(count, func) {
-
+	let innerCount = 0;
+  
+  function callFunc() {
+    if (innerCount < count--) return innerCount++;
+    return func();
+  }
+  
+  return callFunc;
 }
 
 // /*** Uncomment these to check your work! ***/
@@ -114,9 +125,12 @@ function after(count, func) {
 
 
 // CHALLENGE 6
-function delay(func, wait) {
-
+function delay(func, wait, ...rest) {
+  setTimeout(() => func(...rest), (wait * 1000));
 }
+
+delay(willCounter, 1);
+delay(willCounter, 2);
 
 
 // CHALLENGE 7
