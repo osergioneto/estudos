@@ -129,17 +129,24 @@ function delay(func, wait, ...rest) {
   setTimeout(() => func(...rest), (wait * 1000));
 }
 
-delay(willCounter, 1);
-delay(willCounter, 2);
+// delay(willCounter, 1);
+// delay(willCounter, 2);
 
 
 // CHALLENGE 7
 function rollCall(names) {
-
+	function shiftName() {
+    if(names.length > 0) {
+      return console.log(names.shift());
+    }
+    return console.log('Everyone accounted for');
+  }
+  
+  return shiftName;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const rollCaller = rollCall(['Victoria', 'Juan', 'Ruth'])
+const rollCaller = rollCall(['Victoria', 'Juan', 'Ruth'])
 // rollCaller() // => should log 'Victoria'
 // rollCaller() // => should log 'Juan'
 // rollCaller() // => should log 'Ruth'
@@ -148,12 +155,19 @@ function rollCall(names) {
 
 // CHALLENGE 8
 function saveOutput(func, magicWord) {
-
+	let data = {};
+  
+  function innerFunction(num) {
+		if(num === magicWord) return data;
+    return data[num] = func(num);
+  }
+  
+  return innerFunction;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const multiplyBy2 = function(num) { return num * 2; };
-// const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+const multiplyBy2 = function(num) { return num * 2; };
+const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
 // console.log(multBy2AndLog(2)); // => should log 4
 // console.log(multBy2AndLog(9)); // => should log 18
 // console.log(multBy2AndLog('boo')); // => should log { 2: 4, 9: 18 }
@@ -161,12 +175,18 @@ function saveOutput(func, magicWord) {
 
 // CHALLENGE 9
 function cycleIterator(array) {
-
+	let index = 0;
+  function innerFunction() {
+		if(index === (array.length)) index = 0;
+    return array[index++];
+  }
+  
+  return innerFunction;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const threeDayWeekend = ['Fri', 'Sat', 'Sun'];
-// const getDay = cycleIterator(threeDayWeekend);
+const threeDayWeekend = ['Fri', 'Sat', 'Sun'];
+const getDay = cycleIterator(threeDayWeekend);
 // console.log(getDay()); // => should log 'Fri'
 // console.log(getDay()); // => should log 'Sat'
 // console.log(getDay()); // => should log 'Sun'
