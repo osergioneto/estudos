@@ -24,7 +24,8 @@ function delayedGreet() {
 /* CHALLENGE 3 */
 
 function helloGoodbye() {
-  // ADD CODE HERE
+  console.log("hello");
+  return setTimeout(() => console.log("good bye"), 2000)
 }
 // Uncomment the following line to check your work!
 // helloGoodbye(); // should log: hello // should also log (after 3 seconds): good bye
@@ -42,7 +43,7 @@ function brokenRecord() {
 /* CHALLENGE 5 */
 
 function limitedRepeat() {
-  // ADD CODE HERE
+  return setInterval(() => console.log("hi again"), 5000);
 }
 // Uncomment the following line to check your work!
 // limitedRepeat(); // should log (every second, for 5 seconds): hi for now
@@ -50,24 +51,35 @@ function limitedRepeat() {
 
 /* CHALLENGE 6 */
 
-function everyXsecsForYsecs() {
-  // ADD CODE HERE
+function everyXsecsForYsecs(func, interval, duration) {
+  const myInterval = setInterval(() => func(), interval * 1000);
+  return setTimeout(() => clearInterval(myInterval), duration * 1000);
 }
 // Uncomment the following lines to check your work!
-// function theEnd() {
-//   console.log('This is the end!');
-// }
+function theEnd() {
+  console.log('This is the end!');
+}
 // everyXsecsForYsecs(theEnd, 2, 20); // should invoke theEnd function every 2 seconds, for 20 seconds): This is the end!
 
 
 /* CHALLENGE 7 */
 
 function delayCounter(target, wait) {
-
+	let count = 0;
+  function innerFunction() {
+		const interval = setInterval(() => {
+      if(count === target) {
+        return clearInterval(interval);
+      }
+      console.log(++count);
+    }, wait);
+  }
+  
+  return innerFunction;
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-// const countLogger = delayCounter(3, 1000)
+const countLogger = delayCounter(3, 1000)
 // countLogger();
 // After 1 second, log 1
 // After 2 seconds, log 2
@@ -76,11 +88,13 @@ function delayCounter(target, wait) {
 /* CHALLENGE 8 */
 
 function promised (val) {
-  // ADD CODE HERE
+  return new Promise((resolve, reject) => {
+    return setTimeout(() => resolve(val), 2000);
+  });
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-// const createPromise = promised('wait for it...');
+const createPromise = promised('wait for it...');
 // createPromise.then((val) => console.log(val)); 
 // will log "wait for it..." to the console after 2 seconds
 
@@ -105,13 +119,25 @@ class SecondClock {
 /* CHALLENGE 10 */
 
 function debounce(callback, interval) {
-  // ADD CODE HERE
+  let calls = 0;
+  
+  function innerFunction () {
+    if(calls === 0) {
+      calls++
+      return callback();
+    }
+    calls++;
+		setTimeout(() => calls = 0, interval);
+    return undefined;
+  }
+  
+  return innerFunction;
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-// function giveHi() { return 'hi'; }
-// const giveHiSometimes = debounce(giveHi, 3000);
-// console.log(giveHiSometimes()); // -> 'hi'
+function giveHi() { return 'hi'; }
+const giveHiSometimes = debounce(giveHi, 3000);
+console.log(giveHiSometimes()); // -> 'hi'
 // setTimeout(function() { console.log(giveHiSometimes()); }, 2000); // -> undefined
 // setTimeout(function() { console.log(giveHiSometimes()); }, 4000); // -> undefined
 // setTimeout(function() { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
