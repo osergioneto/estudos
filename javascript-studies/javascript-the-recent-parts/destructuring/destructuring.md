@@ -2,6 +2,8 @@
 
 Resumo: TODO
 
+## Array Destructuring
+
 ```javascript
 function data() {
   return [1, 2, 3, 4, 5]
@@ -23,6 +25,8 @@ const [
 ] = temp = data() || [];
 ```
 
+Reassign without temp variable
+
 ```javascript
 // Without Destructuring
 let x = 10;
@@ -32,5 +36,46 @@ x = y;
 y = temp;
 // With Destructuring
 [x, y] = [y, x]
+```
+
+## Object Destructuring
+
+```javascript
+function data() {
+  return { a: 1, b: 2, c: 3, d: 4}
+}
+
+// Without Destructuring
+const tmp = data();
+const first = tmp.a !== undefined ? tmp.a : 42;
+const second = tmp.b;
+
+// With Destructuring
+const { 
+  a: first = 42 , 
+  b: second,
+  ...third 
+} = data();
+```
+
+### Destructuring Object Parameters
+
+```javascript
+// Without Destructuring
+function data(tmp = {}) {
+  const {
+    a,
+    b
+  } = tmp;
+  // ,,,
+}
+
+// With Destructuring
+function data({
+  a,
+  b
+} = {
+  // ...
+})
 
 ```
