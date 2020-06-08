@@ -5,9 +5,11 @@ function getFile(file) {
 }
 
 async function loadFiles(files) {
-	// request all files concurrently
-
-	// print in order, sequentially
+	const filesPromises = files.map(file => getFile(file));
+	// const awaitedFiles = await Promise.all(promises);
+	for (const promise of filesPromises) {
+		console.log(await promise);
+	}
 }
 
 loadFiles(["file1","file2","file3"]);
