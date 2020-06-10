@@ -1,13 +1,14 @@
 import React from 'react';
+import { Title } from './styles';
 
 const Dashboard: React.FC = () => {
   return (
-    <h1>
-      Hello World
+    <Title>
+      Explore repositórios no GitHub
       <span role="img" aria-label="eye mouth eye">
         👁️👄👁️💅
       </span>
-    </h1>
+    </Title>
   );
 };
 
