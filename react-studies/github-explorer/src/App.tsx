@@ -1,16 +1,6 @@
 import React from 'react';
+import Routes from './routes';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>
-        Hello World
-        <span role="img" aria-label="eye mouth eye">
-          👁️👄👁️💅
-        </span>
-      </h1>
-    </div>
-  );
-}
+const App: React.FC = () => <Routes />;
 
 export default App;
