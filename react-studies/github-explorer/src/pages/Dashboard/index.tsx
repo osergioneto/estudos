@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useState, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
-import { Title, Form, Repositories } from './styles';
+import { Title, Form, Repositories, Error } from './styles';
 import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
@@ -17,15 +17,26 @@ interface IRepository {
 
 const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
+  const [inputError, setInputError] = useState('');
   const [repositories, setRepositories] = useState<IRepository[]>([]);
 
   async function handleAddRepository(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const { data: repository } = await api.get(`/repos/${newRepo}`);
+    if (!newRepo) {
+      setInputError('Digite o autor/nome do repositório');
+      return;
+    }
 
-    setRepositories([...repositories, repository]);
-    setNewRepo('');
+    try {
+      const { data: repository } = await api.get(`/repos/${newRepo}`);
+
+      setRepositories([...repositories, repository]);
+      setNewRepo('');
+      setInputError('');
+    } catch (error) {
+      setInputError('Erro na busca por esse repositório');
+    }
   }
 
   return (
@@ -38,7 +49,7 @@ const Dashboard: React.FC = () => {
           👁️👄👁️💅
         </span>
       </Title>
-      <Form onSubmit={handleAddRepository}>
+      <Form hasError={Boolean(inputError)} onSubmit={handleAddRepository}>
         <input
           value={newRepo}
           onChange={(e) => setNewRepo(e.target.value)}
@@ -47,6 +58,8 @@ const Dashboard: React.FC = () => {
         />
         <button type="submit">Pesquisar</button>
       </Form>
+
+      {inputError && <Error>{inputError}</Error>}
 
       <Repositories>
         {repositories.map((repository) => (
