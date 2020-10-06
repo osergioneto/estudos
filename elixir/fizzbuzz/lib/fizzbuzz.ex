@@ -12,8 +12,14 @@ defmodule Fizzbuzz do
       :world
 
   """
-  def run(array) when is_list(array) do
-    array |> Enum.map(fn item -> check_fizzbuzz(item) end)
+  def run({:ok, array}) do
+    array
+    |> String.split(",")
+    |> Enum.map(fn item
+      -> String.trim(item)
+      |> String.to_integer()
+      |> check_fizzbuzz()
+    end)
   end
 
   def check_fizzbuzz(num) when is_integer(num) do
