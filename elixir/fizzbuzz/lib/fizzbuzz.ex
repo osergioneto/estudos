@@ -4,12 +4,12 @@ defmodule Fizzbuzz do
   """
 
   @doc """
-  Hello world.
+  Get FizzBuzz from list inside file.
 
   ## Examples
 
-      iex> Fizzbuzz.hello()
-      :world
+      iex> Fizzbuzz.build("sample.txt")
+      {:ok, [1, 2, "Fizz", 4, "Buzz", "FizzBuzz"]}
 
   """
   def build(file_name) do
@@ -19,9 +19,11 @@ defmodule Fizzbuzz do
   end
 
   defp handle_file_read({:ok, array}) do
-    array
-    |> String.split(",")
-    |> Enum.map(fn item -> item |> convert_and_evaluate() end)
+    result = array
+      |> String.split(",")
+      |> Enum.map(fn item -> item |> convert_and_evaluate() end)
+
+    {:ok, result}
   end
 
   defp handle_file_read({:error, reason}), do: {:error, "Error reading the file: #{reason}"}
