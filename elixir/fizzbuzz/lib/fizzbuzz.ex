@@ -19,7 +19,8 @@ defmodule Fizzbuzz do
   end
 
   defp handle_file_read({:ok, array}) do
-    result = array
+    result =
+      array
       |> String.split(",")
       |> Enum.map(fn item -> item |> convert_and_evaluate() end)
 
