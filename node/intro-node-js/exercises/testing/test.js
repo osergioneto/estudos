@@ -1,29 +1,24 @@
-const { findUser, deleteUser, fixId } = require('./users')
-// write some tests
-describe('users', () => {
-  describe('fixId', () => {
-    test('convert param id to db id', () => {
-      expect(fixId('200')).toBe(200)
-    })
-  })
-  describe('findUser', () => {
-    test('finds user by id if user is there', async () => {
-      const user = await findUser(1)
-      expect(user.id).toBe(1)
-    })
-  })
-  describe('deletUser', () => {
-    test('deletes user with id if user is there', async () => {
-      expect.assertions(2)
+const { deleteUser, findUser } = require('./users');
 
-      const user = await findUser(1)
-      const deletedUser = await deleteUser(user.id)
-      expect(deletedUser.id).toBe(1)
-      try {
-        await findUser(1)
-      } catch(e) {
-        expect(e).toBeTruthy()
-      }
-    })
-  })
+describe('users', () => {
+  test('find user', async () => {
+    const foundUser = await findUser(1);
+
+    expect(foundUser.id).toBe(1);
+    expect(foundUser.email).toBe('readycoder1@gmail.com');
+  });
+
+  test('throw when user dont exist', async () => {
+    await expect(findUser(30)).rejects.toThrow(`No user with id "30"`);
+  });
+
+  test('delete user', async () => {
+    const deletedUser = await deleteUser(5);
+
+    expect(deletedUser.id).toBe(5);
+  });
+
+  test('throw when delete user that doesnt exits', async () => {
+    await expect(deleteUser(30)).rejects.toThrow(`No user with id "30"`);
+  });
 })
