@@ -9,6 +9,7 @@ app.use(urlencoded({ extended: true }))
 app.use(json())
 
 app.get('/user/:id', async (req, res) => {
+  debugger
   const id = req.params.id;
   const user = await users.findUser(id)
   res.status(200).send(user)
