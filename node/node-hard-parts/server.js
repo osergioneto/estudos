@@ -3,30 +3,42 @@ const fs = require('fs/promises');
 const path = require('path');
 
 async function doOnRequest(request, response) {
-  // Send back a message saying "Welcome to Twitter"
-  // code here...
+  // Tá feio, eu sei
   if (request.method === 'GET' && request.url === '/') {
-    // read the index.html file and send it back to the client
-    // code here...
     const file = await fs.readFile(path.join("index.html"));
-    console.log("file: ", file.toString());
     response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.write(file);
+    response.end();
+  } else if (request.method === 'GET' && request.url === '/style.css') {
+    const file = await fs.readFile(path.join("style.css"));
+    response.writeHead(200, { 'Content-Type': 'text/css' });
     response.write(file);
     response.end();
   }
   else if (request.method === 'POST' && request.url === '/sayHi') {
     response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.end("hi back to you!");
+    await fs.appendFile(path.join("hi_log.txt"), "Somebody said hi.\n");
+    return response.end("hi back to you!");
   }
   else if (request.method === 'POST' && request.url === '/greeting') {
-    // accumulate the request body in a series of chunks
-    // code here...
-
+    let bodyData = '';
+    request.on('data', (chunk) => bodyData += chunk);
+    request.on('end', async () => {
+      let responseMessage = '';
+      if (bodyData.startsWith('hello')) {
+        responseMessage = "hello there!";
+      } else if (bodyData.startsWith("what's up")) {
+        responseMessage = "the sky";
+      } else {
+        responseMessage = "good morning";
+      }
+      await fs.appendFile(path.join("hi_log.txt"), `${bodyData}\n`);
+      return response.end(responseMessage);
+    });
   }
   else {
-    // Handle 404 error: page not found
-    // code here...
-
+    response.writeHead(404, { 'Content-Type': 'text/plain' });
+    return response.end("Error: Not Found.");
   }
 }
 
