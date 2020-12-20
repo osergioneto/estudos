@@ -7,8 +7,13 @@
     "through2": "^3.0.1"
   },
   "scripts": {
+    "dev": "nodemon server.js",
     "start": "node server.js",
     "streams": "cd streams && node streams.js "
   },
-  "author": ""
+  "author": "",
+  "devDependencies": {
+    "@types/node": "^14.14.14",
+    "nodemon": "^2.0.6"
+  }
 }
