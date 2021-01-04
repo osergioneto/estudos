@@ -76,7 +76,7 @@ async function processFile(inputStream) {
 }
 
 function streamComplete(stream) {
-    return new Promise(res => stream.on("end", () => { }));
+    return new Promise(res => stream.on("end", res));
 }
 
 function printHelp() {
