@@ -171,7 +171,7 @@ outro texto após o `ls`.
 Por exemplo, para listar os arquivos em `/` (a raiz)
 nós podemos fazer:
 
-```
+```bash
 ~ $ ls /
 bin etc lib media proc sbin sys var
 boot home lib64 mnt root selinux tmp vmlinuz
@@ -194,7 +194,7 @@ Depois de alterar o diretório atual, liste o
 arquivos novamente com `ls`.
 
 ---
-```
+```bash
 ~ $ ls
 doc media notes.txt projects
 ~ $ cd media
@@ -218,7 +218,7 @@ Existem alguns diretórios especiais:
 Para navegar de volta ao diretório pai, faça
 `cd ..`.
 
-```
+```bash
 ~/media/warp $ cd ..
 ~/media $
 ```
@@ -227,14 +227,14 @@ Para navegar de volta ao diretório pai, faça
 Você também pode listar o diretório pai sem
 alterar o diretório atual fazendo `ls ..`:
 
-```
+```bash
 ~/media $ ls ..
 doc notes.txt
 ```
 
 Você também pode adicionar caminhos após `..`:
 
-```
+```bash
 ~/media $ ls ../projects/workshops
 computers.markdown unix.markdown
 ```
@@ -242,7 +242,7 @@ computers.markdown unix.markdown
 ---
 Ou `ls .` é o mesmo que` ls`:
 
-```
+```bash
 ~/media $ ls.
 Distorção vetorial de avatares de áudio 3D
 ```
@@ -283,7 +283,7 @@ Podemos copiar a.txt para b.txt:
 ---
 Agora existem 2 arquivos idênticos, `a.txt` e` b.txt`:
 
-```
+```bash
 ~/doc $ ls
 a.txt b.txt
 ```
@@ -303,7 +303,7 @@ agora `wow /` tem um arquivo `a.txt` nele:
 
 Você pode copiar para um arquivo de destino específico:
 
-```
+```bash
 ~/doc $ cp a.txt uau/qualquer-que-seja.txt
 ~/doc $ ls uau
 a.txt qualquer-que-seja.txt
@@ -315,7 +315,7 @@ a.txt qualquer-que-seja.txt
 Você pode copiar vários arquivos de uma vez para um novo
 lugar, basta colocar:
 
-```
+```bash
 ~/doc $ mkdir xyz
 ~/doc $ cp a.txt b.txt xyz /
 ~/doc $ ls xyz
@@ -334,7 +334,7 @@ diretórios que você deseja copiar para um novo lugar, você
 pode usar `cp -r` para copiar recursivamente um diretório
 e todos os seus subdiretórios para um novo local:
 
-```
+```bash
 ~/doc $ mkdir xyz/123
 ~/doc $ cp a.txt xyz/123/
 ~/doc $ cp -r xyz newxyz
@@ -347,7 +347,7 @@ a.txt
 ---
 Da mesma forma, há um `-R` para o comando` ls` que lista recursivamente os subdiretórios:
 
-```
+```bash
 ~/doc $ ls -R newxyz
 newxyz:
 123 a.txt b.txt
@@ -369,7 +369,7 @@ novo nome de arquivo ou diretório de destino.
 ---
 Podemos renomear `a.txt` para` pigeon.txt`:
 
-```
+```bash
 ~/doc $ mv a.txt pigeon.txt
 ~/doc $ ls
 b.txt newxyz pigeon.txt xyz
@@ -378,7 +378,7 @@ b.txt newxyz pigeon.txt xyz
 ---
 Ou podemos mover um arquivo para um novo diretório:
 
-```
+```bash
 ~/doc $ mv pigeon.txt xyz
 ~/doc $ ls xyz
 123 a.txt b.txt pigeon.txt
@@ -387,11 +387,11 @@ Ou podemos mover um arquivo para um novo diretório:
 ---
 Podemos renomear diretórios da mesma forma que os arquivos:
 
-```
-~/ doc $ mv xyz woo
-~/ doc $ ls
+```bash
+~/doc $ mv xyz woo
+~/doc $ ls
 b.txt newxyz woo
-~/ doc $ ls woo
+~/doc $ ls woo
 123 a.txt b.txt pigeon.txt
 ```
 
@@ -419,23 +419,301 @@ existir.
 Suponha que queremos fazer o seguinte
 estrutura de diretório:
 
-     foo/
+    foo/
        bar/
-         baz/
-         qrs/
+        baz/
+        qrs/
 
 ---
 Em vez de fazer:
 
-```
+```bash
 ~ $ mkdir foo foo/bar foo/bar/baz foo/bar/qrs
 ```
 
 Podemos apenas fazer:
 
-```
+```bash
 ~/doc $ mkdir -p foo/bar/baz foo/bar/qrs
 ```
 
 e os diretórios pais necessários `foo/` e
 `foo/bar/` serão criados automaticamente.
+
+---
+# brace expansion
+
+Existe uma sintaxe útil embutida no bash para
+expandir padrões que seriam repetitivos para
+digitar à mão.
+
+Em vez de fazer algo como:
+
+    ~/doc $ mkdir -p foo/bar/baz foo/bar/qrs
+
+podemos usar uma lista de itens entre chaves:
+
+    ~/doc $ mkdir -p foo/bar/{baz, qrs}
+
+que se expande para o mesmo comando de antes.
+
+---
+Para provar isso, você pode usar `echo` para ver o que
+expansão é:
+
+    ~ $ echo mkdir -p foo/bar/{baz, qrs}
+    mkdir -p foo/bar/baz foo/bar/qrs
+
+Os itens que uma brace expansion gera são
+separados por espaços como se você os tivesse digitado
+à mão.
+
+---
+Você pode ter quantos itens quiser em uma lista:
+
+```bash
+~ $ echo robot- {um, dois, três, quatro} -x
+robot-um-x robot-dois-x robot-três-x robot-quatro-x
+```
+
+---
+Com brace extenions, você pode ter múltiplas expansões:
+
+```bash
+~/doc $ echo robot / {c3po, r2d2} / {sound.mp3, info.txt}
+robot / c3po / sound.mp3 robot / c3po / info.txt robot / r2d2 / sound.mp3 robot / r2d2 / info.txt
+```
+
+Você pode até aninhar as expansões!
+
+```bash
+~/doc $ echo x- {wing, b {ee, oo} p}
+x-wing x-beep x-boop
+```
+
+---
+# sequências de brace expansions
+
+Pode ser tedioso digitar listas numéricas manualmente.
+
+As expansões da braçadeira podem ajudar com isso:
+
+```bash
+~/doc $ echo wow {1..10}
+wow1 wow2 wow3 wow4 wow5 wow6 wow7 wow8 wow9 wow10
+```
+
+e você pode até especificar uma quantidade a pular:
+
+```bash
+~/doc $ echo img {0..100..10}
+img0 img10 img20 img30 img40 img50 img60 img70 img80 img90 img100
+```
+
+---
+# rm
+
+Para remover um arquivo, basta fazer:
+
+     ~/doc $ rm b.txt
+
+Você pode remover vários arquivos de uma vez:
+
+     ~/doc $ rm newxyz / a.txt newxyz / b.txt
+
+e você pode remover diretórios inteiros, incluindo subdiretórios com:
+
+     ~/doc $ rm -r newxyz
+
+Tenha muito cuidado com `-r`. Você pode acidentalmente
+exclua muito mais do que pretendia excluir!
+
+Para remover um arquivo, basta fazer:
+
+     ~/doc $ rm b.txt
+
+Você pode remover vários arquivos de uma vez:
+
+     ~/doc $ rm newxyz/a.txt newxyz/b.txt
+
+e você pode remover diretórios inteiros, incluindo subdiretórios com:
+
+     ~/doc $ rm -r newxyz
+
+# wc
+
+O comando `wc` calcula o número de linhas,
+palavras e bytes em um arquivo:
+
+    ~ $ wc notes.txt
+    3 7 35 /home/substack/notes.txt
+
+Para ver cada campo independentemente, você pode usar
+opções diferentes: argumentos que começam com `-`
+ou `--` seguido por uma letra ou palavra.
+
+---
+Para obter apenas a contagem de palavras, podemos usar `-w`:
+
+    ~ $ wc -w notes.txt
+    7 notas.txt
+
+---
+Para obter apenas o número de linhas em um arquivo, use `-l`:
+
+    ~ $ wc -l notes.txt
+    3 notas.txt
+
+---
+Para obter apenas o número de bytes em um arquivo, use `-c`:
+
+    ~ $ wc -c notes.txt
+    35 notes.txt
+
+---
+Se você não especificar um arquivo, `wc` irá ler de
+stdin. Digite Ctrl + D (^D) para encerrar a entrada.
+
+    ~ $ wc -l
+    um
+    dois
+    três
+    quatro
+    ^D
+    4
+
+---
+# man
+
+Você pode ler a documentação a qualquer momento em seu
+shell digitando `man foo` para qualquer comando` foo`.
+
+Por exemplo, para ler todas as opções que você pode
+dar ao comando `wc`, faça:
+
+     ~ $ man wc
+
+A página de ajuda abrirá em seu `$PAGER`. Tipo
+`q` para voltar ao seu shell.
+
+---
+# mais em opções
+
+As opções (também chamadas de flags ou switches) são argumentos especiais que começam com `-` ou` --`
+seguido por uma letra ou palavra.
+
+---
+De um modo geral, eles são distintos de outros
+argumentos em que sua ordem geralmente não
+importam. Por exemplo:
+
+    grep -i uau
+
+é o mesmo que
+
+    grep wow -i
+
+onde `-i` apenas informa o comando` grep` para
+realizar uma pesquisa que não diferencia maiúsculas de minúsculas.
+
+---
+Às vezes, as opções têm um valor que se segue:
+
+    head -n 1
+
+significa que `-n` tem o valor` 1`.
+
+Às vezes, você pode omitir o espaço:
+
+    head -n1
+
+mas cada programa decide individualmente como
+interpretar seus argumentos.
+
+---
+# caminhos absolutos e relativos
+
+Os caminhos que começam com `.` ou` ..` são caminhos relativos.
+Caminhos que começam com `/` são caminhos absolutos.
+
+---
+Caminhos relativos são resolvidos de acordo com o
+diretório de trabalho atual:
+
+```bash
+~/doc $ cat ../media/warp/mac.sh
+#!/bin/ bash
+youtube-dl 'https://www.youtube.com/watch?v=i9qOJqNjalE'
+ffmpeg -i * .mp4 -vn mac_startup.wav
+sox mac_startup.wav mac_warp.mp3 chorus 0,6 0,9 25 0,9 1 8 -s \
+   echos 0,8 0,7 40 0,25 63 0,3 phaser 1 0,7 3 0,7 0,5 -t
+   play mac_startup.wav
+```
+
+---
+Os caminhos absolutos são os mesmos, não importa o que
+o diretório de trabalho atual é:
+
+    ~/projects/workshops $ cat /etc/issue
+    Debian GNU/Linux 7 \n \l
+---
+# echo
+
+O comando echo apenas imprime texto de seus argumentos:
+
+    ~ $ echo uau legal
+    uau legal
+
+Isso não é muito útil por si só, mas se torna
+útil quando combinado com redirects  e pipes.
+
+---
+# escrever em um arquivo
+
+Usando o caractere `>`, você pode escrever a saída
+de um comando para um arquivo.
+
+Por exemplo, para criar um novo arquivo `greetings.txt`
+com o conteúdo "ahoy thar", podemos fazer:
+
+     ~ $ echo ahoy thar> greetings.txt
+
+e para imprimir o conteúdo de greetings.txt, use `cat`:
+
+     ~ $ cat greetings.txt
+     ahoy thar
+
+---
+Você pode redirecionar a saída de qualquer programa para um arquivo:
+
+     ~ $ ls / > list.txt
+
+---
+# anexar a um arquivo
+
+O operador de redirecionamento `>` irá sobrescrever um arquivo
+com novos conteúdos se já existirem.
+
+Há um operador `>>` que anexa ao final
+de um arquivo se ele já existir:
+
+     ~ $ echo uau > cool.txt
+     ~ $ ls >> cool.txt
+     ~ $ cat cool.txt
+     uau
+     cool.txt
+     doc
+     media
+     notes.txt
+     projects
+
+# ler de um arquivo
+
+Podemos ler um arquivo e inserir no stdin de outro programa com o `<`.
+
+Lembre-se de que se `wc` não obtiver um arquivo como um
+argumento, ele lerá de stdin. Podemos carregar um
+arquivo em `wc` com` <` ao invés:
+
+     ~ $ wc -c <notes.txt
+     35
