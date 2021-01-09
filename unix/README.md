@@ -771,3 +771,63 @@ Podemos até salvar esse número de um arquivo. Basta adicionar
 ~ $ curl -s http://www.gutenberg.org/cache/epub/2701/pg2701.txt |
 sed -r 's/\s+/\n/g' | grep -i whale | wc -l > whalecount.txt
 ```
+
+# pipeline breakdown: curl
+
+Aqui está uma análise de cada parte do pipeline
+e o que faz:
+
+```bash
+curl -s http://www.gutenberg.org/cache/epub/2701/pg2701.txt
+```
+
+busca Moby Dick do Project Gutenberg e
+imprime os resultados em stdout.
+
+---
+# pipeline breakdown: sed
+
+     sed -r 's / \ s + / \ n / g'
+
+converte todos os espaços em branco (tabs, espaços, novas linhas) em novas linhas.
+
+Isso significa que cada palavra tem sua própria linha:
+
+```bash
+~ $ echo 1 dois três beep boop | sed -r 's/\s+/\n/g'
+1
+dois
+três
+beep
+boop
+```
+
+---
+# pipeline breakdown: grep
+
+    grep -i whale
+
+filtra a saída para que apenas as linhas que contenham
+a palavra "whale" será mostrada. `-i` torna a
+pesquisa case-insensitive.
+
+---
+Por exemplo, se tivermos um arquivo `tale.txt`:
+
+    Wow
+    such
+    a
+    whale.
+    A
+    whale
+    of
+    a
+    WHALE!
+
+---
+então nosso comando grep mostrará:
+
+    ~ $ grep -i whale < tale.txt
+    baleia.
+    baleia
+    BALEIA!
