@@ -717,3 +717,57 @@ arquivo em `wc` com` <` ao invés:
 
      ~ $ wc -c <notes.txt
      35
+
+---
+# pipes!
+
+O último porém o mais importante tipo de redirecionamento é
+o operador de pipe `|`.
+
+Com `|` você pode jogar a saída de um programa para
+a entrada do próximo.
+
+Por exemplo, o comando `ls -1` irá listar arquivos,
+um por linha, para stdout. O comando `wc -l`,
+entretanto, contará o número de linhas.
+
+---
+Conectando esses dois programas, podemos
+contar o número de arquivos e subdiretórios em um
+diretório:
+
+    ~ $ ls -1 | wc -l
+    5
+
+e, de fato, existem cinco arquivos e
+subdiretórios neste diretório:
+
+    ~ $ ls -1
+    cool.txt
+    doc
+    meios de comunicação
+    notes.txt
+    projetos
+
+Você pode encadear quantos comandos `|` quiser
+Como você quiser.
+
+---
+Aqui está um exemplo usando dois novos comandos `curl`
+e `sed` que buscará Moby Dick do Project
+Gutenberg e contar o número de ocorrências de
+"whale", não diferencia maiúsculas de minúsculas:
+
+```bash
+~ $ curl -s http://www.gutenberg.org/cache/epub/2701/pg2701.txt | sed -r 's/\s+/\n/g' | grep -i whale | wc -l
+1691
+```
+
+---
+Podemos até salvar esse número de um arquivo. Basta adicionar
+`> whale_count.txt` ao final da pipeline:
+
+```bash
+~ $ curl -s http://www.gutenberg.org/cache/epub/2701/pg2701.txt |
+sed -r 's/\s+/\n/g' | grep -i whale | wc -l > whalecount.txt
+```
