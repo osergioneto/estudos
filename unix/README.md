@@ -831,3 +831,218 @@ então nosso comando grep mostrará:
     baleia.
     baleia
     BALEIA!
+
+---
+# pipeline breakdown: wc -l
+
+    wc -l
+
+conta o número de linhas de stdin e imprime o resultado.
+
+---
+# head
+
+O comando head imprime a primeira parte de um arquivo.
+
+Se um arquivo não for fornecido, `head` lê stdin.
+
+Leia as primeiras 3 linhas de um arquivo com `head -n3`:
+
+```bash
+$ head -n3 mobydick.txt
+O EBook do Project Gutenberg de Moby Dick; ou The Whale, de Herman Melville
+
+Este e-book deve ser usado por qualquer pessoa em qualquer lugar, sem custo e com
+```
+
+---
+Leia os primeiros 20 bytes de um arquivo com `head -c20`:
+
+```bash
+~ $ head -c20 mobydick.txt
+O Projeto Guten
+```
+
+---
+# tail
+
+O comando tail imprime a última parte de um arquivo.
+
+Se um arquivo não for fornecido, `tail` lê stdin.
+
+Leia as últimas 4 linhas de um arquivo com `tail -n4`:
+
+```bash
+~ $ tail -n4 mobydick.txt
+Este site inclui informações sobre o Project Gutenberg-tm, incluindo como fazer doações para o Project Gutenberg Literary Archive Foundation, como ajudar a produzir nossos novos e-books e como inscreva-se em nosso boletim informativo por e-mail para saber mais sobre novos e-books.
+```
+
+---
+Leia os últimos 9 bytes de um arquivo com `tail -c9`:
+
+```bash
+~ $ tail -c9 mobydick.txt
+eBooks.
+```
+
+---
+# cal
+
+Se você precisar de um calendário de texto, basta digitar `cal`:
+
+```bash
+~ $ cal
+   December 2014      
+Su Mo Tu We Th Fr Sa  
+    1  2  3  4  5  6  
+ 7  8  9 10 11 12 13  
+14 15 16 17 18 19 20  
+21 22 23 24 25 26 27  
+28 29 30 31           
+```
+
+---
+Você pode mostrar o mês atual, o anterior e o próximo:
+
+```bash
+~ $ cal -3
+   November 2014         December 2014          January 2015      
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  
+                   1      1  2  3  4  5  6               1  2  3  
+ 2  3  4  5  6  7  8   7  8  9 10 11 12 13   4  5  6  7  8  9 10  
+ 9 10 11 12 13 14 15  14 15 16 17 18 19 20  11 12 13 14 15 16 17  
+16 17 18 19 20 21 22  21 22 23 24 25 26 27  18 19 20 21 22 23 24  
+23 24 25 26 27 28 29  28 29 30 31           25 26 27 28 29 30 31  
+30                                                          
+```
+---
+Ou você pode mostrar um ano inteiro:
+```bash
+~ $ cal 2021
+                            2021
+      Janeiro              Fevereiro               Março          
+do se te qu qu se sá  do se te qu qu se sá  do se te qu qu se sá  
+                1  2      1  2  3  4  5  6      1  2  3  4  5  6  
+ 3  4  5  6  7  8  9   7  8  9 10 11 12 13   7  8  9 10 11 12 13  
+10 11 12 13 14 15 16  14 15 16 17 18 19 20  14 15 16 17 18 19 20  
+17 18 19 20 21 22 23  21 22 23 24 25 26 27  21 22 23 24 25 26 27  
+24 25 26 27 28 29 30  28                    28 29 30 31           
+31                                                                
+
+       Abril                  Maio                 Junho          
+do se te qu qu se sá  do se te qu qu se sá  do se te qu qu se sá  
+             1  2  3                     1         1  2  3  4  5  
+ 4  5  6  7  8  9 10   2  3  4  5  6  7  8   6  7  8  9 10 11 12  
+11 12 13 14 15 16 17   9 10 11 12 13 14 15  13 14 15 16 17 18 19  
+18 19 20 21 22 23 24  16 17 18 19 20 21 22  20 21 22 23 24 25 26  
+25 26 27 28 29 30     23 24 25 26 27 28 29  27 28 29 30           
+                      30 31                                       
+
+       Julho                 Agosto               Setembro        
+do se te qu qu se sá  do se te qu qu se sá  do se te qu qu se sá  
+             1  2  3   1  2  3  4  5  6  7            1  2  3  4  
+ 4  5  6  7  8  9 10   8  9 10 11 12 13 14   5  6  7  8  9 10 11  
+11 12 13 14 15 16 17  15 16 17 18 19 20 21  12 13 14 15 16 17 18  
+18 19 20 21 22 23 24  22 23 24 25 26 27 28  19 20 21 22 23 24 25  
+25 26 27 28 29 30 31  29 30 31              26 27 28 29 30        
+                                                                  
+
+      Outubro               Novembro              Dezembro        
+do se te qu qu se sá  do se te qu qu se sá  do se te qu qu se sá  
+                1  2      1  2  3  4  5  6            1  2  3  4  
+ 3  4  5  6  7  8  9   7  8  9 10 11 12 13   5  6  7  8  9 10 11  
+10 11 12 13 14 15 16  14 15 16 17 18 19 20  12 13 14 15 16 17 18  
+17 18 19 20 21 22 23  21 22 23 24 25 26 27  19 20 21 22 23 24 25  
+24 25 26 27 28 29 30  28 29 30              26 27 28 29 30 31     
+31
+```
+
+---
+# date
+
+Para imprimir a data, basta fazer:
+
+```bash
+~ $ date
+sáb 09 jan 2021 22:29:13 -03
+```
+
+---
+Você pode formatar a data como quiser:
+
+```bash
+~ $ date + '% Y-% m-% d% H:% M:% S'
+09-01-2021 22:30:07
+```
+
+Verifique a página de manual (`man date`) para mais informações sobre quais opções estão
+disponível para strings de data.
+
+---
+# fold
+
+Às vezes, é útil quebrar linhas longas em linhas mais curtas.
+
+---
+Podemos usar o comando dobrar para quebrar algum texto em 30 caracteres:
+
+```bash
+~ $ head -n250 mobydick.txt | tail -n3 | fold -w 30
+can see a whale, for the first
+ discoverer has a ducat for hi
+s pains....
+I was told of a whale taken ne
+ar Shetland, that had above a 
+barrel of
+herrings in his belly.... One 
+of our harpooneers told me tha
+t he caught
+```
+
+---
+ou para quebrar em espaços, use `-s`:
+
+```bash
+~ $ head -n250 mobydick.txt | tail -n3 | fold -sw 30
+can see a whale, for the 
+first discoverer has a ducat 
+for his pains....
+I was told of a whale taken 
+near Shetland, that had above 
+a barrel of
+herrings in his belly.... One 
+of our harpooneers told me 
+that he caught
+```
+
+---
+# curl
+
+curl é uma pequena ferramenta útil para transferir dados de/para um servidor. Dá para enviar requisições HTTP com ela.
+
+Aqui está um trecho simples para buscar a Chave pública RSA mais recente do github do Substack, envolvendo a saída para
+75 linhas de caracteres:
+
+---
+```bash
+~ $ curl -s https://github.com/substack.keys | tail -n1 | fold -w75
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAEAQC7wF3cwpH+NVG+qNz0PLjEg9IqaNyXeeITme9
+fksfJx/rTyoFAWW+JrJVKLPNBCe63JYvp3pTvPqJRg/8hEb/+uFlIIzUNhHAUSaS1mmKgnTHbb+
+1d8CkFAZiZnDhFOKRkEXh5R9F9htNQVIjyzD3XL/H69mb8YzICItq/9klVTZ66s1thp7r3V5+qE
+hbLB4yH6stXyuj2SZiMS+CJeVBJ8Pf/CCUH66NK2o7l1zliJwme+UJry1RtxWQBfEChj9qe36B/
+bR3HACtx6ANMdYJsOxZm0znUjn/XJ9jxy22nVJY5otwZNeIZSSyA1lZB2mZRzTTWzPPx62VWdgH
+eQdOmnqBP0YWpxPBSMJwn4kFt6aGImrm7WTU5sHwqqxRgNvcrecxPWgbdLcV+x/OWF5bug3s096
+AWcP4wQI101w7QtI3cc5+JKHSGssuY17jyyNaHttE7GafBu3pbK93YolgNAMyYUHVicgK+uY6o+
+sH4gcRx+RyQ4OkO7Js49wJi0AXPGhp5QRmIFpua/vVzhMTwMhqW+6luWgfPeAVqn95erc49cY+W
+2B83ZgaDVSuRfDafVCSjUl+oXG/1KxzP2F/ZhGmNGmBRnF5N4OLHW6/KtVgxCpf3+1bcgye+yiq
+NQuM5/NNWZRw3NJhk0XEppd5Ai4JpvguDLhWZ19/+XEvFj9kwKRMRbxf1M7hWDutAE46sQc9x4M
+135M/SyuHW9asHBDCJPgD3nBAjYpMV0fQxIbcNiYWF+JsH6NzhRpLnsTNUvsfUcC/FQqX3VD0Xu
+IEoYmKwDesv6PU60pQNEi6p4u+PnFHS/vvRASYLo/4s+99GQDWxqzi0jjYVWheQW9RLnTU+ghud
+A+xPp7CK/tH8/RAutDdk3k0HdsNTsjHFN/HvM23UIHOpuY07yohayQididHt023IAZdys6m2daQ
+RUKXM8cfaFdQqoj/vaby7pxBPWzO6tuXy1tI6gQ+nolZaXQfXUBHF1uBXo1UQI0dp8J5tCppty6
+NvXmvv90PBGVXOlplyhXB9q0JXBInidATeT8zlgM4Iq1X6ZVlXN2OIU5CiWVA1NYmf05709e6SK
+P0kK2oh19gA+qg1oPOw0WTpZGKz/9NCCw2ywK2/yNJRWuIbSE4RAv6N8v7qtPObwAU5Lohj8oQV
+yC/bbLF6VuVJo6V/nfvP+EJKtsXlBBPBzdsmV1hikkGLJx7Up1s7WTZCwSeSGFPXCe7RdElz2mQ
+YB6dwEbhaGl48MhuiIeER7KZqzQFOu74G0u5tyyCUeEc90BkeUcf/EhrxfS8R9ZRJ9ce7IpYQ4+
+9wTBKFzVc1HinCSUwJTu7m+UHLaaNbK+WCIF+2fFvM1IJmTh2pWSMb
+```
