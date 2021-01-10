@@ -1046,3 +1046,159 @@ yC/bbLF6VuVJo6V/nfvP+EJKtsXlBBPBzdsmV1hikkGLJx7Up1s7WTZCwSeSGFPXCe7RdElz2mQ
 YB6dwEbhaGl48MhuiIeER7KZqzQFOu74G0u5tyyCUeEc90BkeUcf/EhrxfS8R9ZRJ9ce7IpYQ4+
 9wTBKFzVc1HinCSUwJTu7m+UHLaaNbK+WCIF+2fFvM1IJmTh2pWSMb
 ```
+
+# grep
+
+Você pode pesquisar padrões em arquivos ou no stdin
+com o comando `grep`.
+
+O primeiro argumento é o padrão para pesquisar como
+uma expressão regular.
+
+---
+Aqui podemos pesquisar todas as linhas correspondentes
+"whaling" ou "fishing":
+
+```
+~ $ grep -iE '(whal | fish) ing' mobydick.txt | tail -n5
+Equatorial fishing-ground, and in the deep darkness that goes before the
+the whaling season? See, Flask, only see how pale he looks--pale in the
+preliminary cruise, Ahab,--all other whaling waters swept--seemed to
+fixed upon her broad beams, called shears, which, in some whaling-ships,
+years of continual whaling! forty years of privation, and peril, and
+```
+
+---
+# backticks
+
+Às vezes é útil incluir a saída de um
+programa na lista de argumentos de outro.
+
+Por exemplo, com o comando de data, podemos imprimir o
+ano atual:
+
+```bash
+date +% Y
+```
+
+---
+e podemos usar esse valor em uma mensagem com echo:
+
+```bash
+~ $ echo Greetings from the year `data +%Y`.
+Greetings from the year 2021.
+```
+
+---
+# aritmética
+
+Com expressões `$((...))`, você pode fazer
+aritmética na linha de comando!
+
+```bash
+~ $ echo $ ((4 * 5 + 1))
+21
+```
+
+Eu não exageraria com esse recurso, mas às vezes é útil.
+
+---
+# variáveis de ambiente
+
+Variáveis de ambiente são definidas pelo shell e scripts de shell.
+
+Para listar as variáveis de ambiente atuais, digite
+`export`:
+
+---
+```bash
+~ $ export
+declare -x DISPLAY=":0"
+declare -x HOME="/home/substack"
+declare -x HUSHLOGIN="FALSE"
+declare -x LANG="en_US.UTF-8"
+declare -x LD_LIBRARY_PATH="/home/substack/prefix/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/usr/lib:/lib64:/lib"
+declare -x LIBGL_DRIVERS_PATH="/usr/lib/i386-linux-gnu/dri:/usr/lib/x86_64-linux-gnu/dri"
+declare -x LOGNAME="substack"
+declare -x MAIL="/var/mail/substack"
+declare -x OLDPWD="/home/substack/projects/workshops"
+declare -x PATH="/home/substack/prefix/bin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/local/games:/usr/games"
+declare -x PREFIX="/home/substack/prefix"
+declare -x PWD="/home/substack"
+declare -x ROXTERM_ID="0x43962f0"
+declare -x ROXTERM_NUM="15"
+declare -x ROXTERM_PID="2521"
+declare -x SHELL="/bin/bash"
+declare -x SHLVL="3"
+declare -x TERM="xterm"
+declare -x USER="substack"
+declare -x WINDOWID="8684328"
+declare -x WINDOWPATH="7"
+declare -x XAUTHORITY="/home/substack/.Xauthority"
+```
+
+---
+Você pode usar qualquer variável de ambiente referindo-se ao seu `$NAME`.
+
+Por exemplo, para imprimir o valor de `$ HOME` faça:
+
+```bash
+~ $ echo $HOME
+/home/substack
+```
+
+---
+Você pode usar variáveis de ambiente em qualquer comando:
+
+```bash
+~ $ ls /home/$USER
+doc  media  notes.txt  projects
+```
+
+---
+Para definir sua própria variável de ambiente, basta colocar seu nome seguido 
+por um sinal de igual (sem espaços) seguido de seu valor:
+
+```bash
+~ $ ANIMAL=gatos
+~ $ echo $ANIMAL
+gatos
+```
+
+---
+Variáveis de ambiente são quase sempre letras maiúsculas para distingui-los 
+das variáveis em scripts de shell, mas variáveis em minúsculas também funcionam.
+
+---
+# quotes
+
+Se você quiser usar caracteres como `<` ou `>` nos argumentos de um programa, 
+você precisará usar aspas para que o shell não tente interpretar eles.
+
+Por exemplo, para imprimir a string `<b> wow </b>` nós pode usar aspas simples:
+
+```bash
+~ $ echo '<b> uau </b>'
+<b> uau </b>
+```
+
+---
+As aspas duplas são semelhantes, mas as variáveis de ambiente e crases serão
+interpolado no local (substituído por seu valor):
+
+```bash
+~ $ echo "Não há lugar como $HOME."
+Não há nenhum lugar como /home/substack.
+~ $ echo "Até logo` data +% Y`... "
+Até logo 2021 ...
+~ $ echo "Até logo` data +% Y ... próxima parada $((`data +%Y`+1))"'!'
+Até logo 2021... próxima parada 2022!
+```
+
+---
+Você também precisará usar aspas se um dos
+os argumentos que você deseja fornecer têm um espaço em branco
+caractere nele, porque o espaço em branco é diferente
+usado para dividir argumentos.
+
+---
