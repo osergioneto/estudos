@@ -1308,3 +1308,267 @@ renomeando o arquivo:
 ```
 
 e agora o comando é chamado de `whatever`.
+
+---
+# ~/.bashrc
+
+Existe um script bash especial chamado `~/.bashrc`
+que é executado sempre que você inicia o bash. Você pode editar este arquivo para configurar aliases, ambiente
+variáveis e executar comandos ao iniciar um novo
+sessão de terminal.
+
+---
+Na parte inferior do seu arquivo `~/.bashrc`, tente adicionar um comando:
+
+```bash
+echo Saudações $USER. Prazer em ver você de novo.
+```
+
+Agora abra um novo terminal e você verá uma nova mensagem amigável!
+
+---
+# permissões
+
+Cada arquivo em um sistema UNIX pertence a um usuário e a um
+grupo.
+
+usuários são contas no sistema, como a que você
+faz login. grupos são coleções de usuários.
+
+---
+Para ver a quais grupos você pertence, basta digitar
+`grupos`:
+
+```bash
+~ $ groups
+osergioneto adm cdrom sudo dip plugdev lpadmin lxd sambashare docker
+```
+
+---
+Para inspecionar as permissões em um arquivo, use `ls -l`:
+
+```bash
+~/doc $ ls -l b.txt
+-rw-r-r-- 1 osergioneto wharever 11 de janeiro, 00:29 b.txt
+```
+
+---
+Aqui podemos ver que o arquivo `b.txt` é propriedade de
+o usuário `osergioneto` e o grupo`whatever`.
+Também há esta parte à esquerda:
+
+```bash
+-rw-r-r--
+```
+
+Esta string descreve as permissões do arquivo.
+
+---
+O primeiro caractere é reservado para alguns usos fancy, mas depois disso há 3 grupos de 3 caracteres:
+
+```bash
+rwxrwxrwx
+```
+
+---
+Cada caractere descreve uma permissão: (r)ead,
+(w)rite e e(x)ecute. Um `-` no lugar de uma dessas letras significa que a permissão não é acessível.
+
+Se o bit e(x)ecute estiver habilitado em um arquivo para um
+usuário, significa que o usuário pode executar o arquivo.
+
+Se o bit e(x)ecute estiver habilitado em um diretório para
+um usuário, isso significa que o usuário pode listar os arquivos em esse diretório.
+
+---
+* O primeiro `rwx` diz o que o proprietário pode fazer.
+* O segundo `rwx` diz o que os usuários do grupo podem fazer.
+* O terceiro `rwx` diz o que todos os outros podem fazer.
+
+Essas três categorias são chamadas de usuário (u),
+grupo (g) e outro (o).
+
+---
+# chmod
+
+Para alterar as permissões em um arquivo, primeiro descubra
+quais recursos você deseja conceder ou retirar
+(rwx) de quais categorias de usuários (ugo).
+
+---
+Para permitir que o proprietário de um arquivo execute um script, você pode fazer:
+
+    ~ $ chmod u+x script.sh
+
+que é o mesmo que:
+
+    ~ $ chmod +x script.sh
+
+porque o `u` está implícito se não for especificado.
+
+---
+Você também pode revogar permissões com um `-`. Para
+fazer com que outros usuários não possam escrever para um
+arquivo:
+
+    ~ $ chmod o-w wow.txt
+
+---
+Você pode conceder e revogar permissões ao mesmo tempo. Aqui estamos adicionando permissões de ler e executar para o usuário, ao mesmo tempo que revogamos leitura e escrita do grupo:
+
+    ~ $ chmod u+rxg-rw status.sh
+
+Você pode alterar o proprietário de um arquivo com `chown`
+e o grupo com `chgrp`.
+
+---
+# controle de trabalho
+
+O Bash foi desenvolvido para lidar com vários programas em execução em paralelo.
+
+---
+# time cat
+
+Digite `time cat` e pressione ctrl-c antes de um
+segundo, o mais próximo possível sem ultrapassar:
+
+    $ time cat
+    ^C
+
+    0m0.920s reais
+    usuário 0m0.004s
+    sys 0m0.000s
+
+---
+# ctrl-c
+
+Encerrar um processo em primeiro plano (foreground).
+
+---
+# ctrl-z
+
+Coloque um processo em segundo plano (background).
+
+---
+# fg JOB
+
+Move um processo do plano de fundo para o
+primeiro plano por seu JOB.
+
+    ~ $ cat
+    ^Z
+    [1]+  Stopped                 cat
+    ~ $ echo wow
+    wow
+    ~ $ fg %1
+    cat
+    cool
+    cool
+
+---
+# sintaxe de trabalho
+
+Quando você coloca um processo em segundo plano com ctrl-z, o
+shell imprime uma mensagem com `[N]`. `N` é o job. Use `% N` para se referir a um trabalho específico ou:
+
+* `%%` - o trabalho mais recente
+
+---
+# &
+
+Outra maneira de colocar um processo em segundo plano é usar `&`:
+
+    $ ~ node &
+    [1] 29877
+
+O id do trabalho de `node` é 1 e o id do processo é
+29877. Os IDs de trabalho são locais para uma sessão shell, mas IDs de processo são globais em todo o sistema.
+
+---
+    ~ $ perl &
+    [1] 29870
+    ~ $ pgrep perl
+    29870
+    ~ $ kill %1
+    [1]+  Terminated              perl
+
+---
+# pgrep
+
+Pesquise um processo pelo seu nome.
+
+---
+# kill ID
+
+Elimine um processo por seu processo ou job id.
+
+---
+# screen
+
+Você pode usar a tela para executar programas de linha de comando e manter eles rodando, mesmo quando você sai.
+
+---
+# instalação do screen
+
+    $ sudo apt-get install screen
+
+---
+# cria uma nova tela nomeada
+
+    $ screen -S website
+
+---
+# listar telas
+
+    $ screen -list
+
+---
+# conectar a uma tela
+
+    $ screen -x website
+
+---
+# desanexar de uma tela
+
+De dentro de uma tela, pressione CTRL+A e, em seguida, `d`.
+
+---
+# cria uma nova janela dentro de uma tela
+
+CTRL+A c
+
+---
+# ir para a próxima janela
+
+CTRL+A n
+
+---
+# ir para a janela anterior
+
+CTRL+A p
+
+---
+# fechar uma janela
+
+Basta digitar `exit` para fechar a janela.
+
+---
+# executar um servidor web
+
+Faça um servidor web.js:
+
+```js
+var http = require('http');
+var server = http.createServer(function (req, res) {
+    res.end("YOU'RE A WIZARD.\n");
+});
+server.listen(8000);
+```
+
+agora execute seu servidor com o node de dentro de uma tela:
+
+```
+$ node server.js
+```
+
+em seguida, destaque a tela com CTRL+A d.
