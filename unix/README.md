@@ -1202,3 +1202,109 @@ caractere nele, porque o espaço em branco é diferente
 usado para dividir argumentos.
 
 ---
+# scripts
+
+Sempre que você se pegar digitando a mesma
+sequência de comandos várias vezes, considere
+fazer um script!
+
+Basta colocar os comandos que você normalmente digitaria em
+um arquivo e adicione `#!/bin/bash` no topo do arquivo:
+```sh
+#!/bin/bash
+mkdir uau
+cd uau
+echo "yay" > zing.txt
+```
+
+---
+Agora torne seu arquivo de script executável:
+
+    ~ $ chmod +x yourscript.sh
+
+E agora você pode fazer:
+
+    ~ $ ./yourscript.sh
+
+para executar os comandos do seu arquivo!
+
+---
+# argumentos de script
+
+Quando você executa um script com argumentos na
+linha de comando, variáveis de ambiente especiais `$ 1`,
+`$ 2`,` $ 3`... serão definidas para cada argumento.
+
+Por exemplo, se nosso script for:
+
+```sh
+#!/bin/bash
+echo first=$1
+echo second=$2
+```
+
+---
+Em seguida, imprimimos o primeiro e o segundo argumentos:
+
+```
+~ $ ./yourscript.sh beep boop
+first=beep
+second=boop
+```
+
+---
+Existe uma variável especial `$*` que contém todos
+os argumentos separados por espaços. Para um script
+do:
+
+```sh
+#!/bin/bash
+echo Os argumentos são: $*
+```
+
+---
+E agora podemos obter todos os argumentos em um só lugar:
+
+```bash
+~ $ ./args.sh gatos cachorros patos lagartos
+Os argumentos são: gatos cachorros patos lagartos
+```
+
+---
+# $PATH
+
+Existe uma variável de ambiente especial chamada `$PATH`:
+
+```bash
+~ $ echo $ PATH
+/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/local/games:/usr/games
+```
+
+Esta variável contém uma lista de lugares separados
+por `:` esse bash parecerá quando você digitar um
+comando.
+
+---
+Se você colocar um arquivo executável em um dos
+diretórios em seu `$PATH`, você pode fazer seus próprios
+comandos sem a necessidade de especificar um caminho relativo ou absoluto!
+
+`/usr/local/bin` é o lugar habitual para colocar
+scripts específicos do sistema que não são gerenciados pela distribuição do seu sistema. Se você fizer:
+
+```bash
+~ $ sudo cp yourscript.sh /usr/local/bin
+```
+
+---
+Então você será capaz de digitar `yourscript.sh` de
+qualquer diretório na linha de comando!
+
+Você pode renomear o comando que você digita
+renomeando o arquivo:
+
+```bash
+~ $ sudo mv /usr/local/bin/{yourscript.sh,whatever}
+```
+
+e agora o comando é chamado de `whatever`.
