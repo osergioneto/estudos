@@ -154,25 +154,25 @@ novamente executando:
     $ vim foo.txt
 
 ---
-ou você pode fazer apenas `vim` e então a partir do comando
+ou podemos fazer apenas `vim` e então a partir do comando
 modo fazer:
 
     :o foo.txt
 
-Se você já abriu um arquivo, basta digitar
-`:w` para salvar o arquivo, você não precisa digitar seu
+Se já abrimos um arquivo, basta digitar
+`:w` para salvar o arquivo, não preciamos digitar o
 nome sempre.
 
 ---
 # modos
 
 A primeira coisa que você notará é que vim tem 2
-modos:modo de comando e modo de inserção.
+modos: modo de comando e modo de inserção.
 
-Se você estiver no modo de comando, pressione `i` para entrar
+Se estivermos no modo de comando, pressionamos `i` para entrar
 modo de inserção.
 
-Se você estiver no modo de inserção, pressione `esc` para entrar modo de comando.
+Se estvermos no modo de inserção, pressionamos `esc` para entrar modo de comando.
 
 ---
 Se disser `- INSERT --` na parte inferior esquerda de
@@ -422,7 +422,7 @@ com a tecla de esc porque esc é uma
 chave muito comum no vim.
 
 ---
-# xmodmap para escape
+# xmodmap para esc
 
 No Linux, você pode usar o xmodmap para remapear suas chaves.
 
@@ -443,7 +443,7 @@ cada vez que você fizer login, não precisará se lembrar de
 execute o comando sempre que fizer login.
 
 ---
-# alternativa de escape integrada
+# alternativa de esc integrada
 
 Você também pode usar ctrl+`]` para sair do modo de inserção.
 
