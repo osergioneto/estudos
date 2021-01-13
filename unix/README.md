@@ -1236,8 +1236,8 @@ para executar os comandos do seu arquivo!
 # argumentos de script
 
 Quando você executa um script com argumentos na
-linha de comando, variáveis de ambiente especiais `$ 1`,
-`$ 2`,` $ 3`... serão definidas para cada argumento.
+linha de comando, variáveis de ambiente especiais `$1`,
+ `$2`, `$3`... serão definidas para cada argumento.
 
 Por exemplo, se nosso script for:
 
@@ -1473,7 +1473,7 @@ primeiro plano por seu JOB.
 # sintaxe de trabalho
 
 Quando você coloca um processo em segundo plano com ctrl-z, o
-shell imprime uma mensagem com `[N]`. `N` é o job. Use `% N` para se referir a um trabalho específico ou:
+shell imprime uma mensagem com `[N]`. `N` é o job. Use `%N` para se referir a um trabalho específico ou:
 
 * `%%` - o trabalho mais recente
 
