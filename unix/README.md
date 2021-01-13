@@ -291,22 +291,22 @@ a.txt b.txt
 Você também pode copiar um arquivo ou diretório. Aqui vamos
 copiar `a.txt` para o diretório chamado` wow`:
 
-    ~/doc $ mkdir uau
+    ~/doc $ mkdir wow
     ~/doc $ ls
-    a.txt b.txt uau
-    ~/doc $ cp a.txt uau
+    a.txt b.txt wow
+    ~/doc $ cp a.txt wow
 
-agora `wow /` tem um arquivo `a.txt` nele:
+agora `wow/` tem um arquivo `a.txt` nele:
 
-    ~/doc $ ls uau
+    ~/doc $ ls wow
     a.txt
 
 Você pode copiar para um arquivo de destino específico:
 
 ```bash
-~/doc $ cp a.txt uau/qualquer-que-seja.txt
-~/doc $ ls uau
-a.txt qualquer-que-seja.txt
+~/doc $ cp a.txt wow/whatever.txt
+~/doc $ ls wow
+a.txt whatever.txt
 ```
 
 ---
@@ -472,7 +472,7 @@ separados por espaços como se você os tivesse digitado
 Você pode ter quantos itens quiser em uma lista:
 
 ```bash
-~ $ echo robot- {um, dois, três, quatro} -x
+~ $ echo robot-{um,dois,três,quatro}-x
 robot-um-x robot-dois-x robot-três-x robot-quatro-x
 ```
 
@@ -480,15 +480,19 @@ robot-um-x robot-dois-x robot-três-x robot-quatro-x
 Com brace extenions, você pode ter múltiplas expansões:
 
 ```bash
-~/doc $ echo robot / {c3po, r2d2} / {sound.mp3, info.txt}
-robot / c3po / sound.mp3 robot / c3po / info.txt robot / r2d2 / sound.mp3 robot / r2d2 / info.txt
+~/doc $ echo robot/{c3po,r2d2}/{sound.mp3,info.txt}
+robot/c3po/sound.mp3 robot/c3po/info.txt robot/r2d2/sound.mp3 robot/r2d2/info.txt
 ```
 
 Você pode até aninhar as expansões!
 
 ```bash
-~/doc $ echo x- {wing, b {ee, oo} p}
+~/doc $ echo x-{wing,b{ee,oo}p}
 x-wing x-beep x-boop
+```
+
+```bash
+$ mkdir folder{1..100}
 ```
 
 ---
@@ -676,17 +680,17 @@ de um comando para um arquivo.
 Por exemplo, para criar um novo arquivo `greetings.txt`
 com o conteúdo "ahoy thar", podemos fazer:
 
-     ~ $ echo ahoy thar> greetings.txt
+    ~ $ echo ahoy thar > greetings.txt
 
 e para imprimir o conteúdo de greetings.txt, use `cat`:
 
-     ~ $ cat greetings.txt
-     ahoy thar
+    ~ $ cat greetings.txt
+    ahoy thar
 
 ---
 Você pode redirecionar a saída de qualquer programa para um arquivo:
 
-     ~ $ ls / > list.txt
+    ~ $ ls / > list.txt
 
 ---
 # anexar a um arquivo
@@ -697,15 +701,15 @@ com novos conteúdos se já existirem.
 Há um operador `>>` que anexa ao final
 de um arquivo se ele já existir:
 
-     ~ $ echo uau > cool.txt
-     ~ $ ls >> cool.txt
-     ~ $ cat cool.txt
-     uau
-     cool.txt
-     doc
-     media
-     notes.txt
-     projects
+    ~ $ echo wow > cool.txt
+    ~ $ ls >> cool.txt
+    ~ $ cat cool.txt
+    wow
+    cool.txt
+    doc
+    media
+    notes.txt
+    projects
 
 # ler de um arquivo
 
@@ -715,8 +719,8 @@ Lembre-se de que se `wc` não obtiver um arquivo como um
 argumento, ele lerá de stdin. Podemos carregar um
 arquivo em `wc` com` <` ao invés:
 
-     ~ $ wc -c <notes.txt
-     35
+    ~ $ wc -c < notes.txt
+    35
 
 ---
 # pipes!
@@ -787,7 +791,7 @@ imprime os resultados em stdout.
 ---
 # pipeline breakdown: sed
 
-     sed -r 's / \ s + / \ n / g'
+     sed -r 's/\s+/\n/g'
 
 converte todos os espaços em branco (tabs, espaços, novas linhas) em novas linhas.
 
@@ -828,9 +832,9 @@ Por exemplo, se tivermos um arquivo `tale.txt`:
 então nosso comando grep mostrará:
 
     ~ $ grep -i whale < tale.txt
-    baleia.
-    baleia
-    BALEIA!
+    whale.
+    whale
+    WHALE!
 
 ---
 # pipeline breakdown: wc -l
@@ -1078,7 +1082,7 @@ Por exemplo, com o comando de data, podemos imprimir o
 ano atual:
 
 ```bash
-date +% Y
+date +%Y
 ```
 
 ---
@@ -1189,9 +1193,9 @@ interpolado no local (substituído por seu valor):
 ```bash
 ~ $ echo "Não há lugar como $HOME."
 Não há nenhum lugar como /home/substack.
-~ $ echo "Até logo` data +% Y`... "
+~ $ echo "Até logo` data +%Y`... "
 Até logo 2021 ...
-~ $ echo "Até logo` data +% Y ... próxima parada $((`data +%Y`+1))"'!'
+~ $ echo "Até logo` data +%Y ... próxima parada $((`data +%Y`+1))"'!'
 Até logo 2021... próxima parada 2022!
 ```
 
