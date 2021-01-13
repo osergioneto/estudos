@@ -550,7 +550,7 @@ O comando `wc` calcula o número de linhas,
 palavras e bytes em um arquivo:
 
     ~ $ wc notes.txt
-    3 7 35 /home/substack/notes.txt
+    3 7 35 /home/osergioneto/notes.txt
 
 Para ver cada campo independentemente, você pode usar
 opções diferentes: argumentos que começam com `-`
@@ -1118,17 +1118,17 @@ Para listar as variáveis de ambiente atuais, digite
 ```bash
 ~ $ export
 declare -x DISPLAY=":0"
-declare -x HOME="/home/substack"
+declare -x HOME="/home/osergioneto"
 declare -x HUSHLOGIN="FALSE"
 declare -x LANG="en_US.UTF-8"
-declare -x LD_LIBRARY_PATH="/home/substack/prefix/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/usr/lib:/lib64:/lib"
+declare -x LD_LIBRARY_PATH="/home/osergioneto/prefix/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/usr/lib:/lib64:/lib"
 declare -x LIBGL_DRIVERS_PATH="/usr/lib/i386-linux-gnu/dri:/usr/lib/x86_64-linux-gnu/dri"
 declare -x LOGNAME="substack"
 declare -x MAIL="/var/mail/substack"
-declare -x OLDPWD="/home/substack/projects/workshops"
-declare -x PATH="/home/substack/prefix/bin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/local/games:/usr/games"
-declare -x PREFIX="/home/substack/prefix"
-declare -x PWD="/home/substack"
+declare -x OLDPWD="/home/osergioneto/projects/workshops"
+declare -x PATH="/home/osergioneto/prefix/bin:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/local/games:/usr/games"
+declare -x PREFIX="/home/osergioneto/prefix"
+declare -x PWD="/home/osergioneto"
 declare -x ROXTERM_ID="0x43962f0"
 declare -x ROXTERM_NUM="15"
 declare -x ROXTERM_PID="2521"
@@ -1138,17 +1138,17 @@ declare -x TERM="xterm"
 declare -x USER="substack"
 declare -x WINDOWID="8684328"
 declare -x WINDOWPATH="7"
-declare -x XAUTHORITY="/home/substack/.Xauthority"
+declare -x XAUTHORITY="/home/osergioneto/.Xauthority"
 ```
 
 ---
 Você pode usar qualquer variável de ambiente referindo-se ao seu `$NAME`.
 
-Por exemplo, para imprimir o valor de `$ HOME` faça:
+Por exemplo, para imprimir o valor de `$HOME` faça:
 
 ```bash
 ~ $ echo $HOME
-/home/substack
+/home/osergioneto
 ```
 
 ---
@@ -1192,7 +1192,7 @@ interpolado no local (substituído por seu valor):
 
 ```bash
 ~ $ echo "Não há lugar como $HOME."
-Não há nenhum lugar como /home/substack.
+Não há nenhum lugar como /home/osergioneto.
 ~ $ echo "Até logo` data +%Y`... "
 Até logo 2021 ...
 ~ $ echo "Até logo` data +%Y ... próxima parada $((`data +%Y`+1))"'!'
