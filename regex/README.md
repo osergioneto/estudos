@@ -124,9 +124,9 @@ s/PATTERN/REP/FLAGS
 * `()` - grupo de captura
 * `(?:)` não grupo de captura
 
-* `\d` - dígito` [0-9] `
-* `\w` - palavra` [A-Za-z0-9_] `
-* `\s` - espaço em branco` [ \t\r\n\f] `
+* `\d` - dígito `[0-9]`
+* `\w` - palavra `[A-Za-z0-9_]`
+* `\s` - espaço em branco `[ \t\r\n\f]`
 
 ---
 `.` corresponde a qualquer caractere
@@ -188,7 +188,7 @@ BXXP e BXXP
 Você pode usar `-` para especificar intervalos.
 
 ```bash
-$ echo 'beep and boop' | sed 's / [a-f] / X / g'
+$ echo 'beep and boop' | sed 's/[a-f]/X/g'
 XXXp XnX Xoop
 ```
 
@@ -200,7 +200,7 @@ XXXp XnX Xoop
 Coloque um `^` após o colchete de abertura em um
 caracteres de classe para negá-lo.
 
-Por exemplo, para corresponder a um caractere não vogal: `[^ aeiou]`
+Por exemplo, para corresponder a um caractere não vogal: `[^aeiou]`
 
 ```bash
 $ echo 'beep boop' | sed 's/[^aeiou]/Z/g'
@@ -213,7 +213,7 @@ ZeeZZZooZ
 Os motores Regex fornecem muitas sequências de caracteres de classe predefinidas:
 
 * `\w` - caractere de palavra: `[A-Za-z0-9_]`
-* `\W` - caracteres de não palavra: `[^ A-Za-z0-9_]`
+* `\W` - caracteres de não palavra: `[^A-Za-z0-9_]`
 * `\s` - espaço em branco: `[ \t\r\n\f]`
 * `\S` - não espaços em branco: `[^ \t\r\n\f]`
 * `\d` - dígito: `[0-9]`
@@ -237,7 +237,7 @@ Os motores Regex fornecem muitas sequências de caracteres de classe predefinida
 # grupos de captura em sed
 
 ```bash
-$ echo 'hey <cool> whatever' | sed -r 's/<([^>] +)>/(\1)/g'
+$ echo 'hey <cool> whatever' | sed -r 's/<([^>]+)>/(\1)/g'
 hey (cool) whatever
 ```
 
@@ -245,7 +245,7 @@ hey (cool) whatever
 # referências anteriores em sed (backward reference)
 
 ```bash
-$ echo 'hey cool cool beans' | sed -r 's/(\S+) \1/REPEATED/'
+$ echo 'hey cool cool beans' | sed -r 's/(\S+)\1/REPEATED/'
 hey REPEATED beans
 ```
 
