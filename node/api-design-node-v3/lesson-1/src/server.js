@@ -12,7 +12,14 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-app.get("/", (req, res) => {
+let count = 0;
+
+const loggerMiddleware = (req, res, next) => {
+    console.log(`Request number: ${count++}`);
+    next();
+}
+
+app.get("/", loggerMiddleware, (req, res) => {
     res.send({ message: "hello" });
 })
 
