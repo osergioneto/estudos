@@ -1,51 +1,68 @@
 export const getOne = model => async (req, res) => {
   try {
-    const found = await model.findById(req.params.id).exec()
-    return res.status(200).json(found)
-  } catch (e) {
+    const found = await model.findOne({ id: req.params.id, createdBy: req.user._id }).exec()
+
+    if (!found) {
+      return res.status(400).end()
+    }
+
+    return res.status(200).json({ data: found })
+  } catch (error) {
     console.error(e)
-    return res.status(400).end()
   }
 }
 
 export const getMany = model => async (req, res) => {
   try {
-    const found = await model.find({}).exec()
-    return res.status(200).json(found)
+    const found = await model.find({ createdBy: req.user._id }).exec()
+
+    if (!found) {
+      return res.status(400).end()
+    }
+
+    return res.status(200).json({ data: found })
   } catch (e) {
     console.error(e)
-    return res.status(400).end()
   }
 }
 
 export const createOne = model => async (req, res) => {
   try {
-    const created = await model.create({ ...req.body })
-    return res.status(200).json(created)
+    const created = await model.create({ ...req.body, createdBy: req.user._id })
+    return res.status(201).json({ data: created })
   } catch (e) {
     console.error(e)
-    return res.status(400).end()
   }
 }
 
 export const updateOne = model => async (req, res) => {
-  try {
-    const updated = await model.findByIdAndUpdate(req.params.id, req.body, { new: true }).lean().exec()
-    return res.status(200).json(updated)
-  } catch (e) {
-    console.error(e)
+  const updated = await model.findOneAndUpdate({
+    _id: req.params.id,
+    createdBy: req.user._id
+  },
+    req.body,
+    { new: true })
+    .lean()
+    .exec()
+
+  if (!updated) {
     return res.status(400).end()
   }
+
+  return res.status(200).json({ data: updated })
 }
 
 export const removeOne = model => async (req, res) => {
-  try {
-    const updated = await model.findByIdAndRemove(req.params.id).exec()
-    return res.status(200).json(updated)
-  } catch (e) {
-    console.error(e)
+  const updated = await model.findOneAndRemove({
+    _id: req.params.id,
+    createdBy: req.user._id
+  }).exec()
+
+  if (!updated) {
     return res.status(400).end()
   }
+
+  return res.status(200).json({ data: updated })
 }
 
 export const crudControllers = model => ({
