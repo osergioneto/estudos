@@ -7,6 +7,7 @@ import { connect } from './utils/db'
 import userRouter from './resources/user/user.router'
 import itemRouter from './resources/item/item.router'
 import listRouter from './resources/list/list.router'
+import { signup, signin } from './utils/auth'
 
 export const app = express()
 
@@ -23,6 +24,15 @@ app.use('/api/list', listRouter)
 app.post('/signup', async (req, res) => {
   try {
     const jwt = await signup(req, res)
+    return res.status(201).json({ token: jwt })
+  } catch (e) {
+    console.log(e)
+    return res.status(400).end()
+  }
+})
+app.post('/signin', async (req, res) => {
+  try {
+    const jwt = await signin(req, res)
     return res.status(201).json({ token: jwt })
   } catch (e) {
     console.log(e)

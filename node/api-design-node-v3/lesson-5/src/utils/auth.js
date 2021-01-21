@@ -1,6 +1,7 @@
 import config from '../config'
 import { User } from '../resources/user/user.model'
 import jwt from 'jsonwebtoken'
+import { compare } from 'bcryptjs'
 
 export const newToken = user => {
   return jwt.sign({ id: user.id }, config.secrets.jwt, {
@@ -23,7 +24,22 @@ export const signup = async (req, res) => {
   return newToken(user);
 }
 
-export const signin = async (req, res) => { }
+export const signin = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const isValidPassword = await compare(password, user.password)
+
+  if (!isValidPassword) {
+    throw new Error('Email/password is not valid')
+  }
+
+  return newToken(user);
+}
 
 export const protect = async (req, res, next) => {
   next()
