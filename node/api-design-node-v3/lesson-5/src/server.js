@@ -20,6 +20,15 @@ app.use(morgan('dev'))
 app.use('/api/user', userRouter)
 app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
+app.post('/signup', async (req, res) => {
+  try {
+    const jwt = await signup(req, res)
+    return res.status(201).json({ token: jwt })
+  } catch (e) {
+    console.log(e)
+    return res.status(400).end()
+  }
+})
 
 export const start = async () => {
   try {

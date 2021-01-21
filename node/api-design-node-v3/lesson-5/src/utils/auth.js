@@ -16,9 +16,14 @@ export const verifyToken = token =>
     })
   })
 
-export const signup = async (req, res) => {}
+export const signup = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.create({ email, password })
 
-export const signin = async (req, res) => {}
+  return newToken(user);
+}
+
+export const signin = async (req, res) => { }
 
 export const protect = async (req, res, next) => {
   next()
