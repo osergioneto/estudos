@@ -42,5 +42,23 @@ export const signin = async (req, res) => {
 }
 
 export const protect = async (req, res, next) => {
+  const { authorization } = req.headers;
+
+  if (!authorization.startsWith('Bearer ')) {
+    throw new Error('Bad format token')
+  }
+
+  const token = authorization.split(' ')[1]
+  const isValidToken = await verifyToken(token)
+
+  if (!isValidToken) {
+    throw new Error('Invalid token')
+  }
+
+  const user = await User.findById({ _id: isValidToken.id }).select('-password').lean()
+  req.user = user
+  console.log("req.user: ", req.user);
+
+
   next()
 }

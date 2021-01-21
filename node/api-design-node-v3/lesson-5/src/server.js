@@ -7,7 +7,7 @@ import { connect } from './utils/db'
 import userRouter from './resources/user/user.router'
 import itemRouter from './resources/item/item.router'
 import listRouter from './resources/list/list.router'
-import { signup, signin } from './utils/auth'
+import { signup, signin, protect } from './utils/auth'
 
 export const app = express()
 
@@ -18,9 +18,9 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-app.use('/api/user', userRouter)
-app.use('/api/item', itemRouter)
-app.use('/api/list', listRouter)
+app.use('/api/user', protect, userRouter)
+app.use('/api/item', protect, itemRouter)
+app.use('/api/list', protect, listRouter)
 app.post('/signup', async (req, res) => {
   try {
     const jwt = await signup(req, res)
