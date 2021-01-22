@@ -15,6 +15,13 @@ defmodule RockChallenge do
   def hello do
     :world
   end
+
+  def sum_prices(file_name) do
+    file_name
+    |> File.read()
+    |> handle_file_read()
+  end
+
   defp handle_file_read({ok, array}) do
     IO.puts(array)
     result =
