@@ -23,10 +23,9 @@ defmodule RockChallenge do
   end
 
   defp handle_file_read({ok, array}) do
-    IO.puts(array)
     result =
       array
-      |> Enum.map(fn item -> IO.puts(item) end)
+      |> Poison.decode!()
 
     {:ok, result}
   end
