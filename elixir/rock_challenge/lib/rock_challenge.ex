@@ -25,10 +25,17 @@ defmodule RockChallenge do
     :hello
   end
 
-  defp sum_prices({:ok, items}) do
-    IO.inspect(items)
+  defp sum_prices(items) do
+    { sums, total } = 
     items
-    |> Enum.map_reduce(0, fn item, acc -> {item["amount"] * item["price"], item["amount"] * item["price"] + acc} end)
+        |> Enum.map_reduce(0, 
+          fn item,
+            acc -> {item["amount"] * item["price"], 
+            item["amount"] * item["price"] + acc} 
+          end)
+
+    total
+  end
   end
 
   defp handle_file_read({ok, array}) do
