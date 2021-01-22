@@ -36,14 +36,19 @@ defmodule RockChallenge do
 
     total
   end
+  defp div_and_mod(divident, divisor) do
+    quotient = div(divident, divisor)
+    reminder = rem(divident, divisor)
+
+    {quotient, reminder}
   end
 
-  defp handle_file_read({ok, array}) do
-    result =
-      array
+  defp handle_file_read({ok, list}) do
+    json =
+      list
       |> Poison.decode!()
 
-    {:ok, result}
+    json
   end
 
   defp handle_file_read({:error, reason}), do: {:error, "Error reading the file: #{reason}"}
