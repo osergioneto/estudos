@@ -8,8 +8,13 @@ defmodule RockChallenge do
 
   ## Examples
 
-      iex> RockChallenge.hello()
-      :world
+      iex> RockChallenge.split_payments("files/shopping_list.json", "files/buyers_list.json")
+      %{
+        "diana@gmail.com" => 5087,
+        "gaia@gmail.com" => 5087,
+        "sergio@gmail.com" => 5089,
+        "veronica@gmail.com" => 5087
+      }
 
   """
   def share_payments(shopping_list, buyers_emails) do
