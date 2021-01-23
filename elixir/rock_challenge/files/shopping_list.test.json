@@ -1,0 +1,42 @@
+[
+    {
+        "name": "rice",
+        "amount": 4,
+        "price": 1000
+    },
+    {
+        "name": "beans",
+        "amount": 5,
+        "price": 830
+    },
+    {
+        "name": "steak",
+        "amount": 1,
+        "price": 4200
+    },
+    {
+        "name": "meat",
+        "amount": 2,
+        "price": 4500
+    },
+    {
+        "name": "netflix",
+        "amount": 1,
+        "price": 45000
+    },
+    {
+        "name": "youtube premium",
+        "amount": 1,
+        "price": 33100
+    },
+    {
+        "name": "amazon prime",
+        "amount": 1,
+        "price": 9900
+    },
+    {
+        "name": "monster",
+        "amount": 20,
+        "price": 5000
+    }
+]
