@@ -4,7 +4,7 @@ defmodule RockChallenge do
   """
 
   @doc """
-  Hello world.
+  Consume two json files, compute and return splited bills.
 
   ## Examples
 
@@ -31,6 +31,16 @@ defmodule RockChallenge do
     splited_values
   end
 
+  @doc """
+  Multiply each product by its quantity and add up the total.
+
+  ## Examples
+
+      iex> items = RockChallenge.handle_file_read("file.json")
+      iex> RockChallenge.sum_prices(items)
+      iex> 12048
+
+  """
   def sum_prices(items) do
     { sums, total } = 
       items
