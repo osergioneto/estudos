@@ -36,7 +36,7 @@ defmodule RockChallenge do
 
   ## Examples
 
-      iex> items = RockChallenge.handle_file_read("file.json")
+      iex> items = RockChallenge.handle_file_read("files/shopping_list.json")
       iex> RockChallenge.sum_prices(items)
       iex> 12048
 
