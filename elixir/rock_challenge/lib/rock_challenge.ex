@@ -17,20 +17,21 @@ defmodule RockChallenge do
       }
 
   """
-  def share_payments(shopping_list, buyers_emails) do
+  def split_payments(shopping_list, buyers_emails) do
     total =
       shopping_list
-        |> File.read()
         |> handle_file_read()
         |> sum_prices()
 
-    buyers_emails
-      |> File.read()
-      |> handle_file_read()
-      |> split_values(total)
+    splited_values = 
+      buyers_emails
+        |> handle_file_read()
+        |> split_values(total)
+
+    splited_values
   end
 
-  defp sum_prices(items) do
+  def sum_prices(items) do
     { sums, total } = 
       items
         |> Enum.map_reduce(0, 
@@ -42,13 +43,13 @@ defmodule RockChallenge do
     total
   end
 
-  defp split_values(buyers, total) do
+  def split_values(buyers, total) do
     total 
     |> div_and_mod(Enum.count(buyers))
     |> merge_values(buyers)
   end
 
-  defp merge_values({quotient, reminder}, buyers) do
+  def merge_values({quotient, reminder}, buyers) do
     splited_values = List.duplicate(quotient, Enum.count(buyers))
 
     buyers
@@ -56,20 +57,19 @@ defmodule RockChallenge do
     |> Enum.into(%{})
   end
 
-  defp div_and_mod(divident, divisor) do
+  def div_and_mod(divident, divisor) do
     quotient = div(divident, divisor)
     reminder = rem(divident, divisor)
 
     {quotient, reminder}
   end
 
-  defp handle_file_read({ok, list}) do
+  def handle_file_read(file_name) do
     json =
-      list
+      file_name
+      |> File.read!()
       |> Poison.decode!()
 
     json
   end
-
-  defp handle_file_read({:error, reason}), do: {:error, "Error reading the file: #{reason}"}
 end
