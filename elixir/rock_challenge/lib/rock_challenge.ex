@@ -27,6 +27,7 @@ defmodule RockChallenge do
       buyers_emails
         |> handle_file_read()
         |> split_values(total)
+        |> merge_values()
 
     splited_values
   end
@@ -54,16 +55,25 @@ defmodule RockChallenge do
   end
 
   def split_values(buyers, total) do
-    total 
-    |> div_and_mod(Enum.count(buyers))
-    |> merge_values(buyers)
+    { quotient, reminder } = total |> div_and_mod(Enum.count(buyers))
+  
+    splited_values = 
+      quotient  
+        |> List.duplicate(Enum.count(buyers))
+        |> Enum.with_index
+        |> Enum.map(fn { value, index} ->
+            cond do
+              index < reminder -> value+1
+              index >= reminder -> value
+  end
+          end)
+
+    {splited_values, buyers}
   end
 
-  def merge_values({quotient, reminder}, buyers) do
-    splited_values = List.duplicate(quotient, Enum.count(buyers))
-
+  def merge_values({ splited_values, buyers }) do
     buyers
-    |> Enum.zip(List.insert_at(splited_values,0, (quotient + reminder)))
+    |> Enum.zip(splited_values)
     |> Enum.into(%{})
   end
 
