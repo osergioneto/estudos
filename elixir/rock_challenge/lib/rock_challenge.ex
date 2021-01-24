@@ -12,8 +12,8 @@ defmodule RockChallenge do
       %{
         "diana@gmail.com" => 5087,
         "gaia@gmail.com" => 5087,
-        "sergio@gmail.com" => 5089,
-        "veronica@gmail.com" => 5087
+        "sergio@gmail.com" => 5088,
+        "veronica@gmail.com" => 5088
       }
 
   """
@@ -65,7 +65,7 @@ defmodule RockChallenge do
             cond do
               index < reminder -> value+1
               index >= reminder -> value
-  end
+            end
           end)
 
     {splited_values, buyers}
