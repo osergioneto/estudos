@@ -17,12 +17,12 @@
     {
         "name": "meat",
         "amount": 2,
-        "price": 4500
+        "price": 4510
     },
     {
         "name": "netflix",
         "amount": 1,
-        "price": 45000
+        "price": 45300
     },
     {
         "name": "youtube premium",
@@ -32,7 +32,7 @@
     {
         "name": "amazon prime",
         "amount": 1,
-        "price": 9900
+        "price": 9982
     },
     {
         "name": "monster",

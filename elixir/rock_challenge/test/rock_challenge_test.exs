@@ -5,7 +5,7 @@ defmodule RockChallengeTest do
   test "sum_prices" do
     list = RockChallenge.handle_file_read("files/shopping_list.test.json")
 
-    assert RockChallenge.sum_prices(list) == 209350
+    assert RockChallenge.sum_prices(list) == 209752
   end
 
   test "sum_prices when list is empty" do
@@ -21,13 +21,13 @@ defmodule RockChallengeTest do
     buyers = 
       RockChallenge.handle_file_read("files/buyers_list.test.json")
 
-    assert RockChallenge.split_values(buyers, total) == %{"a@gmail.com" => 41870,"b@gmail.com" => 41870,"c@gmail.com" => 41870,"d@gmail.com" => 41870,"e@gmail.com" => 41870 }
+    assert RockChallenge.split_values(buyers, total) == {[41951, 41951, 41950, 41950, 41950], ["a@gmail.com", "b@gmail.com", "c@gmail.com", "d@gmail.com", "e@gmail.com"]}
   end
 
   test "merge_values" do
     buyers = RockChallenge.handle_file_read("files/buyers_list.test.json")
 
-    assert RockChallenge.merge_values({120, 3}, buyers) == %{"a@gmail.com" => 123,"b@gmail.com" => 120,"c@gmail.com" => 120,"d@gmail.com" => 120,"e@gmail.com" => 120 }
+    assert RockChallenge.merge_values({[41951, 41951, 41950, 41950, 41950], buyers}) == %{"a@gmail.com" => 41951, "b@gmail.com" => 41951, "c@gmail.com" => 41950, "d@gmail.com" => 41950, "e@gmail.com" => 41950}
   end
 
   test "div_and_mod" do
