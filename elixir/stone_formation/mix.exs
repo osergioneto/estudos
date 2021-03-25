@@ -27,5 +27,5 @@ defmodule StoneFormation.MixProject do
     ]
   end
 
-  defp elixirc_paths(_), do: ["lib", "test"]
+  defp elixirc_paths(_), do: ["lib", "test/support"]
 end
