@@ -13,11 +13,24 @@ defmodule BookProgrammingElixir16.Chapters.AnonymousFunctions do
   sum/1 Sum all values of
   """
 
-  @spec run_list_concat(list_1 :: list(), list_2 :: list) :: list() | {:error, atom()}
-  def run_list_concat(list_1 \\ [], list_2 \\ []) when is_list(list_1) and is_list(list_2) do
+  @spec list_concat(list_1 :: list(), list_2 :: list) :: list() | {:error, atom()}
+  def list_concat(list_1 \\ [], list_2 \\ []) when is_list(list_1) and is_list(list_2) do
     list_concat = fn list_1, list_2 -> list_1 ++ list_2 end
 
     list_concat.(list_1, list_2)
   end
 
+  @spec sum(n1 :: integer(), n2 :: integer(), n3 :: integer()) :: integer()
+  def sum(n1, n2, n3) do
+    sum = fn n1, n2, n3 -> n1 + n2 + n3 end
+
+    sum.(n1, n2, n3)
+  end
+
+  @spec pair_tuple_to_list(tupla :: tuple()) :: list()
+  def pair_tuple_to_list(tupla \\ {}) when is_tuple(tupla) do
+    pair_tuple_to_list = fn tupla -> Tuple.to_list(tupla) end
+
+    pair_tuple_to_list.(tupla)
+  end
 end
