@@ -23,7 +23,7 @@ defmodule RockChallenge do
         |> handle_file_read()
         |> sum_prices()
 
-    splited_values = 
+    splited_values =
       buyers_emails
         |> handle_file_read()
         |> split_values(total)
@@ -43,12 +43,12 @@ defmodule RockChallenge do
 
   """
   def sum_prices(items) do
-    { sums, total } = 
+    { sums, total } =
       items
-        |> Enum.map_reduce(0, 
+        |> Enum.map_reduce(0,
           fn item,
-            acc -> {item["amount"] * item["price"], 
-            item["amount"] * item["price"] + acc} 
+            acc -> {item["amount"] * item["price"],
+            item["amount"] * item["price"] + acc}
           end)
 
     total
@@ -56,9 +56,9 @@ defmodule RockChallenge do
 
   def split_values(buyers, total) do
     { quotient, reminder } = total |> div_and_mod(Enum.count(buyers))
-  
-    splited_values = 
-      quotient  
+
+    splited_values =
+      quotient
         |> List.duplicate(Enum.count(buyers))
         |> Enum.with_index
         |> Enum.map(fn { value, index} ->
