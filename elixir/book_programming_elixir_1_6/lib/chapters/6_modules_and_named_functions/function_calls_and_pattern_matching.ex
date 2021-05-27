@@ -12,7 +12,7 @@ defmodule SimpleRecursion do
     15
   """
   def sum(1), do: 1
-  def sum(n), do: sum(n - 1) + n
+  def sum(n) when is_integer(n) and n > 0, do: sum(n - 1) + n
 
   @doc """
   Return gcd(greatest common divisor) between two numbers.
