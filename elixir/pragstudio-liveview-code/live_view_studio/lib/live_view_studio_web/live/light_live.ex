@@ -51,11 +51,11 @@ defmodule LiveViewStudioWeb.LightLive do
   end
 
   def handle_event("up", _, socket) do
-    {:noreply, update(socket, :brightness, &(&1 + 10))}
+    {:noreply, update(socket, :brightness, &min(&1 + 10, 100))}
   end
 
   def handle_event("down", _, socket) do
-    {:noreply, update(socket, :brightness, &(&1 - 10))}
+    {:noreply, update(socket, :brightness, &max(&1 - 10, 0))}
   end
 
   def handle_event("random", _, socket) do
