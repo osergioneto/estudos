@@ -17,7 +17,7 @@ defmodule LiveViewStudioWeb.LicenseLive do
             <img src="images/license.svg">
             <span>
               Your license is currently for
-              <strong><%= @seats %></strong> seats.
+              <strong><%= @seats %></strong> <%= singularize(@seats) %>.
             </span>
           </div>
           <form phx-change="update">
@@ -36,5 +36,9 @@ defmodule LiveViewStudioWeb.LicenseLive do
   def handle_event("update", %{"seats" => seats}, socket) do
     seats = String.to_integer(seats)
     {:noreply, assign(socket, amount: Licenses.calculate(seats), seats: seats)}
+  end
+
+  defp singularize(seats) do
+    if seats == 1, do: "seat", else: "seats"
   end
 end
