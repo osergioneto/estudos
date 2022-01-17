@@ -49,9 +49,7 @@ defmodule RationalNumbers do
   Absolute value of a rational number
   """
   @spec abs(a :: rational) :: rational
-  def abs({a, b}) do
-    {Kernel.abs(a), Kernel.abs(b)}
-  end
+  def abs({a, b}), do: {Kernel.abs(a), Kernel.abs(b)}
 
   @doc """
   Exponentiation of a rational number by an integer
@@ -77,17 +75,21 @@ defmodule RationalNumbers do
   Reduce a rational number to its lowest terms
   """
   @spec reduce(a :: rational) :: rational
-  def reduce({numerator, denominator}) do
-    gcd = Integer.gcd(numerator, denominator)
+  def reduce({a, b}) do
+    gcd = Integer.gcd(a, b)
+    numerator = div(a, gcd)
+    denominator = div(b, gcd)
 
-    {div(numerator, gcd), div(denominator, gcd)}
-    |> fix_signal()
+    fix_signal({numerator, denominator})
   end
 
   def root(n, x, precision \\ 1.0e-5) do
     f = fn prev -> ((n - 1) * prev + x / :math.pow(prev, n - 1)) / n end
     fixed_point(f, x, precision, f.(x))
   end
+
+  defp fixed_point(_, guess, tolerance, next) when Kernel.abs(guess - next) < tolerance, do: next
+  defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
 
   defp fix_signal({numerator, denominator}) when numerator > 0 and denominator < 0,
     do: {numerator * -1, denominator * -1}
@@ -96,7 +98,4 @@ defmodule RationalNumbers do
     do: {numerator * -1, denominator * -1}
 
   defp fix_signal({numerator, denominator}), do: {numerator, denominator}
-
-  defp fixed_point(_, guess, tolerance, next) when Kernel.abs(guess - next) < tolerance, do: next
-  defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
 end
