@@ -14,10 +14,10 @@ defmodule WordCount do
 
   defp clean_input(sentence) do
     sentence
-    # Remove special characters
-    |> String.replace(~r{(!|!|&|@|\$|%|\^|&|,|:)}, "")
-    # Turn consecutive whitespaces into one
+    |> String.replace(~r{(!|\.|&|@|\$|%|\^|&|:)}, "")
     |> String.replace(~r{\s+}, " ")
-    |> String.split(~r{( |_)})
+    |> String.split(~r{( |_|,)})
+    |> Enum.map(fn word -> String.replace(word, ~r/^'|'$/, "") end)
+    |> Enum.filter(fn word -> word != "" end)
   end
 end
