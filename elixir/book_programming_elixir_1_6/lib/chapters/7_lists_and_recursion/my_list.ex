@@ -30,4 +30,11 @@ defmodule MyList do
 
   def max_internal([head | tail], current_max) when head < current_max,
     do: max_internal(tail, current_max)
+
+  @moduledoc """
+  ➤ Exercise: ListsAndRecursion-4
+    Write a function MyList.span(from, to) that returns a list of the numbers from
+    from up to to.
+  """
+  def span(from, to), do: Enum.to_list(from..to)
 end
