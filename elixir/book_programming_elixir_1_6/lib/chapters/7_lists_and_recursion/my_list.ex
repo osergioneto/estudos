@@ -16,4 +16,18 @@ defmodule MyList do
 
   defp sum_values([]), do: 0
   defp sum_values([head | tail]), do: head + sum_values(tail)
+
+  @moduledoc """
+  Write a max(list) that returns the element with the maximum value in the list. (This is slightly trickier than it sounds.)
+  """
+  def max([]), do: []
+  def max([head | tail]), do: max_internal(tail, head)
+
+  def max_internal([], max), do: max
+
+  def max_internal([head | tail], current_max) when head > current_max,
+    do: max_internal(tail, head)
+
+  def max_internal([head | tail], current_max) when head < current_max,
+    do: max_internal(tail, current_max)
 end
