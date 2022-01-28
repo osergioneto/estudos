@@ -1,11 +1,13 @@
 defmodule HighScore do
+  @initial_score 0
+
   @spec new :: map
   def new() do
     Map.new()
   end
 
   @spec add_player(map, String.t(), integer) :: map
-  def add_player(scores, name, score \\ 0) do
+  def add_player(scores, name, score \\ @initial_score) do
     Map.put(scores, name, score)
   end
 
@@ -14,7 +16,7 @@ defmodule HighScore do
   end
 
   def reset_score(scores, name) do
-    reseted_score = Map.replace(scores, name, 0)
+    reseted_score = Map.replace(scores, name, @initial_score)
 
     case Map.get(reseted_score, name) do
       nil -> add_player(scores, name, 0)
@@ -23,12 +25,7 @@ defmodule HighScore do
   end
 
   def update_score(scores, name, score) do
-    scores
-    |> Map.get(name)
-    |> case do
-      nil -> add_player(scores, name, score)
-      player_score -> Map.replace(scores, name, player_score + score)
-    end
+    Map.update(scores, name, score, fn value -> value + score end)
   end
 
   def get_players(scores) do
