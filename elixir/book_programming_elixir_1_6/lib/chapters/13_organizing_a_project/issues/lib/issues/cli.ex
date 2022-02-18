@@ -3,6 +3,8 @@ defmodule Issues.CLI do
   Handle the command line parsing and the dispatch to the various functions that end up generating a table of the last _n_ issues in a github project
   """
 
+  alias Issues.TableFormatter
+
   @default_count 4
 
   def run(argv) do
@@ -48,6 +50,9 @@ defmodule Issues.CLI do
     user
     |> Issues.GithubIssues.fetch(project)
     |> decode_response()
+    |> sort_into_descending_order()
+    |> last(count)
+    |> TableFormatter.print_table_for_columns(["number", "created_at", "title"])
   end
 
   def decode_response({:ok, body}), do: body
@@ -55,5 +60,15 @@ defmodule Issues.CLI do
   def decode_response({:error, error}) do
     IO.puts("Error fetching from Github: #{error["message"]}")
     System.halt(2)
+  end
+
+  def sort_into_descending_order(list_of_issues) do
+    Enum.sort(list_of_issues, fn i1, i2 -> i1["created_at"] >= i2["created_at"] end)
+  end
+
+  def last(list, count) do
+    list
+    |> Enum.take(count)
+    |> Enum.reverse()
   end
 end
