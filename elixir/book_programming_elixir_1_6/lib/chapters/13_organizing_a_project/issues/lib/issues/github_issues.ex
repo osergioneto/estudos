@@ -1,8 +1,12 @@
 defmodule Issues.GithubIssues do
+  require Logger
+
   @user_agent [{"User-agent", "Elixir sergio.deusdedith@gmail.com"}]
   @github_url Application.fetch_env!(:issues, :github_url)
 
   def fetch(user, project) do
+    Logger.info("Fetching #{user}'s project #{project}")
+
     user
     |> issues_url(project)
     |> HTTPoison.get(@user_agent)
@@ -14,6 +18,9 @@ defmodule Issues.GithubIssues do
   end
 
   def handle_response({:ok, %{status_code: status_code, body: body}}) do
+    Logger.info("Got response: status code=#{status_code}")
+    Logger.debug(fn -> inspect(body) end)
+
     {
       status_code |> check_for_error(),
       body |> Poison.Parser.parse!()
