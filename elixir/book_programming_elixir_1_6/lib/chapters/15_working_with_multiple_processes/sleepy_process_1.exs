@@ -8,18 +8,26 @@ defmodule SleepyProcess1 do
   Resposta: Não importa que não o processo pai estava dormindo. Após o exit do processo filho, o processo pai é morto.
   """
 
-  def parent() do
-    spawn_link(SleepyProcess1, :create_child_process, [self()])
-    :timer.sleep(5000)
+  def run do
+    spawn_link(SleepyProcess1, :child, [self()])
 
+    :timer.sleep(500)
+
+    loop_receive
+  end
+
+  def loop_receive() do
     receive do
-      message -> IO.inspect("Exit with message: #{message}")
+      message ->
+        IO.puts("Exit with message: #{message}")
+        loop_receive
+    after
+      500 -> IO.puts("All messages received")
     end
   end
 
-  def create_child_process(parent_pid) do
-    IO.inspect(parent_pid, label: "parent_pid")
+  def child(parent_pid) do
     send(parent_pid, "SleepProcess1")
-    exit(:a_casa_caiu)
+    # exit(:a_casa_caiu)
   end
 end
