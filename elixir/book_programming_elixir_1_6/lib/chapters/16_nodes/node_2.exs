@@ -7,7 +7,6 @@ defmodule Nodes2 do
 
   Resposta: O tempo de resposta do "tick" é por volta de 2 segundos pois
   a função generator também trata os casos de registro.
-  Podem haver casos que o tempo de enviar as mensagens de tick chegou
-  porém o processamento de registro de um novo cliente ainda não terminou.
+  Quando há novos cliente para serem registrados, o contador será reiniciado.
   """
 end
