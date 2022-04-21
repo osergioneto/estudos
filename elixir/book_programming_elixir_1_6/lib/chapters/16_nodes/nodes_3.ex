@@ -8,9 +8,6 @@ defmodule Ticker do
     The solution should deal with new clients being added at any time.
     """
 
-    # iex --sname two /Users/sn/Projects/Personal/estudos/elixir/book_programming_elixir_1_6/lib/chapters/16_nodes/nodes_3.ex
-    # Node.connect :"server@Sergios-MBP"
-
     # 2 seconds
     @interval 2000
     @name :ticker
@@ -29,30 +26,34 @@ defmodule Ticker do
         {:register, pid} ->
           IO.puts("registering #{inspect(pid)}")
 
-          if current == nil do
-            generator([pid | clients], 0)
-          else
-            generator([pid | clients], current)
-          end
+          register_current([pid | clients], current)
       after
         @interval ->
           IO.puts("tick")
 
-          if current == nil do
-            generator(clients, current)
-          else
-            client = Enum.at(clients, current)
-            send(client, {:tick})
-
-            current = current + 1
-
-            if current >= length(clients) do
-              generator(clients, 0)
-            else
-              generator(clients, current)
-            end
-          end
+          interval_current(clients, current)
       end
+    end
+
+    defp register_current(clients, nil), do: generator(clients, 0)
+    defp register_current(clients, current), do: generator(clients, current)
+
+    defp interval_current(clients, current) when is_nil(current), do: generator(clients, current)
+
+    defp interval_current(clients, current) when current >= length(clients) do
+      current = 0
+      send_message_to_client(clients, current)
+      generator(clients, current)
+    end
+
+    defp interval_current(clients, current) do
+      send_message_to_client(clients, current)
+      generator(clients, current + 1)
+    end
+
+    defp send_message_to_client(clients, current) do
+      client = Enum.at(clients, current)
+      send(client, {:tick})
     end
   end
 
