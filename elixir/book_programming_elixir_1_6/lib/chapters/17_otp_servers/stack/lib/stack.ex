@@ -5,6 +5,7 @@ defmodule Stack do
 
   use GenServer
 
+  @impl true
   def init(stack) do
     {:ok, stack}
   end
@@ -18,11 +19,24 @@ defmodule Stack do
       iex> GenServer.call(pid, :pop)
       1
   """
+  @impl true
   def handle_call(:pop, _from, []) do
     {:reply, [], []}
   end
 
+  @impl true
   def handle_call(:pop, _from, [hd | tail]) do
     {:reply, hd, tail}
+  end
+
+  @doc """
+  Callback que lida com as mensagens de `:push`.
+
+  Nesse callback o valor enviado como argumento é adicionado ao topo da pilha.
+  Nada é retornado.
+  """
+  @impl true
+  def handle_cast({:push, value}, stack) do
+    {:noreply, [value | stack]}
   end
 end
