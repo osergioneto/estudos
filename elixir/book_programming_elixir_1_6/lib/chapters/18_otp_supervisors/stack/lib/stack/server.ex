@@ -4,7 +4,7 @@ defmodule Stack.Server do
 
   @impl true
   def init(stack) do
-    {:ok, stack}
+    {:ok, Stack.Stash.get()}
   end
 
   @impl true
@@ -28,7 +28,7 @@ defmodule Stack.Server do
   end
 
   @impl true
-  def terminate(reason, state) do
-    IO.puts("reason: #{inspect(reason)}. \nstate: #{inspect(state)}")
+  def terminate(_reason, state) do
+    Stack.Stash.update(state)
   end
 end
