@@ -2,6 +2,8 @@ defmodule Stack.Server do
   use GenServer
   alias Stack.Impl
 
+  @vsn "0"
+
   @impl true
   def init(stack) do
     {:ok, Stack.Stash.get()}
