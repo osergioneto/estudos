@@ -5,8 +5,8 @@ defmodule Tracer do
   ➤ Exercise: LinkingModules-BehavioursAndUse-1
   In the body of the def macro, there’s a quote block that defines the actual method. It contains
 
-  IO.puts "==> call: #{Tracer.dump_dfn(unquote(name), unquote(args))}" result = unquote(content)
-  IO.puts "<== result: #{result}"
+  IO.puts "==> call: \#{Tracer.dump_dfn(unquote(name), unquote(args))}" "result = unquote(content)"
+  IO.puts "<== result: \#{result}"
 
   Why does the first call to puts have to unquote the values in its interpolation but the second call does not?
   A: O primeiro block recebe valores que quando recebidos dentro da função irão expandir para visão de tupla de três valores, o unquote serve
@@ -29,14 +29,22 @@ defmodule Tracer do
   chardata() comporta um tipo chamado maybe_improper_list(), dando a inforção que o o argumento pode ser uma lista impropria.
   """
 
-  IO.puts([green_background(), "Hello ", "world!", white_background()])
-
   def dump_args(args) do
     args |> Enum.map(&inspect/1) |> Enum.join(", ")
   end
 
   def dump_defn(name, args) do
     "#{name}(#{dump_args(args)})"
+  end
+
+  defmacro def({:when, _, [{name, _, args} = definition, _]}, do: content) do
+    quote do
+      Kernel.def unquote(definition) do
+        IO.puts("#{IO.ANSI.blue()}==> call:   #{Tracer.dump_defn(unquote(name), unquote(args))}")
+        result = unquote(content)
+        IO.puts("#{IO.ANSI.green()}<== result: #{result}")
+      end
+    end
   end
 
   defmacro def(definition = {name, _, args}, do: content) do
@@ -56,4 +64,11 @@ defmodule Tracer do
       import unquote(__MODULE__), only: [def: 2]
     end
   end
+end
+
+defmodule Test do
+  use Tracer
+  def puts_sum_three(a, b, c), do: IO.inspect(a + b + c)
+  def puts_minus_two(a, b) when a > 0 and b == 0, do: IO.inspect(a - b)
+  def add_list(list), do: Enum.reduce(list, 0, &(&1 + &2))
 end
