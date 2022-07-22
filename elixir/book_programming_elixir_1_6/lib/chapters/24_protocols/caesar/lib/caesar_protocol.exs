@@ -40,10 +40,10 @@ defimpl Caesar, for=>  [List, BitString] do
 
   end
 
-  def get_shift_number(number, shift) when number + shift <= 26 do
+  def get_shift_number(number, shift) when number + shift < 26 do
     number + shift
   end
-  def get_shift_number(number, shift) when number + shift > 26 do
+  def get_shift_number(number, shift) when number + shift >= 26 do
     get_shift_number(number - 26, shift)
   end
 end
