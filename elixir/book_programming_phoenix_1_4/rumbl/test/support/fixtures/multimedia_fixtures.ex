@@ -11,9 +11,9 @@ defmodule Rumbl.MultimediaFixtures do
     {:ok, video} =
       attrs
       |> Enum.into(%{
-         url: "some  url",
-        description: "some description",
-        title: "some title"
+        url: "http://example.com",
+        description: "a description",
+        title: "A Title"
       })
       |> Rumbl.Multimedia.create_video()
 
