@@ -13,6 +13,7 @@ defmodule Rumbl.Multimedia.Category do
     category
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> foreign_key_constraint(:videos, name: :videos_category_id_fkey, message: "still exist")
   end
 
   def alphabetical(query \\ __MODULE__) do
