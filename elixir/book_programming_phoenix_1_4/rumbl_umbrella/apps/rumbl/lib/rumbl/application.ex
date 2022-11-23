@@ -11,11 +11,9 @@ defmodule Rumbl.Application do
       # Start the Ecto repository
       Rumbl.Repo,
       # Start the Telemetry supervisor
-      RumblWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Rumbl.PubSub},
+      {Phoenix.PubSub, name: Rumbl.PubSub}
       # Start the Endpoint (http/https)
-      RumblWeb.Presence
       # Start a worker by calling: Rumbl.Worker.start_link(arg)
       # {Rumbl.Worker, arg}
     ]
