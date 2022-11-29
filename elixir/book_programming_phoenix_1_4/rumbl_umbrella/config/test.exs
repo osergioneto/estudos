@@ -20,6 +20,10 @@ config :rumbl_web, RumblWeb.Endpoint,
   secret_key_base: "i3gs4oK+i4Yl9yvF68g69ateMVHlwOfEC9OG5tC8EU0iulHXo3Cmtg/chYX615jP",
   server: false
 
+config :info_sys, :wolfram,
+  app_id: "1234",
+  http_client: InfoSys.Test.HTTPClient
+
 # Print only warnings and errors during test
 config :logger, level: :warn
 
