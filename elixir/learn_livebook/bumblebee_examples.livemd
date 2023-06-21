@@ -1,6 +1,6 @@
 <!-- livebook:{"app_settings":{"slug":"osergioneto"}} -->
 
-# Examples
+# Examples - Bumblebee
 
 ```elixir
 Mix.install([
