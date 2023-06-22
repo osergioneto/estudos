@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Annotated
-from fastapi import FastAPI, Query, Path
-from pydantic import BaseModel
+from fastapi import Body, FastAPI, Query, Path
+from pydantic import BaseModel, Field, HttpUrl
 
 
 class ModelName(str, Enum):
@@ -10,11 +10,32 @@ class ModelName(str, Enum):
     lenet = "lenet"
 
 
+class Image(BaseModel):
+    url: HttpUrl
+    name: str
+
+
 class Item(BaseModel):
+    name: str
+    description: str | None = Field(
+        default=None, title="The description of the item", max_length=300
+    )
+    price: float = Field(gt=0, description="The price must be greater than zero")
+    tax: float | None = None
+    tags: set[str] | None = set()
+    images: list[Image] | None = None
+
+
+class Offer(BaseModel):
     name: str
     description: str | None = None
     price: float
-    tax: float | None = None
+    items: list[Item]
+
+
+class User(BaseModel):
+    username: str
+    full_name: str | None = None
 
 
 app = FastAPI()
@@ -73,11 +94,17 @@ async def create_item(item: Item):
 
 
 @app.put("/items/{item_id}")
-async def create_item(item_id: int, item: Item, q: str | None = None):
-    result = {"item_id": item_id, **item.dict()}
+async def update_item(
+    item_id: int,
+    item: Item,
+    user: User,
+    importance: Annotated[int, Body(gt=0)],
+    q: str | None = None,
+):
+    results = {"item_id": item_id, "item": item, "user": user}
     if q:
-        result.update({"q": q})
-    return result
+        results.update({"q": q})
+    return results
 
 
 @app.get("/users/me")
@@ -118,3 +145,8 @@ async def get_model(model_name: ModelName):
 @app.get("/files/{file_path:path}")
 async def read_file(file_path: str):
     return {"file_path": file_path}
+
+
+@app.post("/offers/")
+async def create_offer(offer: Offer):
+    return offer
