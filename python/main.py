@@ -1,5 +1,6 @@
 from enum import Enum
-from fastapi import FastAPI
+from typing import Annotated
+from fastapi import FastAPI, Query
 from pydantic import BaseModel
 
 
@@ -39,8 +40,23 @@ async def read_item(item_id: str, q: str | None = None, short: bool = False):
 
 
 @app.get("/items/")
-async def read_item(skip: int = 0, limit: int = 10):
-    return fake_items_db[skip : skip + limit]
+async def read_items(
+    q: Annotated[
+        str | None,
+        Query(
+            min_length=3,
+            max_length=50,
+            regex="^fixedquery$",
+            title="Query string",
+            description="q é um campo para busca",
+            deprecated=True,
+        ),
+    ] = None
+):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
 
 
 @app.post("/items/")
