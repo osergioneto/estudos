@@ -11,6 +11,7 @@ from fastapi import (
     File,
     UploadFile,
     Request,
+    Header,
 )
 from fastapi.responses import JSONResponse, RedirectResponse, HTMLResponse
 from pydantic import BaseModel, Field, HttpUrl, EmailStr
@@ -28,14 +29,16 @@ class Image(BaseModel):
 
 
 class Item(BaseModel):
-    name: str
+    id: str
+    # name: str
+    title: str
     description: str | None = Field(
         default=None, title="The description of the item", max_length=300
     )
-    price: float = Field(gt=0, description="The price must be greater than zero")
-    tax: float | None = None
-    tags: set[str] | None = set()
-    images: list[Image] | None = None
+    # price: float = Field(gt=0, description="The price must be greater than zero")
+    # tax: float | None = None
+    # tags: set[str] | None = set()
+    # images: list[Image] | None = None
 
 
 class Offer(BaseModel):
@@ -79,6 +82,14 @@ def fake_save_user(user_in: UserIn):
     return user_in_db
 
 
+fake_secret_token = "coneofsilence"
+
+fake_db = {
+    "foo": {"id": "foo", "title": "Foo", "description": "There goes my hero"},
+    "bar": {"id": "bar", "title": "Bar", "description": "The bartenders"},
+}
+
+
 app = FastAPI()
 
 items = {"foo": "The Foo Wrestlers"}
@@ -104,33 +115,52 @@ async def read_unicorn(name: str):
     return {"unicorn_name": name}
 
 
-@app.get("/items/{item_id}")
-async def read_item(
-    item_id: Annotated[str, Path(title="The ID of the item to get")],
-    q: Annotated[str | None, Query(alias="item-query")] = None,
-    short: bool = False,
-):
-    if item_id not in items:
-        raise HTTPException(
-            status_code=404,
-            detail="Item not found",
-            headers={"X-Error": "There goes my error"},
-        )
-    return {"item_id": item_id}
+@app.get("/items/{item_id}", response_model=Item)
+async def read_main(item_id: str, x_token: Annotated[str, Header()]):
+    if x_token != fake_secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
+    if item_id not in fake_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return fake_db[item_id]
 
 
-@app.get("/items/", response_model=list[Item])
-async def read_items() -> Any:
-    return [Item(name="Portal Gun", price=42.0), Item(name="Plumbus", price=32.0)]
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item, x_token: Annotated[str, Header()]):
+    if x_token != fake_secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
+    if item.id in fake_db:
+        raise HTTPException(status_code=400, detail="Item already exists")
+    fake_db[item.id] = item
+    return item
 
 
-@app.post("/items/", response_model=Item, status_code=status.HTTP_201_CREATED)
-async def create_item(item: Item) -> Any:
-    item_dict = item.dict()
-    if item.tax:
-        price_with_tax = item.price + item.tax
-        item_dict.update({"price_with_tax": price_with_tax})
-    return item_dict
+# @app.get("/items/{item_id}")
+# async def read_item(
+#     item_id: Annotated[str, Path(title="The ID of the item to get")],
+#     q: Annotated[str | None, Query(alias="item-query")] = None,
+#     short: bool = False,
+# ):
+#     if item_id not in items:
+#         raise HTTPException(
+#             status_code=404,
+#             detail="Item not found",
+#             headers={"X-Error": "There goes my error"},
+#         )
+#     return {"item_id": item_id}
+
+
+# @app.get("/items/", response_model=list[Item])
+# async def read_items() -> Any:
+#     return [Item(name="Portal Gun", price=42.0), Item(name="Plumbus", price=32.0)]
+
+
+# @app.post("/items/", response_model=Item, status_code=status.HTTP_201_CREATED)
+# async def create_item(item: Item) -> Any:
+#     item_dict = item.dict()
+#     if item.tax:
+#         price_with_tax = item.price + item.tax
+#         item_dict.update({"price_with_tax": price_with_tax})
+#     return item_dict
 
 
 @app.put("/items/{item_id}")

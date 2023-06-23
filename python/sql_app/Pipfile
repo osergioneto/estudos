@@ -9,6 +9,7 @@ fastapi = {extras = ["all"], version = "*"}
 email-validator = "*"
 python-multipart = "*"
 sqlalchemy = "*"
+pytest = "*"
 
 [dev-packages]
 
