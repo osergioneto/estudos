@@ -1,6 +1,17 @@
 from enum import Enum
 from typing import Annotated, Any
-from fastapi import Body, FastAPI, Query, Response, Path, status, File, UploadFile
+from fastapi import (
+    Body,
+    FastAPI,
+    HTTPException,
+    Query,
+    Response,
+    Path,
+    status,
+    File,
+    UploadFile,
+    Request,
+)
 from fastapi.responses import JSONResponse, RedirectResponse, HTMLResponse
 from pydantic import BaseModel, Field, HttpUrl, EmailStr
 
@@ -52,6 +63,11 @@ class UserInDB(UserBase):
     hashed_password: str
 
 
+class UnicornException(Exception):
+    def __init(self, name: str):
+        self.name = name
+
+
 def fake_password_hasher(raw_password: str):
     return "supersecret" + raw_password
 
@@ -65,28 +81,42 @@ def fake_save_user(user_in: UserIn):
 
 app = FastAPI()
 
-fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
+items = {"foo": "The Foo Wrestlers"}
 
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
+@app.exception_handler(UnicornException)
+async def unicorn_exception_handler(request: Request, exc: UnicornException):
+    return JSONResponse(
+        status_code=418,
+        content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},
+    )
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
+@app.get("/unicorns/{name}")
+async def read_unicorn(name: str):
+    if name == "yolo":
+        raise UnicornException(name=name)
+    return {"unicorn_name": name}
 
 
 @app.get("/items/{item_id}")
 async def read_item(
-    item_id: Annotated[int, Path(title="The ID of the item to get", gt=1)],
+    item_id: Annotated[str, Path(title="The ID of the item to get")],
     q: Annotated[str | None, Query(alias="item-query")] = None,
     short: bool = False,
 ):
-    item = {"item_id": item_id}
-    if q:
-        item.update({"q": q})
-    if not short:
-        item.update(
-            {"description": "This is an amazing item that has a long description"}
+    if item_id not in items:
+        raise HTTPException(
+            status_code=404,
+            detail="Item not found",
+            headers={"X-Error": "There goes my error"},
         )
-    return item
+    return {"item_id": item_id}
 
 
 @app.get("/items/", response_model=list[Item])
@@ -185,7 +215,7 @@ async def create_upload_file(files: list[UploadFile]):
     return {"filenames": [file.filename for file in files]}
 
 
-@app.get("/")
+@app.get("/files-upload")
 async def main():
     content = """
 <body>
