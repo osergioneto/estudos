@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Annotated, Any
-from fastapi import Body, FastAPI, Query, Response, Path, status
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi import Body, FastAPI, Query, Response, Path, status, File, UploadFile
+from fastapi.responses import JSONResponse, RedirectResponse, HTMLResponse
 from pydantic import BaseModel, Field, HttpUrl, EmailStr
 
 
@@ -68,9 +68,9 @@ app = FastAPI()
 fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+# @app.get("/")
+# async def root():
+#     return {"message": "Hello World"}
 
 
 @app.get("/items/{item_id}")
@@ -173,3 +173,30 @@ async def get_portal(teleport: bool = False) -> Response:
     if teleport:
         return RedirectResponse(url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     return JSONResponse(content={"message": "Here's your interdimensional portal."})
+
+
+@app.post("/files/")
+async def create_file(files: Annotated[list[bytes], File()]):
+    return {"file_sizes": [len(file) for file in files]}
+
+
+@app.post("/uploadfiles/")
+async def create_upload_file(files: list[UploadFile]):
+    return {"filenames": [file.filename for file in files]}
+
+
+@app.get("/")
+async def main():
+    content = """
+<body>
+<form action="/files/" enctype="multipart/form-data" method="post">
+<input name="files" type="file" multiple>
+<input type="submit">
+</form>
+<form action="/uploadfiles/" enctype="multipart/form-data" method="post">
+<input name="files" type="file" multiple>
+<input type="submit">
+</form>
+</body>
+    """
+    return HTMLResponse(content=content)
