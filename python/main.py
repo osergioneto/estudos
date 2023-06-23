@@ -1,7 +1,8 @@
 from enum import Enum
-from typing import Annotated
-from fastapi import Body, FastAPI, Query, Path
-from pydantic import BaseModel, Field, HttpUrl
+from typing import Annotated, Any
+from fastapi import Body, FastAPI, Query, Response, Path, status
+from fastapi.responses import JSONResponse, RedirectResponse
+from pydantic import BaseModel, Field, HttpUrl, EmailStr
 
 
 class ModelName(str, Enum):
@@ -33,9 +34,33 @@ class Offer(BaseModel):
     items: list[Item]
 
 
-class User(BaseModel):
+class UserBase(BaseModel):
     username: str
+    email: EmailStr
     full_name: str | None = None
+
+
+class UserIn(UserBase):
+    password: str
+
+
+class UserOut(UserBase):
+    pass
+
+
+class UserInDB(UserBase):
+    hashed_password: str
+
+
+def fake_password_hasher(raw_password: str):
+    return "supersecret" + raw_password
+
+
+def fake_save_user(user_in: UserIn):
+    hashed_password = fake_password_hasher(user_in.password)
+    user_in_db = UserInDB(**user_in.dict(), hashed_password=hashed_password)
+    print("User saved! ..not really")
+    return user_in_db
 
 
 app = FastAPI()
@@ -64,28 +89,13 @@ async def read_item(
     return item
 
 
-@app.get("/items/")
-async def read_items(
-    q: Annotated[
-        str | None,
-        Query(
-            min_length=3,
-            max_length=50,
-            regex="^fixedquery$",
-            title="Query string",
-            description="q é um campo para busca",
-            deprecated=True,
-        ),
-    ] = None
-):
-    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
-    if q:
-        results.update({"q": q})
-    return results
+@app.get("/items/", response_model=list[Item])
+async def read_items() -> Any:
+    return [Item(name="Portal Gun", price=42.0), Item(name="Plumbus", price=32.0)]
 
 
-@app.post("/items/")
-async def create_item(item: Item):
+@app.post("/items/", response_model=Item, status_code=status.HTTP_201_CREATED)
+async def create_item(item: Item) -> Any:
     item_dict = item.dict()
     if item.tax:
         price_with_tax = item.price + item.tax
@@ -97,7 +107,7 @@ async def create_item(item: Item):
 async def update_item(
     item_id: int,
     item: Item,
-    user: User,
+    user: UserBase,
     importance: Annotated[int, Body(gt=0)],
     q: str | None = None,
 ):
@@ -105,6 +115,12 @@ async def update_item(
     if q:
         results.update({"q": q})
     return results
+
+
+@app.post("/user/", response_model=UserOut)
+async def create_user(user: UserIn):
+    user_saved = fake_save_user(user)
+    return user_saved
 
 
 @app.get("/users/me")
@@ -150,3 +166,10 @@ async def read_file(file_path: str):
 @app.post("/offers/")
 async def create_offer(offer: Offer):
     return offer
+
+
+@app.get("/portal")
+async def get_portal(teleport: bool = False) -> Response:
+    if teleport:
+        return RedirectResponse(url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    return JSONResponse(content={"message": "Here's your interdimensional portal."})
