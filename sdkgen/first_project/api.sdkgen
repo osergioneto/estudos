@@ -1,0 +1,12 @@
+type Post {
+    id: uuid
+    title: string
+    body: string
+    createdAt: datetime
+    author: {
+        name: string
+    }
+}
+
+fn getPost(id: uuid): Post?
+fn addNumber(first: int, second: int): int
