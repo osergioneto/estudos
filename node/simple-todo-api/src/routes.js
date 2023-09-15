@@ -18,40 +18,43 @@ export const routes = [
     },
     {
         method: 'POST',
-        path: buildRoutePath('/users'),
+        path: buildRoutePath('/tasks'),
         handler: (req, res) => {
-            const { name, email } = req.body
+            const { title, description } = req.body
 
-            const user = {
+            const task = {
                 id: randomUUID(),
-                name,
-                email
+                title,
+                description,
+                created_at: new Date,
+                updated_at: null,
+                completed_at: null
             }
 
-            database.insert('users', user)
+            database.insert('tasks', task)
             
-            return res.writeHead(201).end('Criação de usuário')
+            return res.writeHead(201).end('Task created')
         }
     },
     {
         method: 'PUT',
-        path: buildRoutePath('/userd/:id'),
+        path: buildRoutePath('/tasks/:id'),
         handler: (req, res) => {
             const { id } = req.params
-            const { name, email }= req.body
+            const { title, description }= req.body
 
-            database.update('users', id, { name, email })
+            database.update('tasks', id, { title, description })
 
             return res.writeHead(204).end()
         }
     },
     {
         method: 'DELETE',
-        path: buildRoutePath('/users/:id'),
+        path: buildRoutePath('/tasks/:id'),
         handler: (req, res) => {
             const { id } = req.params
 
-            database.delete('users', id)
+            database.delete('tasks', id)
 
             return res.writeHead(204).end()
         }
