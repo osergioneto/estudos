@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto"
 import { Database  } from "./database.js"
 import { buildRoutePath } from "./utils/build-route-path.js"
+import { checkExistingResource } from "./utils/check_existing_resource.js"
 
-const database = new Database()
+export const database = new Database()
 
 console.log(buildRoutePath('/tasks'))
 export const routes = [
@@ -41,7 +42,11 @@ export const routes = [
         path: buildRoutePath('/tasks/:id'),
         handler: (req, res) => {
             const { id } = req.params
+            const task = database.selectById('tasks', id)
+            if (!task) { return res.writeHead(404).end() }
+
             const { title, description }= req.body
+
 
             database.update('tasks', id, { title, description })
 
@@ -53,7 +58,10 @@ export const routes = [
         path: buildRoutePath('/tasks/:id'),
         handler: (req, res) => {
             const { id } = req.params
+            const task = database.selectById('tasks', id)
+            if (!task) { return res.writeHead(404).end() }
 
+            
             database.delete('tasks', id)
 
             return res.writeHead(204).end()
