@@ -22,6 +22,14 @@ export const routes = [
         handler: (req, res) => {
             const { title, description } = req.body
 
+            if (!title) {
+                return res.writeHead(404).end(JSON.stringify({"mensagem": "Título não enviado"}))
+            }
+
+            if (!description) {
+                return res.writeHead(404).end(JSON.stringify({"mensagem": "Descrição não enviada"}))
+            }
+
             const task = {
                 id: randomUUID(),
                 title,
@@ -33,7 +41,7 @@ export const routes = [
 
             database.insert('tasks', task)
             
-            return res.writeHead(201).end('Task created')
+            return res.writeHead(201).end(JSON.stringify({"mensagem": "Task criada"}))
         }
     },
     {
