@@ -1,7 +1,6 @@
 import { randomUUID } from "node:crypto"
 import { Database  } from "./database.js"
 import { buildRoutePath } from "./utils/build-route-path.js"
-import { checkExistingResource } from "./utils/check_existing_resource.js"
 
 export const database = new Database()
 
@@ -43,7 +42,7 @@ export const routes = [
         handler: (req, res) => {
             const { id } = req.params
             const task = database.selectById('tasks', id)
-            if (!task) { return res.writeHead(404).end() }
+            if (!task) { return res.writeHead(404).end(JSON.stringify({"mensagem": "Task não existe"})) }
 
             const { title, description }= req.body
 
@@ -59,7 +58,7 @@ export const routes = [
         handler: (req, res) => {
             const { id } = req.params
             const task = database.selectById('tasks', id)
-            if (!task) { return res.writeHead(404).end() }
+            if (!task) { return res.writeHead(404).end(JSON.stringify({"mensagem": "Task não existe"})) }
 
             let update_params;
 
@@ -82,7 +81,7 @@ export const routes = [
         handler: (req, res) => {
             const { id } = req.params
             const task = database.selectById('tasks', id)
-            if (!task) { return res.writeHead(404).end() }
+            if (!task) { return res.writeHead(404).end(JSON.stringify({"mensagem": "Task não existe"})) }
 
             
             database.delete('tasks', id)
