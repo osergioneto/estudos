@@ -19,9 +19,15 @@ export async function mealsRoutes(app: FastifyInstance) {
         onDiet: z.coerce.boolean(),
       })
 
-      const { name, description, ateAt, onDiet } = createMealBodySchema.parse(
-        request.body,
-      )
+      const result = createMealBodySchema.safeParse(request.body)
+
+      if (!result.success) {
+        return reply.status(400).send(result.error.issues)
+      }
+
+      const {
+        data: { name, description, ateAt, onDiet },
+      } = result
 
       await knex('meals').insert({
         id: randomUUID(),
