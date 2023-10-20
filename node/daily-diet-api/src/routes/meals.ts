@@ -12,6 +12,10 @@ export async function mealsRoutes(app: FastifyInstance) {
       const { sessionId } = request.cookies
       const user = await knex('users').where('session_id', sessionId).first()
 
+      if (!user) {
+        return reply.status(404).send({ message: "User doesn't exists" })
+      }
+
       const createMealBodySchema = z.object({
         name: z.string(),
         description: z.string(),
