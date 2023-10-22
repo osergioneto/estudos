@@ -168,4 +168,44 @@ describe('Meals routes', () => {
     expect(mealsGaia.body).toHaveLength(2)
     expect(mealsDiana.body).toHaveLength(1)
   })
+
+  it('should get existing meal', async () => {
+    const gaia = await request(app.server)
+      .post('/users')
+      .send({
+        name: 'Gaia Regina',
+        email: 'gaia.regina@gmail.com',
+      })
+      .expect(201)
+
+    const cookiesGaia = gaia.get('Set-Cookie')
+
+    await request(app.server)
+      .post('/meals/')
+      .set('Cookie', cookiesGaia)
+      .send({
+        name: 'Sorvete de Pistache',
+        description: 'Melhor sorvete',
+        ateAt: '2023-10-09 03:26:35',
+        onDiet: 'false',
+      })
+      .expect(201)
+
+    const mealGaia = await request(app.server)
+      .get('/meals')
+      .set('Cookie', cookiesGaia)
+      .expect(200)
+
+    const [mealListed] = mealGaia.body
+
+    console.log('mealListed: ', mealListed)
+
+    const meal = await request(app.server)
+      .get(`/meals/${mealListed.id}`)
+      .set('Cookie', cookiesGaia)
+      .expect(200)
+
+
+    expect(meal.body).toHaveProperty('id', mealListed.id)
+  })
 })
