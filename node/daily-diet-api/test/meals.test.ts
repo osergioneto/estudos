@@ -97,6 +97,7 @@ describe('Meals routes', () => {
     const updatedMeal = await knex('meals').select().first()
 
     expect(createdMeal?.id).toEqual(updatedMeal?.id)
-    console.log('createdMeal: ', createdMeal)
+    expect(updatedMeal).toHaveProperty('name', 'Vatapá')
+    expect(updatedMeal).toHaveProperty('description', 'melhor comida')
   })
 })
