@@ -61,10 +61,10 @@ export async function mealsRoutes(app: FastifyInstance) {
       }
 
       const updateMealBodySchema = z.object({
-        name: z.string(),
-        description: z.string(),
-        ateAt: z.coerce.date(),
-        onDiet: z.coerce.boolean(),
+        name: z.string().optional(),
+        description: z.string().optional(),
+        ateAt: z.coerce.date().optional(),
+        onDiet: z.coerce.boolean().optional(),
       })
 
       const result = updateMealBodySchema.safeParse(request.body)
@@ -73,19 +73,18 @@ export async function mealsRoutes(app: FastifyInstance) {
         return reply.status(400).send(result.error.issues)
       }
 
-      const {
-        data: { name, description, ateAt, onDiet },
-      } = result
+      const { data } = result
 
       const mealToUpdate = {
-        id: meal?.id,
-        name: name ?? meal?.name,
-        description: description ?? meal?.name,
-        ate_at: ateAt ?? meal?.ate_at,
-        on_diet: onDiet ?? meal?.on_diet,
+        name: data?.name ?? meal?.name,
+        description: data?.description ?? meal?.name,
+        ate_at: data?.ateAt ?? meal?.ate_at,
+        on_diet: data?.onDiet ?? meal?.on_diet,
       }
 
-      await knex('meals').update(mealToUpdate)
+      await knex('meals')
+        .update(mealToUpdate)
+        .where({ id: meal?.id })
 
       return reply.status(200).send()
     },
