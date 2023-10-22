@@ -100,4 +100,72 @@ describe('Meals routes', () => {
     expect(updatedMeal).toHaveProperty('name', 'Vatapá')
     expect(updatedMeal).toHaveProperty('description', 'melhor comida')
   })
+
+  it('should list meals from user', async () => {
+    const gaia = await request(app.server)
+      .post('/users')
+      .send({
+        name: 'Gaia Regina',
+        email: 'gaia.regina@gmail.com',
+      })
+      .expect(201)
+
+    const cookiesGaia = gaia.get('Set-Cookie')
+
+    await request(app.server)
+      .post('/meals/')
+      .set('Cookie', cookiesGaia)
+      .send({
+        name: 'Sorvete de Pistache',
+        description: 'Melhor sorvete',
+        ateAt: '2023-10-09 03:26:35',
+        onDiet: 'false',
+      })
+      .expect(201)
+
+    await request(app.server)
+      .post('/meals/')
+      .set('Cookie', cookiesGaia)
+      .send({
+        name: 'Sorvete de Giandujotto',
+        description: 'Bom demais também',
+        ateAt: '2023-10-22 05:00:22',
+        onDiet: 'false',
+      })
+      .expect(201)
+
+    const diana = await request(app.server)
+      .post('/users')
+      .send({
+        name: 'Diana Carla',
+        email: 'diana.carla@gmail.com',
+      })
+      .expect(201)
+
+    const cookiesDiana = diana.get('Set-Cookie')
+
+    await request(app.server)
+      .post('/meals/')
+      .set('Cookie', cookiesDiana)
+      .send({
+        name: 'Cenoura',
+        description: 'Amo o croc croc',
+        ateAt: '2023-10-19 07:00:40',
+        onDiet: 'true',
+      })
+      .expect(201)
+
+    const mealsGaia = await request(app.server)
+      .get('/meals')
+      .set('Cookie', cookiesGaia)
+      .expect(200)
+
+    const mealsDiana = await request(app.server)
+      .get('/meals')
+      .set('Cookie', cookiesDiana)
+      .expect(200)
+
+    expect(mealsGaia.body).toHaveLength(2)
+    expect(mealsDiana.body).toHaveLength(1)
+  })
 })
