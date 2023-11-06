@@ -7,4 +7,10 @@ export class PrismaUsersRepository {
 
         return user
     }
+
+    async findUnique(where: Prisma.UserWhereUniqueInput) {
+        const user = await prisma.user.findUnique({ where })
+
+        return user
+    }
 }
