@@ -9,21 +9,19 @@ let gymsRepository: InMemoryGymsRepository
 let sut: CheckInUseCase
 
 describe('Check In Use Case', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         checkInsRepository = new InMemoryCheckInsRepository()
         gymsRepository = new InMemoryGymsRepository()
         sut = new CheckInUseCase(checkInsRepository, gymsRepository)
 
-        gymsRepository.items.push({
+        await gymsRepository.create({
             id: 'gym-01',
             name: 'Javascript Gym',
-            created_at: new Date(),
             description: '',
             phone: '',
-            latitude: new Decimal(-23.5916201),
-            altitude: new Decimal(-46.6222736)
+            latitude: -23.5916201,
+            longitude: -46.6222736
         })
-
 
         vi.useFakeTimers()
     })
@@ -86,14 +84,13 @@ describe('Check In Use Case', () => {
     })
 
     it('should not be able to check in on distant gym', async () => {
-        gymsRepository.items.push({
+        await gymsRepository.create({
             id: 'gym-02',
             name: 'Elixir Gym',
-            created_at: new Date(),
             description: '',
             phone: '',
-            latitude: new Decimal(-23.5975687),
-            altitude: new Decimal(-46.6363024)
+            latitude: -23.5975687,
+            longitude: -46.6363024
         })
 
         await expect(() =>
