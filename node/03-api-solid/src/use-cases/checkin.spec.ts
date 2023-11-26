@@ -3,6 +3,8 @@ import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-c
 import { CheckInUseCase } from './checkin'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { Decimal } from '@prisma/client/runtime/library'
+import { LimitCheckInsError } from './errors/limit-of-check-ins-error'
+import { MaxDistanceError } from './errors/max-distance-error'
 
 let checkInsRepository: InMemoryCheckInsRepository
 let gymsRepository: InMemoryGymsRepository
@@ -58,7 +60,7 @@ describe('Check In Use Case', () => {
                 userLatitude: -23.5916201,
                 userLongitude: -46.6222736
             })
-        ).rejects.toBeInstanceOf(Error)
+        ).rejects.toBeInstanceOf(LimitCheckInsError)
     })
 
     it('should be able to check in twitch in different days', async () => {
@@ -100,7 +102,7 @@ describe('Check In Use Case', () => {
                 userLatitude: -23.5916201,
                 userLongitude: -46.6222736
             })
-        ).rejects.toBeInstanceOf(Error)
+        ).rejects.toBeInstanceOf(MaxDistanceError)
     })
 })
 
