@@ -30,7 +30,7 @@ export class CheckInUseCase {
 
         const distance = getDistanceBetweenCoordinates(
             { latitude: userLatitude, longitude: userLongitude },
-            { latitude: gym.latitude.toNumber(), longitude: gym.altitude.toNumber() }
+            { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() }
         )
 
         if (distance > 0.1) {
