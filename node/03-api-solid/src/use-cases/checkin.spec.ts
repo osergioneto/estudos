@@ -20,8 +20,8 @@ describe('Check In Use Case', () => {
             created_at: new Date(),
             description: '',
             phone: '',
-            latitude: new Decimal(0),
-            altitude: new Decimal(0)
+            latitude: new Decimal(-23.5916201),
+            altitude: new Decimal(-46.6222736)
         })
 
 
@@ -83,6 +83,27 @@ describe('Check In Use Case', () => {
         })
 
         expect(checkIn.id).toEqual(expect.any(String))
+    })
+
+    it('should not be able to check in on distant gym', async () => {
+        gymsRepository.items.push({
+            id: 'gym-02',
+            name: 'Elixir Gym',
+            created_at: new Date(),
+            description: '',
+            phone: '',
+            latitude: new Decimal(-23.5975687),
+            altitude: new Decimal(-46.6363024)
+        })
+
+        await expect(() =>
+            sut.execute({
+                gymId: 'gym-02',
+                userId: 'user-id',
+                userLatitude: -23.5916201,
+                userLongitude: -46.6222736
+            })
+        ).rejects.toBeInstanceOf(Error)
     })
 })
 
