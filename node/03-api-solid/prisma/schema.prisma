@@ -43,7 +43,7 @@ model Gym {
   description String?
   phone       String?
   latitude    Decimal
-  altitude    Decimal
+  longitude   Decimal
   created_at  DateTime @default(now())
 
   checkIns CheckIn[]
