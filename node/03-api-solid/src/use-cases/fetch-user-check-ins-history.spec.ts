@@ -23,15 +23,20 @@ describe('Check In Use Case', () => {
             })
         }
 
-
         const { checkIns } = await sut.execute({
             userId: 'user-id',
             page: 2
         })
 
-        console.log("checkIns", checkIns)
-
         expect(checkIns).toHaveLength(2)
+        expect(checkIns).toEqual([
+            expect.objectContaining({
+                gym_id: 'gym-21'
+            }),
+            expect.objectContaining({
+                gym_id: 'gym-22'
+            }),
+        ])
     })
 })
 
