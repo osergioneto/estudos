@@ -1,6 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
 import { ValidateCheckInUseCase } from './validate-check-in'
+import { randomUUID } from 'node:crypto'
+import { ResourceNotFoundError } from './errors/resource-not-found'
+import { LateCheckInValidationError } from './errors/late-check-in-validation-error'
 
 let checkInsRepository: InMemoryCheckInsRepository
 let sut: ValidateCheckInUseCase
@@ -10,7 +13,7 @@ describe('Validate Check In Use Case', () => {
         checkInsRepository = new InMemoryCheckInsRepository()
         sut = new ValidateCheckInUseCase(checkInsRepository)
 
-        // vi.useFakeTimers()
+        vi.useFakeTimers()
     })
 
     afterEach(() => {
@@ -28,24 +31,27 @@ describe('Validate Check In Use Case', () => {
         expect(checkIn.validated_at).not.toBe(null)
     })
 
-    // it('should not be able to check in twice in the same day', async () => {
-    //     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
+    it('should be able to validate an unexisting checkin', async () => {
+        await expect(sut.execute({
+            checkInId: randomUUID()
+        })).rejects.toBeInstanceOf(ResourceNotFoundError)
+    })
 
-    //     const { checkIn } = await sut.execute({
-    //         gymId: 'gym-01',
-    //         userId: 'user-id',
-    //         userLatitude: -23.5916201,
-    //         userLongitude: -46.6222736
-    //     })
+    it('should not be able to validate check-in 20 minutes after it was created', async () => {
+        vi.setSystemTime(new Date(2023, 0, 1, 13, 40))
 
-    //     await expect(() =>
-    //         sut.execute({
-    //             gymId: 'gym-01',
-    //             userId: 'user-id',
-    //             userLatitude: -23.5916201,
-    //             userLongitude: -46.6222736
-    //         })
-    //     ).rejects.toBeInstanceOf(LimitCheckInsError)
-    // })
+        const createdCheckIn = await checkInsRepository.create({
+            gym_id: 'gym-01',
+            user_id: 'user-id'
+        })
+
+        const twentyOneMinutesinMs = 1000 * 60 * 21;
+
+        vi.advanceTimersByTime(twentyOneMinutesinMs)
+
+        await expect(() => sut.execute({
+            checkInId: createdCheckIn.id
+        })).rejects.toBeInstanceOf(LateCheckInValidationError)
+    })
 })
 
