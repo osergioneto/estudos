@@ -23,6 +23,7 @@ describe('Profile (e2e)', () => {
                 id: expect.any(String),
                 name: 'John Doe',
                 email: 'johndoe@email.com',
+                role: 'MEMBER',
                 password_hash: expect.any(String),
                 created_at: expect.any(String),
                 updated_at: expect.any(String)
