@@ -1,14 +1,20 @@
-﻿Random random = new Random();
-int daysUntilExpiration = random.Next(12);
-// int discountPercentage = 0;
-Console.WriteLine($"daysUntilExpiration: {daysUntilExpiration}");
-string message = daysUntilExpiration switch
-{
-    0 => "Your subscription has expired.",
-    1 => $"Your subscription expires within a day!\n Renew now and save 20%!",
-    < 5 => $"Your subscription expires in {daysUntilExpiration} days. \nRenew now and save 10%!",
-    < 10 => "Your subscription will expire soon. Renew now!",
-    _ => ""
-};
+﻿/*
+string[] fraudulentOrderIDs = new string[3];
 
-Console.WriteLine(message);
+fraudulentOrderIDs[0] = "A123";
+fraudulentOrderIDs[1] = "B456";
+fraudulentOrderIDs[2] = "C789";
+// fraudulentOrderIDs[3] = "D000";
+*/
+
+string[] fraudulentOrderIDs = { "A123", "B456", "C789" };
+
+Console.WriteLine($"First: {fraudulentOrderIDs[0]}");
+Console.WriteLine($"Second: {fraudulentOrderIDs[1]}");
+Console.WriteLine($"Third: {fraudulentOrderIDs[2]}");
+
+fraudulentOrderIDs[0] = "F000";
+
+Console.WriteLine($"Reassign First: {fraudulentOrderIDs[0]}");
+
+Console.WriteLine($"There are {fraudulentOrderIDs.Length} fraudulent orders to process.");
