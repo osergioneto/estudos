@@ -1,22 +1,24 @@
-﻿/*
-  The following code creates five random OrderIDs
-  to test the fraud detection process.  OrderIDs 
-  consist of a letter from A to E, and a three
-  digit number. Ex. A123.
+﻿
+/*
+The high-level purpose of this code is to reverse a string 
+and count the number of times a particular character appears.
 */
-Random random = new Random();
-string[] orderIDs = new string[5];
+string originalMessage = "The quick brown fox jumps over the lazy dog.";
 
-for (int i = 0; i < orderIDs.Length; i++)
+char[] message = originalMessage.ToCharArray();
+Array.Reverse(message);
+
+int letterCount = 0;
+
+foreach (char letter in message)
 {
-    int prefixValue = random.Next(65, 70);
-    string prefix = Convert.ToChar(prefixValue).ToString();
-    string suffix = random.Next(1, 1000).ToString("000");
-
-    orderIDs[i] = prefix + suffix;
+    if (letter == 'o')
+    {
+        letterCount++;
+    }
 }
 
-foreach (var orderID in orderIDs)
-{
-    Console.WriteLine(orderID);
-}
+string reversedMessage = new String(message);
+
+Console.WriteLine(reversedMessage);
+Console.WriteLine($"'o' appears {letterCount} times.");
