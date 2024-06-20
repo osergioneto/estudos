@@ -1,24 +1,26 @@
-﻿
-/*
-The high-level purpose of this code is to reverse a string 
-and count the number of times a particular character appears.
-*/
-string originalMessage = "The quick brown fox jumps over the lazy dog.";
+﻿// initialize variables - graded assignments 
+int currentAssignments = 5;
 
-char[] message = originalMessage.ToCharArray();
-Array.Reverse(message);
+int[] sophiaGrades = { 90, 86, 87, 98, 100 };
+int[] andrewGrades = { 92, 89, 81, 96, 90 };
+int[] emmaGrades = { 90, 85, 87, 98, 68 };
+int[] loganGrades = { 90, 95, 87, 88, 96 };
 
-int letterCount = 0;
+int sophiaSum = sophiaGrades.Sum();
+int andrewSum = andrewGrades.Sum();
+int emmaSum = emmaGrades.Sum();
+int loganSum = loganGrades.Sum();
 
-foreach (char letter in message)
-{
-    if (letter == 'o')
-    {
-        letterCount++;
-    }
-}
+decimal sophiaScore = (decimal)sophiaSum / currentAssignments;
+decimal andrewScore = (decimal)andrewSum / currentAssignments;
+decimal emmaScore = (decimal)emmaSum / currentAssignments;
+decimal loganScore = (decimal)loganSum / currentAssignments;
 
-string reversedMessage = new String(message);
+Console.WriteLine("Student\t\tGrade\n");
+Console.WriteLine("Sophia:\t\t" + sophiaScore + "\tA-");
+Console.WriteLine("Andrew:\t\t" + andrewScore + "\tB+");
+Console.WriteLine("Emma:\t\t" + emmaScore + "\tB");
+Console.WriteLine("Logan:\t\t" + loganScore + "\tA-");
 
-Console.WriteLine(reversedMessage);
-Console.WriteLine($"'o' appears {letterCount} times.");
+Console.WriteLine("Press the Enter key to continue");
+Console.ReadLine();
