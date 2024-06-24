@@ -1,3 +1,4 @@
-int saleAmount = 1001;
-int discount = saleAmount > 1000 ? 100 : 50;
-Console.WriteLine($"Discount: {discount}");
+Random dice = new Random();
+int number = dice.Next(1, 3);
+string coin = number == 1 ? "heads" : "tails";
+Console.WriteLine(coin);
