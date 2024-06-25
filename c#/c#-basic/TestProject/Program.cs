@@ -1,19 +1,16 @@
-using System.Data;
-using System.Text.RegularExpressions;
+int[] numbers = { 4, 8, 15, 16, 23, 42 };
+bool found = false;
+int total = 0;
 
-string permission = "Manager";
-string pattern = @"\b(Admin|Manager)\b";
-int level = 55;
-
-Match match = Regex.Match(permission, pattern);
-
-string message = (match.Value, level) switch
+foreach (int number in numbers)
 {
-    ("Admin", > 55) => "Welcome, Super Admin user.",
-    ("Admin", <= 55) => "Welcome, Admin user.",
-    ("Manager", >= 20) => "Contact an Admin for access.",
-    ("Manager", <= 20) => "You do not have sufficient privileges.",
-    _ => "You do not have sufficient privileges."
-};
+    total += number;
 
-Console.WriteLine(message);
+    if (number == 42)
+        found = true;
+}
+
+if (found)
+    Console.WriteLine("Set contains 42");
+
+Console.WriteLine($"Total: {total}");
