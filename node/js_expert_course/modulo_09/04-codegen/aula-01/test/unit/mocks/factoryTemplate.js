@@ -1,13 +1,12 @@
+export default `
+import ProductService from "../service/productService.js";
+import ProductRepository from "../repository/productRepository.js";
 
-// export default `
 export default class ProductFactory {
-    constructor(repository, service) {
-        this.repository = repository;
-        this.service = service;
-    }
-
-    getInstance(data) {
-        return this.repository.create(data);
+    static getInstance() {
+        const repository = new ProductRepository();
+        const service = new ProductService({ repository });
+        return service;
     }
 }
-// `;
+`;

@@ -14,7 +14,10 @@ describe("#Util - Strings", () => {
             expect(result).toBe("Hello");
         });
 
-        it.todo("should return null when string is empty");
+        it("should return empty when string is empty", () => {
+            const result = Util.upperCaseFirstLetter("");
+            expect(result).toBe("");
+        });
     });
 
     describe("#lowerCaseFirstLetter", () => {
@@ -22,6 +25,10 @@ describe("#Util - Strings", () => {
             const result = Util.lowerCaseFirstLetter("Byebye");
             expect(result).toBe("byebye");
         });
-        it.todo("should return null when string is empty");
+
+        it("should return empty when string is empty", () => {
+            const result = Util.lowerCaseFirstLetter("");
+            expect(result).toBe("");
+        });
     });
 });
