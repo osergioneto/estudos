@@ -1,12 +1,13 @@
-import { describe, expect, it, beforeAll, beforeEach, jest } from "@jest/globals";
+import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 import templates from "../../src/templates/index";
-import { repositoryTemplateMock } from "./mocks/index";
+import { repositoryTemplateMock, serviceTemplateMock } from "./mocks/index";
 
-const { repositoryTemplate } = templates;
+const { repositoryTemplate, serviceTemplate } = templates;
 
 describe("#Templates", () => {
     const componentName = "product";
     const repositoryName = `${componentName}Repository`;
+    const serviceName = `${componentName}Service`;
 
     beforeEach(() => {
         jest.restoreAllMocks();
@@ -19,11 +20,18 @@ describe("#Templates", () => {
             template: repositoryTemplateMock
         }
         const result = repositoryTemplate(componentName);
-        console.log("repositoryName: ", repositoryName);
-        console.log("result: ", result);
         expect(result).toStrictEqual(expected);
     });
 
-    it.todo("should generate service template");
+    it("should generate service from template", () => {
+        const expected = {
+            fileName: serviceName,
+            template: serviceTemplateMock
+        }
+        const result = serviceTemplate(componentName, repositoryName);
+        expect(result).toStrictEqual(expected);
+    });
+
+
     it.todo("should generate factory template");
 });
