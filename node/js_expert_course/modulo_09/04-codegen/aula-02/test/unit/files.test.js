@@ -12,6 +12,10 @@ describe("#Layers - Files Structure", () => {
         componentName: "heroes"
     }
 
+    const repositoryLayer = `${defaultConfig.componentName}Repository`;
+    const serviceLayer = `${defaultConfig.componentName}Service`;
+
+
     beforeEach(() => {
         jest.restoreAllMocks();
         jest.clearAllMocks();
@@ -31,7 +35,7 @@ describe("#Layers - Files Structure", () => {
 
     it("repository should not add any additional dependencies", async () => {
         jest.spyOn(fs, fs.writeFile.name).mockResolvedValue()
-        jest.spyOn(templates, templates.repositoryTemplate.name).mockReturnValue({ className: "", template: "" })
+        jest.spyOn(templates, templates.repositoryTemplate.name).mockReturnValue({ fileName: "", template: "" })
 
         const config = {
             ...defaultConfig,
@@ -43,10 +47,43 @@ describe("#Layers - Files Structure", () => {
 
         expect(result).toStrictEqual(expected);
 
-        expect(fs.writeFile).toHaveBeenCalledTimes(config.layers);
+        expect(fs.writeFile).toHaveBeenCalledTimes(config.layers.length);
         expect(templates.repositoryTemplate).toHaveBeenCalledWith(config.componentName);
     });
 
-    it.todo("service should have repository as dependecy");
-    it.todo("factory should have service and repository as dependencies")
+    it("service should have repository as dependecy", async () => {
+        jest.spyOn(fs, fs.writeFile.name).mockResolvedValue()
+        jest.spyOn(templates, templates.serviceTemplate.name).mockReturnValue({ fileName: "", template: "" })
+
+        const config = {
+            ...defaultConfig,
+            layers: ["repository", "service"]
+        };
+
+        const result = await createFiles(config);
+        const expected = { success: true };
+
+        expect(result).toStrictEqual(expected);
+
+        expect(fs.writeFile).toHaveBeenCalledTimes(config.layers.length);
+        expect(templates.serviceTemplate).toHaveBeenCalledWith(config.componentName, repositoryLayer);
+    });
+
+    it("factory should have service and repository as dependencies", async () => {
+        jest.spyOn(fs, fs.writeFile.name).mockResolvedValue()
+        jest.spyOn(templates, templates.factoryTemplate.name).mockReturnValue({ fileName: "", template: "" })
+
+        const config = {
+            ...defaultConfig,
+            layers: ["repository", "service", "factory"]
+        };
+
+        const result = await createFiles(config);
+        const expected = { success: true };
+
+        expect(result).toStrictEqual(expected);
+
+        expect(fs.writeFile).toHaveBeenCalledTimes(config.layers.length);
+        expect(templates.factoryTemplate).toHaveBeenCalledWith(config.componentName, repositoryLayer, serviceLayer);
+    });
 });
