@@ -27,7 +27,6 @@ describe("#Integration - Layers - Folders Structure", () => {
 
     it("should create folders if it doesnt exists", async () => {
         const beforeRun = await fs.readdir(config.mainPath);
-        console.log("beforeRun: ", beforeRun);
 
         await createLayersIfNotExists(config);
 
@@ -38,6 +37,12 @@ describe("#Integration - Layers - Folders Structure", () => {
     });
 
     it("should not create folders if it exists", async () => {
+        const beforeRun = await getFolders(config);
 
+        await createLayersIfNotExists(config);
+
+        const afterRun = await getFolders(config);
+
+        expect(afterRun).toEqual(beforeRun);
     });
 });
