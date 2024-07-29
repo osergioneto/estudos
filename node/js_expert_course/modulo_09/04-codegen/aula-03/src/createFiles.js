@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
-import templates from "./templates/index";
-import Util from "./util";
+import templates from "./templates/index.js";
+import Util from "./util.js";
 
 function defaultDependencies(layer, componentName) {
     const dependencies = {

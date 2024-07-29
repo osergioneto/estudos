@@ -1,4 +1,4 @@
-import Util from "../util";
+import Util from "../util.js";
 
 const repositoryNameAnchor = "$$repositoryName";
 const serviceNameAnchor = "$$serviceName";
