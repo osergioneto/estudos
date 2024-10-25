@@ -1,0 +1,20 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: static
+  - text: public
+  - text: void
+  - text: Main
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/3773#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 25 Oct 2024 03:22:02 UTC"
+record: -1
+selected_options:
+  - 3
+local_check: false
