@@ -1,0 +1,9 @@
+type: unsupported
+custom_name: "Thermal tango: Two scales, one verdict"
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/49207#comment
+status: Solved
+record: -1
