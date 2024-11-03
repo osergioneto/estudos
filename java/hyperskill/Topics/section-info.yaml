@@ -8,3 +8,8 @@ content:
   - Floating-point types
   - Comparing values. Relational operators
   - Conditional statement
+  - Type casting
+  - Calling methods
+  - One-line condition with ternary operator
+  - While and do-while loops
+  - For loop

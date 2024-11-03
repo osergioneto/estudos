@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: It belongs to the Math library
+  - text: This method's name is Math
+  - text: This method calculates the absolute value of a double value
+  - text: It is a built-in method
+  - text: It is a user-defined method
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/10978#comment
+status: Solved
+record: -1
+local_check: false
