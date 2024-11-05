@@ -15,3 +15,6 @@ content:
   - For loop
   - Break and continue. Branching
   - Primitive and reference types
+  - Array
+  - Iterating over arrays
+  - Multidimensional array
