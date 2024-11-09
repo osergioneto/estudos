@@ -12,6 +12,23 @@ public class MainV3 {
 
         int[][] room = new int[rows][seats];
 
+        printCinema(room, null, null);
+        System.out.println();
+
+        System.out.print("Enter a row number: \n> ");
+        int ticketRow = scanner.nextInt() - 1;
+        System.out.print("Enter a seat number in that row: \n> ");
+        int ticketSeat = scanner.nextInt() - 1;
+        System.out.println();
+
+        int ticketCost = ticketCost(rows, seats, ticketRow);
+        System.out.println("Ticket price: $" + ticketCost);
+        System.out.println();
+
+        printCinema(room, ticketRow, ticketSeat);
+    }
+
+    private static void printCinema(int[][] room, Integer ticketRow, Integer ticketSeat) {
         System.out.println("Cinema:");
         for (int i = 0; i < room.length ; i++) {
             if (i != 0) System.out.print((i+1));
@@ -24,36 +41,24 @@ public class MainV3 {
                     System.out.print("\n");
                 }
                 if (i == 0 && j == 0) {
-                    System.out.print((i+1) + " S");
+                    String message = (ticketRow != null && ticketRow != null) && ticketRow == 0 && ticketSeat == 0 ? ((i+1) + " B") : ((i+1) + " S");
+                    System.out.print(message);
                 } else {
-                    System.out.print(" S");
+                    String message = (ticketRow != null && ticketRow != null) && ticketRow == i && ticketSeat == j ? " B" : " S";
+                    System.out.print(message);
                 }
             }
             System.out.println();
         }
-
-//        int totalIncome = 0;
-//
-//        if (rows * seats < 60) {
-//            totalIncome = rows * seats * 10;
-//        } else {
-//            int frontHalf = rows / 2;
-//            int backHalf = rows % 2 == 0 ? rows / 2 : (rows / 2 + rows % 2);
-//
-//            System.out.println("frontHalf: " + frontHalf);
-//            System.out.println("backHalf:  " + backHalf);
-//
-//            totalIncome = (frontHalf * seats * 10) + (backHalf * seats * 8);
-//        }
-//
-//        System.out.print("Total income: \n$" + totalIncome);
     }
 
-//    private int roomSize(int rows, int seats) {
-//
-//    }
-//
-//    private int ticketPrice(int row, int seat) {
-//
-//    }
+    private static int ticketCost(int rows, int seats, int ticketRow) {
+        if (rows * seats < 60) {
+            return 10;
+        } else {
+            int frontHalf = rows / 2;
+
+            return ticketRow <= frontHalf ? 8 : 10 ;
+        }
+    }
 }
