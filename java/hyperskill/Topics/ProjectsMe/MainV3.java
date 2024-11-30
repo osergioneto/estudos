@@ -22,8 +22,8 @@ public class MainV3 {
         System.out.println();
 
         int ticketCost = ticketCost(rows, seats, ticketRow);
-        System.out.println("Ticket price: $" + ticketCost);
-        System.out.println();
+        System.out.println("Ticket price: ");
+        System.out.println("$" + ticketCost);
 
         printCinema(room, ticketRow, ticketSeat);
     }
@@ -58,7 +58,7 @@ public class MainV3 {
         } else {
             int frontHalf = rows / 2;
 
-            return ticketRow <= frontHalf ? 8 : 10 ;
+            return ticketRow < frontHalf ? 10 : 8 ;
         }
     }
 }
