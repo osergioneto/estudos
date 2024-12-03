@@ -1,0 +1,13 @@
+type: code
+custom_name: Print "We are robots!"
+files:
+  - name: src/Main.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/2505#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 30 Nov 2024 03:07:07 UTC"
+record: -1
+submission_language: java17
