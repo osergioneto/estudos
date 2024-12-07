@@ -7,13 +7,11 @@ class Main {
         int n = scanner.nextInt();
         int[] arr = new int[n];
 
-        int highestVal = Integer.MIN_VALUE;
         int highestIndex = 0;
         for (int i = 0; i < n; i++) {
             arr[i] = scanner.nextInt();
 
-            if (highestVal < arr[i]) {
-                highestVal = arr[i];
+            if (arr[highestIndex] < arr[i]) {
                 highestIndex = i;
             }
         }
