@@ -12,23 +12,36 @@ public class MainV3 {
 
         int[][] room = new int[rows][seats];
 
-        printCinema(room, null, null);
-        System.out.println();
+        int menuOption = showMenu(scanner);
 
-        System.out.print("Enter a row number: \n> ");
-        int ticketRow = scanner.nextInt() - 1;
-        System.out.print("Enter a seat number in that row: \n> ");
-        int ticketSeat = scanner.nextInt() - 1;
-        System.out.println();
-
-        int ticketCost = ticketCost(rows, seats, ticketRow);
-        System.out.println("Ticket price: ");
-        System.out.println("$" + ticketCost);
-
-        printCinema(room, ticketRow, ticketSeat);
+        while (menuOption != 0) {
+            switch (menuOption) {
+                case 1:
+                    printCinema(room);
+                    break;
+                case 2:
+                    buyTicket(scanner, rows, seats, room);
+                    break;
+                default:
+                    break;
+            }
+            menuOption = showMenu(scanner);
+        }
     }
 
-    private static void printCinema(int[][] room, Integer ticketRow, Integer ticketSeat) {
+    private static int showMenu(Scanner scanner) {
+        System.out.println("\n1. Show the seats");
+        System.out.println("2. Buy a ticket");
+        System.out.print("0. Exit \n> ");
+
+        int option = scanner.nextInt();
+
+        System.out.println();
+
+        return option;
+    }
+
+    private static void printCinema(int[][] room) {
         System.out.println("Cinema:");
         for (int i = 0; i < room.length ; i++) {
             if (i != 0) System.out.print((i+1));
@@ -41,15 +54,30 @@ public class MainV3 {
                     System.out.print("\n");
                 }
                 if (i == 0 && j == 0) {
-                    String message = (ticketRow != null && ticketRow != null) && ticketRow == 0 && ticketSeat == 0 ? ((i+1) + " B") : ((i+1) + " S");
+                    String message = room[0][0] == 1 ? ((i+1) + " B") : ((i+1) + " S");
                     System.out.print(message);
                 } else {
-                    String message = (ticketRow != null && ticketRow != null) && ticketRow == i && ticketSeat == j ? " B" : " S";
+                    String message = room[i][j] == 1 ? " B" : " S";
                     System.out.print(message);
                 }
             }
             System.out.println();
         }
+    }
+
+    private static int buyTicket(Scanner scanner, int rows, int seats, int[][] room) {
+        System.out.print("Enter a row number: \n> ");
+        int ticketRow = scanner.nextInt() - 1;
+        System.out.print("Enter a seat number in that row: \n> ");
+        int ticketSeat = scanner.nextInt() - 1;
+        System.out.println();
+
+        int ticketCost = ticketCost(rows, seats, ticketRow);
+        room[ticketRow][ticketSeat] = 1;
+        System.out.println("Ticket price: ");
+        System.out.println("$" + ticketCost);
+
+        return ticketCost;
     }
 
     private static int ticketCost(int rows, int seats, int ticketRow) {
