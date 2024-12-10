@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "Yes, it is possible by using class with name Main."
+  - text: "No, it is impossible."
+  - text: "Yes, it is possible by using a static block in the Java program."
+  - text: "Yes, it is possible by using special VM options."
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/2070#comment
+status: Solved
+record: -1
+local_check: false

@@ -31,6 +31,7 @@ public class Main {
         }
 
         System.out.println(result);
+        String texto = "Naruto";
     }
 
     public static double add(double a, double b) {

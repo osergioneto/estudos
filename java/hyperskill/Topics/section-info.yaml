@@ -24,3 +24,5 @@ content:
   - Method  main
   - Multiple conditions  switch
   - Functional decomposition
+  - String
+  - Errors in programs
