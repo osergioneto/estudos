@@ -27,3 +27,6 @@ content:
   - String
   - Errors in programs
   - NullPointerException
+  - Formatted output
+  - Array exceptions
+  - Arrays as parameters
