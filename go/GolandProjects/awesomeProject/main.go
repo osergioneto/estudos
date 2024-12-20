@@ -1,21 +1,19 @@
 package main
 
-import (
-	"fmt"
-)
-
-//TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
-// the <icon src="AllIcons.Actions.Execute"/> icon in the gutter and select the <b>Run</b> menu item from here.</p>
+import "fmt"
 
 func main() {
-	//TIP <p>Press <shortcut actionId="ShowIntentionActions"/> when your caret is at the underlined text
-	// to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
-	s := "gopher"
-	fmt.Println("Hello and welcome, %s!", s)
+	var name string
+	var age int
 
-	for i := 1; i <= 5; i++ {
-		//TIP <p>To start your debugging session, right-click your code in the editor and select the Debug option.</p> <p>We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-		// for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.</p>
-		fmt.Println("i =", 100/i)
-	}
+	fmt.Print("Enter your name: ") // Writing a request message to the stdout
+	fmt.Scan(&name)                // Reading from the stdin into the name variable
+	fmt.Println("")                // Going to the next line by writing /n to the stdout
+
+	fmt.Print("Enter your age: ") // Writing a request message to the stdout
+	fmt.Scan(&age)                // Reading from the stdin into the age variable
+	fmt.Println("")               // Going to the next line by writing /n to the stdout
+
+	fmt.Print(name, age) // Writing to the stdout the values of name and
+	// age variables that you have entered
 }
