@@ -9,5 +9,5 @@ func main() {
 	fmt.Println(int(source))
 	// string(true)
 	// string(10)
-	string('a')
+	// string('a')
 }
