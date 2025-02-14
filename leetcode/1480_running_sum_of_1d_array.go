@@ -6,10 +6,10 @@ func main() {
 	nums := []int{1, 2, 3, 4}
 
 	result := make([]int, len(nums))
-	for i := 0; i < len(nums); i++ {
-		for j := 0; j < i+1; j++ {
-			result[i] += nums[j]
-		}
+	result[0] = nums[0]
+
+	for i := 1; i < len(nums); i++ {
+		result[i] = nums[i] + result[i-1]
 	}
 
 	fmt.Print(result)
