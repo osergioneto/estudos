@@ -1,0 +1,29 @@
+type: matching
+captions:
+  - a + b
+  - a - b
+  - a * b
+  - a / b
+  - a % b
+  - -a
+options:
+  - unary minus (sign changing)
+  - remainder
+  - addition
+  - multiplication
+  - subtraction
+  - integer division
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/2209#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5

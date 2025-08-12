@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: It is representing the standard input.
+  - text: It is an input integer value.
+  - text: It is a standard keyword.
+  - text: It is a command that starts reading data from a file.
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/8302#comment
+status: Solved
+record: -1
+local_check: false

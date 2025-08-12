@@ -1,0 +1,14 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: <code>fmt.Print()</code>
+  - text: <code>fmt.Scan()</code>
+  - text: <code>fmt.Println()</code>
+files:
+  - name: main.go
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14529#comment
+status: Solved
+record: -1
+local_check: false

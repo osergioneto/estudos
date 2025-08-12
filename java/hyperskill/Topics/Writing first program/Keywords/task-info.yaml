@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: HelloWorldProgram
+  - text: class
+  - text: static
+  - text: "System.out.println(\"Hello, World!\");"
+  - text: public
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/3758#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 25 Oct 2024 03:28:20 UTC"
+record: -1
+selected_options:
+  - 1
+  - 2
+  - 4
+local_check: false

@@ -1,0 +1,13 @@
+type: code
+files:
+  - name: src/Teste.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/2303#comment
+status: Solved
+feedback:
+  message: "<html>By typing out the code yourself, you take a significant step in\
+    \ your coding journey.</html>"
+  time: "Fri, 25 Oct 2024 03:31:10 UTC"
+record: -1
+submission_language: java17

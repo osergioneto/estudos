@@ -1,0 +1,8 @@
+content:
+  - Theory
+  - Unknown input
+  - Code that throws an exception
+  - Lines that may throw NPE
+  - When NPE cannot occur
+  - Avoid NPE
+  - Print string multiple times based on input

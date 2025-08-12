@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: A multiple-line comment begins with <code>/*</code> and ends with <code>*/</code>
+  - text: A multiple-line comment can't span only one line.
+  - text: An end-of-line comment begins with <code>//</code> and lasts till the end
+      of the current line.
+  - text: Using javadoc tool it is possible to generate a documentation based on comments
+      like <code>/**</code> javadoc <code>*/</code>
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/1976#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: public void main(String args)
+  - text: "public static int main(String[] args)"
+  - text: "public static void main(String[] args)"
+  - text: public static void main(String args)
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/2302#comment
+status: Solved
+record: -1
+local_check: false

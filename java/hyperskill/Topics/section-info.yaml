@@ -1,0 +1,32 @@
+content:
+  - Introduction to Java
+  - Writing first program
+  - Printing data
+  - Types and variables
+  - Comments
+  - Reading user's input with Scanner
+  - Floating-point types
+  - Comparing values. Relational operators
+  - Conditional statement
+  - Type casting
+  - Calling methods
+  - One-line condition with ternary operator
+  - While and do-while loops
+  - For loop
+  - Break and continue. Branching
+  - Primitive and reference types
+  - Array
+  - Iterating over arrays
+  - Multidimensional array
+  - Arithmetic operations
+  - Integer types and operations
+  - Declaring methods
+  - Method  main
+  - Multiple conditions  switch
+  - Functional decomposition
+  - String
+  - Errors in programs
+  - NullPointerException
+  - Formatted output
+  - Array exceptions
+  - Arrays as parameters

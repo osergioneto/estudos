@@ -1,0 +1,15 @@
+type: code
+files:
+  - name: main.go
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14532#comment
+status: Failed
+feedback:
+  message: |
+    Compilation error
+    # command-line-arguments
+    ./main.go:7:2: syntax error: non-declaration statement outside function body
+  time: "Fri, 20 Dec 2024 00:52:20 UTC"
+record: -1
+submission_language: go

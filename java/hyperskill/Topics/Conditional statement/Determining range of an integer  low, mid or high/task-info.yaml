@@ -1,0 +1,13 @@
+type: code
+custom_name: "Determining range of an integer: low, mid or high"
+files:
+  - name: src/Main.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/40336#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 02 Nov 2024 04:21:33 UTC"
+record: -1
+submission_language: java17

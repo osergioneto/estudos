@@ -1,0 +1,7 @@
+content:
+  - Theory
+  - Rounding down a halved float value to an integer
+  - Casting long to byte with intermediate int
+  - Converting and printing double values as integers
+  - Sequential conversions
+  - Widening casting

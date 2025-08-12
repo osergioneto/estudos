@@ -1,0 +1,16 @@
+type: code
+custom_name: According to legend...
+files:
+  - name: main.go
+    visible: true
+    learner_created: false
+  - name: go_build_According_to_legend
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/23452#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 20 Dec 2024 00:49:51 UTC"
+record: -1
+submission_language: go
