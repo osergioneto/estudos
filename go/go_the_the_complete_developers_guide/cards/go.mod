@@ -1,3 +1,3 @@
-module example.com/m
+module cards
 
 go 1.24.5
