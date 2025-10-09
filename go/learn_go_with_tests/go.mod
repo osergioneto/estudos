@@ -1,3 +1,3 @@
-module example.com/hello
+module example.com
 
 go 1.24.0
