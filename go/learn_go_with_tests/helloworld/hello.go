@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"net/http"
 )
 
 func Hello(name, language string) string {
@@ -10,6 +13,14 @@ func Hello(name, language string) string {
 	}
 
 	return getPrefix(language) + name
+}
+
+func Greet(writer io.Writer, name string) {
+	fmt.Fprintf(writer, "Hello, %s", name)
+}
+
+func MyGreeterHandler(w http.ResponseWriter, r *http.Request) {
+	Greet(w, "world")
 }
 
 func getPrefix(language string) string {
@@ -24,5 +35,7 @@ func getPrefix(language string) string {
 }
 
 func main() {
-	fmt.Println(Hello("world", "Spanish"))
+	// fmt.Println(Hello("world", "Spanish"))
+	// Greet(os.Stdout, "Elodie")
+	log.Fatal(http.ListenAndServe(":5001", http.HandlerFunc(MyGreeterHandler)))
 }
