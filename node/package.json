@@ -15,6 +15,6 @@
     "zx": "^8.1.4"
   },
   "devDependencies": {
-    "mocha": "^7.2.0"
+    "mocha": "^11.7.5"
   }
 }
