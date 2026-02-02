@@ -27,7 +27,7 @@
   "dependencies": {
     "@fastify/cookie": "^9.1.0",
     "dotenv": "^16.3.1",
-    "fastify": "^4.23.2",
+    "fastify": "^5.7.3",
     "knex": "^2.5.1",
     "sqlite3": "^5.1.6",
     "zod": "^3.22.2"
