@@ -7,7 +7,7 @@
     "regexp-tree": "^0.1.27",
     "safe-regex": "^2.1.1",
     "undici-types": "^5.26.5",
-    "zx": "^8.1.4"
+    "zx": "^8.8.5"
   },
   "scripts": {
     "start": "npx zx index.mjs",
